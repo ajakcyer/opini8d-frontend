@@ -32,6 +32,12 @@ class AllOpinions extends Component {
     console.log(this.props);
     return (
       <>
+        {this.props.opinions.length === 0 ?
+        
+            <h1>Loading...</h1>
+        
+        :
+        
         <Switch>
           <Route
             path="/opinions/:id"
@@ -40,7 +46,7 @@ class AllOpinions extends Component {
               let foundOpinion = this.props.opinions.find(
                 (opinion) => opinion.id === urlId
               );
-              //   debugger
+                // debugger
               return <Opinion opinion={foundOpinion} />;
             }}
           />
@@ -57,6 +63,10 @@ class AllOpinions extends Component {
             )}
           />
         </Switch>
+        
+        
+        
+        }
       </>
     );
   }
