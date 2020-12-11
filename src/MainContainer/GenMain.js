@@ -1,15 +1,22 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
-import { AuthCont } from "./Auth/AuthCont";
-import { Main } from "./MainContainer/Main";
+import { NavLink, Route, Switch, withRouter } from "react-router-dom";
+import { AuthCont } from "../Auth/AuthCont"
+import { Main } from "./Main"
 
 const GenMain = () => {
+
+    // if user is logged in
+    const currentUserID = 2
+
+
   return (
-    <div>
-      <Main />
-      {/* <hr></hr>
-      <AuthCont/> */}
-    </div>
+    <>
+    {currentUserID ? 
+    <Main />
+    :
+    <AuthCont/>
+    }
+    </>
   );
 };
 
