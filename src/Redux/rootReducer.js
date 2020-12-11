@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 
 
 const defaultState = {
+    currentUser: 2,
     opinions: []
 }
 
@@ -18,7 +19,17 @@ const opinionsReducer = (state = defaultState.opinions , action) =>{
     }
 }
 
+const currentUserReducer = (state = defaultState.currentUser, action) =>{
+    switch(action.tye){
+        default:
+            return state
+    }
+}
+
+
+
 const rootReducer = combineReducers({
+    currentUser: currentUserReducer,
     opinions: opinionsReducer
 })
 
