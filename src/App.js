@@ -1,4 +1,6 @@
 import './App.css';
+import { AuthCont } from './Auth/AuthCont';
+import { Main } from './MainContainer/Main';
 
 function App() {
 
@@ -8,7 +10,9 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Hello World</h1>
+      <Main/>
+      <hr></hr>
+      <AuthCont/>
     </div>
   );
 }
