@@ -1,5 +1,5 @@
 import React from 'react'
-import { AllOpinions } from '../ExplorePage/AllOpinions'
+import AllOpinions from '../ExplorePage/AllOpinions'
 import { Profile } from '../Profile/Profile'
 
 export const Main = () => {
