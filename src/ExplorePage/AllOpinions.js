@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchOpinionsFromApi } from "../Redux/action";
 
 class AllOpinions extends Component {
+    
   componentDidMount = () => {
     fetch("http://localhost:3000/api/v1/opinions")
       .then((r) => r.json())
