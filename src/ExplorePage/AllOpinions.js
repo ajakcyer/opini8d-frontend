@@ -4,6 +4,7 @@ import { fetchOpinionsFromApi } from "../Redux/action";
 import { NavLink, Route, Switch, withRouter } from "react-router-dom";
 import { Opinion } from "../OpinionPage/Opinion";
 import { OpinionCard } from "../ReuseComponents/OpinionCard";
+import CreateOpinion from "../ReuseComponents/CreateOpinion";
 
 class AllOpinions extends Component {
   componentDidMount = () => {
@@ -33,11 +34,8 @@ class AllOpinions extends Component {
     return (
       <>
         {this.props.opinions.length === 0 ?
-        
             <h1>Loading...</h1>
-        
         :
-        
         <Switch>
           <Route
             path="/opinions/:id"
@@ -58,14 +56,11 @@ class AllOpinions extends Component {
                 <div className="all-opinions">
                     {this.renderOpinions()}
                 </div>
-
+                <CreateOpinion/>
               </>
             )}
           />
         </Switch>
-        
-        
-        
         }
       </>
     );
