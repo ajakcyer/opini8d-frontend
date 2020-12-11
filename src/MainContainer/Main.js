@@ -6,7 +6,7 @@ export const Main = () => {
     return (
         <div>
             <h1>Main (logged in) Component Container</h1>
-            <Profile/>
+            {/* <Profile/> */}
             <hr></hr>
             <AllOpinions/>
         </div>
