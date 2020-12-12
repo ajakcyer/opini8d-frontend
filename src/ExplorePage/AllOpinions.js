@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchOpinionsFromApi } from "../Redux/action";
 import { NavLink, Route, Switch, withRouter } from "react-router-dom";
-import { Opinion } from "../OpinionPage/Opinion";
+import Opinion from "../OpinionPage/Opinion";
 import { OpinionCard } from "../ReuseComponents/OpinionCard";
 import CreateOpinion from "../ReuseComponents/CreateOpinion";
 
@@ -16,17 +16,7 @@ class AllOpinions extends Component {
   };
 
   renderOpinions = () => {
-    return this.props.opinions.map((opinion, index) => <OpinionCard key={index} opinion={opinion}/>
-    //   return (
-    //     <div key={index}>
-    //       <h4>By: {opinion.user.username}</h4>
-    //       <NavLink to={`/opinions/${opinion.id}`}>
-    //         <h3>{opinion.title}</h3>
-    //       </NavLink>
-    //       <hr></hr>
-    //     </div>
-    //   );
-    );
+    return this.props.opinions.map((opinion, index) => <OpinionCard key={index} opinion={opinion}/>);
   };
 
   render() {

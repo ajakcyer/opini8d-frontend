@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import { connect } from "react-redux";
 import {addOpinionToApi} from '../Redux/action'
 
@@ -9,7 +8,7 @@ class CreateOpinion extends Component {
     state = {
         title: "",
         content: "",
-        userId: this.props.user
+        userId: this.props.currentUser
     }
 
     onChangeHandler = (e) =>{
@@ -26,7 +25,7 @@ class CreateOpinion extends Component {
     }
 
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         return (
             <div>
             <h3>Create an Opinion</h3>
@@ -48,7 +47,7 @@ const mdp = (dispatch) =>{
 }
 
 const msp = (state) =>{
-    return ({user: state.currentUser})
+    return ({currentUser: state.currentUser})
 }
 
 export default connect(msp, mdp)(CreateOpinion)
