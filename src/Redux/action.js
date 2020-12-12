@@ -24,3 +24,8 @@ export const addOpinionToApi = (opinion) =>{
         // return({type: "ADD_OPINION", payload: opinion})
     }
 }
+
+export const rateOpinion = (data) =>{
+    
+    
+}
