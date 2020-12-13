@@ -16,6 +16,12 @@ const opinionsReducer = (state = defaultState.opinions , action) =>{
         case "ADD_OPINION":
             // debugger
             return [...state, action.payload]
+        case "EDIT_OPINION":
+            // debugger
+            let copiedArray = [...state]
+            const opinionIndex = copiedArray.findIndex(opinion => opinion.id === action.payload.id)
+            copiedArray[opinionIndex] = action.payload
+            return copiedArray
         default:
             return state
     }

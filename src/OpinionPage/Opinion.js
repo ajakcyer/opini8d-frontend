@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { editOpinion } from '../Redux/action'
 
 class Opinion extends Component {
   state = {
@@ -30,12 +31,16 @@ class Opinion extends Component {
 
   updatePost = (e) => {
     e.preventDefault();
-    
+    this.props.editPost({
+      id: this.props.opinion.id,
+      title: this.state.title,
+      content: this.state.content
+    })
     this.setState((prev) => ({ editBtn: false }));
   };
 
   render() {
-    // console.log(this.props.opinion.user.id)
+    console.log(this.props)
     return (
       <div>
         <h4>By: {this.props.opinion.user.username}</h4>
@@ -81,7 +86,7 @@ const msp = (state) => {
 };
 
 const mdp = (dispatch) => {
-  return { rateUser: () => dispatch() };
+  return { editPost: (opinion) => dispatch(editOpinion(opinion)) };
 };
 
-export default connect(msp)(Opinion);
+export default connect(msp, mdp)(Opinion);

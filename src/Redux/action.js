@@ -25,7 +25,22 @@ export const addOpinionToApi = (opinion) =>{
     }
 }
 
-export const rateOpinion = (data) =>{
-    
+export const editOpinion = (opinion) =>{
+    // debugger
+    return(dispatch) => {
+        fetch(`http://localhost:3000/api/v1/opinions/${opinion.id}`,{
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                title: opinion.title,
+                content: opinion.content
+            })
+        })
+        .then(r=>r.json())
+        .then(data => dispatch({type: "EDIT_OPINION", payload: data}))
+    }
     
 }
