@@ -2,38 +2,86 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class Opinion extends Component {
+  state = {
+    editBtn: false,
+    title: this.props.opinion.title,
+    content: this.props.opinion.content,
+  };
 
-  onClickHandler = (e) =>{
+  onClickHandler = (e) => {
     // debugger
-    switch(e.target.innerHTML){
+    switch (e.target.innerHTML) {
       case "Disagree":
-        return console.log("Clicked on disagree")
+        return console.log("Clicked on disagree");
       case "Agree":
-        return console.log("Clicked on agree")
-
+        return console.log("Clicked on agree");
     }
-  }
+  };
+
+  editClicked = () => {
+    this.setState((prev) => ({ editBtn: !prev.editBtn }));
+  };
+
+  onChangeUpdate = (e) => {
+    this.setState((prev) => ({
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  updatePost = (e) => {
+    e.preventDefault();
+    
+    this.setState((prev) => ({ editBtn: false }));
+  };
 
   render() {
-    console.log(this.props)
+    // console.log(this.props.opinion.user.id)
     return (
       <div>
         <h4>By: {this.props.opinion.user.username}</h4>
-        <h2>{this.props.opinion.title}</h2>
-        <p>{this.props.opinion.content}</p>
-        <button onClick={this.onClickHandler}>Disagree</button>
-        <button onClick={this.onClickHandler}>Agree</button>
+        {this.props.currentUser === this.props.opinion.user.id ? (
+          <>
+            <button onClick={this.editClicked}>{this.state.editBtn ? "Nevermind" : "Edit Post"}</button>
+            <button>Delete Post</button>
+          </>
+        ) : null}
+
+        {this.state.editBtn ? (
+          <form onSubmit={this.updatePost}>
+            <input
+              onChange={this.onChangeUpdate}
+              type="text"
+              name="title"
+              value={this.state.title}
+            />
+            <br></br>
+            <textarea
+              onChange={this.onChangeUpdate}
+              name="content"
+              value={this.state.content}
+            ></textarea>
+            <br></br>
+            <button>Update</button>
+          </form>
+        ) : (
+          <>
+            <h2>{this.props.opinion.title}</h2>
+            <p>{this.props.opinion.content}</p>
+            <button onClick={this.onClickHandler}>Disagree</button>
+            <button onClick={this.onClickHandler}>Agree</button>
+          </>
+        )}
       </div>
     );
   }
 }
 
-const msp = (state) =>{
-  return ({currentUser: state.currentUser})
-}
+const msp = (state) => {
+  return { currentUser: state.currentUser };
+};
 
-const mdp = (dispatch) =>{
-  return({rateUser: ()=> dispatch()})
-}
+const mdp = (dispatch) => {
+  return { rateUser: () => dispatch() };
+};
 
 export default connect(msp)(Opinion);
