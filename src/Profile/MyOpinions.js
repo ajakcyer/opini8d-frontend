@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import CreateOpinion from '../ReuseComponents/CreateOpinion'
 import { OpinionCard } from '../ReuseComponents/OpinionCard'
 
 class MyOpinions extends Component {
@@ -15,6 +16,7 @@ class MyOpinions extends Component {
             <>
 
             {this.renderMyOpinions()}
+            <CreateOpinion/>
             </>
         )
     }

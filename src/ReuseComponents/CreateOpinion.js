@@ -22,6 +22,10 @@ class CreateOpinion extends Component {
         // console.log(this.state)
         // debugger
         this.props.addOpinion(this.state)
+        this.setState(prev => ({
+            title: "",
+            content: ""
+        }))
     }
 
     render() {

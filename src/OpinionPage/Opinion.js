@@ -42,7 +42,7 @@ class Opinion extends Component {
 
   deleteBtn = () =>{
     this.props.deletePost(this.props.opinion)
-    this.props.history.push('/opinions')
+    this.props.history.goBack()
   }
 
 
