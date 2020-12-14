@@ -53,11 +53,49 @@ class Opinion extends Component {
     this.props.history.goBack()
   }
 
+  ratings = () =>{
+    // debugger
+    // let color;
+    if (this.props.opinion.ratings.length > 0){
+      let positive = this.props.opinion.ratings.filter(rating => rating.agreeable === true)
+      let negative = this.props.opinion.ratings.filter(rating => rating.agreeable === false)
+      // debugger
+      return (
+        <>
+          <h5>{(positive.length / this.props.opinion.ratings.length) * 100}% Agree</h5>
+          <h5>{(negative.length / this.props.opinion.ratings.length) * 100}% disagree</h5>
+          <p>Out of {this.props.opinion.ratings.length} {this.props.opinion.ratings.length > 1 ? "voters" : "voter"}</p>
+        </>
+      )
+      // debugger
+      // if (positive.length > negative.length){
+      //   return color = "Green"
+      // } else if (positive.length < negative.length){
+      //   // debugger
+      //   return color = "Red"
+      // } else if (positive.length === negative.length){
+      //   return color = "Grey"
+      // }
+    } else {
+      return(
+        <>
+          <h5>0% Agree</h5>
+          <h5>0% Disagree</h5>
+          <p>No ratings yet!</p>
+        </>
+
+      )
+      // return color = "Grey"
+    }
+    
+  }
+
 
   render() {
-    console.log(this.props)
+    // console.log(this.ratings())
     return (
       <div>
+        {this.ratings()}
         <h4>By: {this.props.opinion.user.username}</h4>
         {this.props.currentUser === this.props.opinion.user.id ? (
           <>
