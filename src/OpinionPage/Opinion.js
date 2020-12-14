@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { editOpinion } from '../Redux/action'
+import { editOpinion, deleteOpinion } from '../Redux/action'
+import {withRouter} from 'react-router-dom'
 
 class Opinion extends Component {
   state = {
@@ -39,6 +40,12 @@ class Opinion extends Component {
     this.setState((prev) => ({ editBtn: false }));
   };
 
+  deleteBtn = () =>{
+    this.props.deletePost(this.props.opinion)
+    this.props.history.push('/opinions')
+  }
+
+
   render() {
     console.log(this.props)
     return (
@@ -47,7 +54,7 @@ class Opinion extends Component {
         {this.props.currentUser === this.props.opinion.user.id ? (
           <>
             <button onClick={this.editClicked}>{this.state.editBtn ? "Nevermind" : "Edit Post"}</button>
-            <button>Delete Post</button>
+            <button onClick={this.deleteBtn}>Delete Post</button>
           </>
         ) : null}
 
@@ -86,7 +93,10 @@ const msp = (state) => {
 };
 
 const mdp = (dispatch) => {
-  return { editPost: (opinion) => dispatch(editOpinion(opinion)) };
+  return {
+    editPost: (opinion) => dispatch(editOpinion(opinion)),
+    deletePost: (opinion) => dispatch(deleteOpinion(opinion))
+   };
 };
 
-export default connect(msp, mdp)(Opinion);
+export default withRouter(connect(msp, mdp)(Opinion));

@@ -22,6 +22,12 @@ const opinionsReducer = (state = defaultState.opinions , action) =>{
             const opinionIndex = copiedArray.findIndex(opinion => opinion.id === action.payload.id)
             copiedArray[opinionIndex] = action.payload
             return copiedArray
+        case "DELETE_OPINION":
+            let cArray = [...state]
+            const oIndex = cArray.findIndex(opinion => opinion.id === action.payload.id)
+            // debugger
+            cArray.splice(oIndex, 1)
+            return cArray
         default:
             return state
     }

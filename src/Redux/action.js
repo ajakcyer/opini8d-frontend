@@ -44,3 +44,15 @@ export const editOpinion = (opinion) =>{
     }
     
 }
+
+export const deleteOpinion = (opinion)=> {
+    // debugger
+    return (dispatch) => {
+        fetch(`http://localhost:3000/api/v1/opinions/${opinion.id}`,{
+            method: 'DELETE'
+        })
+        .then(r=>r.json())
+        .then(data => dispatch({type: "DELETE_OPINION", payload: opinion}))
+    }
+
+}
