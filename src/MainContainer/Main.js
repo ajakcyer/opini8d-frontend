@@ -18,7 +18,7 @@ class Main extends Component {
 
   render() {
     // debugger
-    console.log(this.props)
+    // console.log(this.props)
     return (
     <>
       <h1>Main (logged in) Component Container</h1>

@@ -56,3 +56,24 @@ export const deleteOpinion = (opinion)=> {
     }
 
 }
+
+export const opinionRated = (opinion) =>{
+    debugger
+    return(dispatch) =>{
+        fetch(`http://localhost:3000/api/v1/ratings`,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: {
+                user_id: opinion.userId,
+                opinion_id: opinion.id,
+                agreeable: opinion.agreeable
+            }
+        })
+        .then(r=>r.json())
+        .then(console.log)
+    }
+
+}

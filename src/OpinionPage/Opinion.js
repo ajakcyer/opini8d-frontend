@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { editOpinion, deleteOpinion } from '../Redux/action'
+import { editOpinion, deleteOpinion, opinionRated } from '../Redux/action'
 import {withRouter} from 'react-router-dom'
 
 class Opinion extends Component {
@@ -79,8 +79,8 @@ class Opinion extends Component {
           <>
             <h2>{this.props.opinion.title}</h2>
             <p>{this.props.opinion.content}</p>
-            <button onClick={this.onClickHandler}>Disagree</button>
             <button onClick={this.onClickHandler}>Agree</button>
+            <button onClick={this.onClickHandler}>Disagree</button>
           </>
         )}
       </div>
@@ -95,7 +95,8 @@ const msp = (state) => {
 const mdp = (dispatch) => {
   return {
     editPost: (opinion) => dispatch(editOpinion(opinion)),
-    deletePost: (opinion) => dispatch(deleteOpinion(opinion))
+    deletePost: (opinion) => dispatch(deleteOpinion(opinion)),
+    ratePost: (opinion) => dispatch(opinionRated(opinion))
    };
 };
 

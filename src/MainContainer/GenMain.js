@@ -9,7 +9,7 @@ const GenMain = (props) => {
     // if user is logged in
     // const currentUserID = 2
 
-console.log(props)
+// console.log(props)
   return (
     <>
     {props.currentUser ? 
