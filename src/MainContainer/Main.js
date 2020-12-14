@@ -1,22 +1,53 @@
-import React from "react";
+import React, { Component } from 'react'
 import { NavLink, Route, Switch, withRouter } from "react-router-dom";
 import AllOpinions from "../ExplorePage/AllOpinions";
-import { Profile } from "../Profile/Profile";
+import Profile from "../Profile/Profile";
+import { connect } from "react-redux";
+import { fetchOpinionsFromApi } from "../Redux/action";
 
-export const Main = () => {
-  return (
+
+class Main extends Component {
+  componentDidMount = () => {
+    fetch("http://localhost:3000/api/v1/opinions")
+      .then((r) => r.json())
+      .then((data) => {
+        return this.props.fetchOpinions(data);
+      });
+  };
+
+
+  render() {
+    // debugger
+    console.log(this.props)
+    return (
     <>
       <h1>Main (logged in) Component Container</h1>
       <NavLink to="/opinions">Explore Opinions</NavLink>
       <br></br>
       <NavLink to="/profile">View Profile</NavLink>
 
+      {this.props.opinions.length === 0 ? <h1>Loading...</h1> :
+      
       <Switch>
-        <Route path="/profile" render={() => <Profile />} />
-        <Route path="/opinions" render={() => <AllOpinions />} />
+        <Route path="/profile" render={() => <Profile opinions={this.props.opinions} />} />
+        <Route path="/opinions" render={() => <AllOpinions opinions={this.props.opinions} />} />
       </Switch>
+      
+      }
       {/* <hr></hr>
       <AllOpinions /> */}
     </>
-  );
+      
+    )
+  }
+}
+
+const mdp = (dispatch) => {
+  return { fetchOpinions: (data) => dispatch(fetchOpinionsFromApi(data)) };
 };
+
+const msp = (state) => {
+  return { opinions: state.opinions };
+};
+
+export default connect(msp, mdp)(Main);

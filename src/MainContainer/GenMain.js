@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink, Route, Switch, withRouter } from "react-router-dom";
 import {connect} from 'react-redux'
 import { AuthCont } from "../Auth/AuthCont"
-import { Main } from "./Main"
+import Main from "./Main"
 
 const GenMain = (props) => {
 

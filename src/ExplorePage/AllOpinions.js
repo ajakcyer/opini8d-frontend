@@ -7,20 +7,20 @@ import { OpinionCard } from "../ReuseComponents/OpinionCard";
 import CreateOpinion from "../ReuseComponents/CreateOpinion";
 
 class AllOpinions extends Component {
-  componentDidMount = () => {
-    fetch("http://localhost:3000/api/v1/opinions")
-      .then((r) => r.json())
-      .then((data) => {
-        return this.props.fetchOpinions(data);
-      });
-  };
+  // componentDidMount = () => {
+  //   fetch("http://localhost:3000/api/v1/opinions")
+  //     .then((r) => r.json())
+  //     .then((data) => {
+  //       return this.props.fetchOpinions(data);
+  //     });
+  // };
 
   renderOpinions = () => {
     return this.props.opinions.map((opinion, index) => <OpinionCard key={index} opinion={opinion}/>);
   };
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <>
         {this.props.opinions.length === 0 ?
@@ -57,12 +57,12 @@ class AllOpinions extends Component {
   }
 }
 
-const mdp = (dispatch) => {
-  return { fetchOpinions: (data) => dispatch(fetchOpinionsFromApi(data)) };
-};
+// const mdp = (dispatch) => {
+//   return { fetchOpinions: (data) => dispatch(fetchOpinionsFromApi(data)) };
+// };
 
-const msp = (state) => {
-  return { opinions: state.opinions };
-};
+// const msp = (state) => {
+//   return { opinions: state.opinions };
+// };
 
-export default connect(msp, mdp)(AllOpinions);
+export default AllOpinions;
