@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 
 
 const defaultState = {
-    currentUser: 1,
+    currentUser: 2,
     opinions: []
 }
 
@@ -28,6 +28,12 @@ const opinionsReducer = (state = defaultState.opinions , action) =>{
             // debugger
             cArray.splice(oIndex, 1)
             return cArray
+        case "RATE_OPINION":
+            // debugger
+            let sameArray = [...state]
+            const index = sameArray.findIndex(opinion => opinion.id === action.payload.opinion_id)
+            sameArray[index].ratings.push(action.payload)
+            return sameArray
         default:
             return state
     }

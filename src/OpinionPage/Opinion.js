@@ -14,9 +14,17 @@ class Opinion extends Component {
     // debugger
     switch (e.target.innerHTML) {
       case "Disagree":
-        return console.log("Clicked on disagree");
+        return this.props.ratePost({
+          userId: this.props.currentUser,
+          id: this.props.opinion.id,
+          agreeable: false
+        })
       case "Agree":
-        return console.log("Clicked on agree");
+        return this.props.ratePost({
+          userId: this.props.currentUser,
+          id: this.props.opinion.id,
+          agreeable: true
+        })
     }
   };
 
