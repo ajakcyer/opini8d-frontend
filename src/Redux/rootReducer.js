@@ -41,6 +41,13 @@ const opinionsReducer = (state = defaultState.opinions , action) =>{
             let ratingIndex = copy[opIndex].ratings.findIndex(rating => rating.id === action.payload.id)
             copy[opIndex].ratings[ratingIndex] = action.payload
             return copy
+        case "DELETE_RATING":
+            // debugger
+            let arrayCopied = [...state]
+            const indexO = arrayCopied.findIndex(opinion => opinion.id === action.payload.opinionId)
+            let indexR = arrayCopied[indexO].ratings.findIndex(rating => rating.id === action.payload.id)
+            arrayCopied[indexO].ratings.splice(indexR, 1)
+            return arrayCopied
         default:
             return state
     }

@@ -114,3 +114,19 @@ export const patchRating = (rating) =>{
         })
     }
 }
+
+export const deleteRating = (rating)=>{
+    // debugger
+    return (dispatch) => {
+        fetch(`http://localhost:3000/api/v1/ratings/${rating.id}`,{
+            method: 'DELETE'
+        })
+        .then(r=>r.json())
+        .then(data => {
+            dispatch({
+                type: "DELETE_RATING",
+                payload: rating
+            })
+        })
+    }
+}

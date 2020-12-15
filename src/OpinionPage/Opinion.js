@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { editOpinion, deleteOpinion, opinionRated, patchRating } from "../Redux/action";
+import { editOpinion, deleteOpinion, opinionRated, patchRating, deleteRating } from "../Redux/action";
 import { withRouter } from "react-router-dom";
 import { Button } from 'semantic-ui-react'
 
@@ -16,10 +16,18 @@ class Opinion extends Component {
     switch (e.target.innerHTML) {
       case "Disagree":
         if (this.didIVote()){
-          return this.props.patchRating({
-            id: this.didIVote().id,
-            agreeable: false
-          })
+          if (this.didIVote().agreeable === false){
+            return this.props.deleteRate({
+              id: this.didIVote().id,
+              opinionId: this.props.opinion.id
+            })
+            // debugger
+          } else {
+            return this.props.patchRating({
+              id: this.didIVote().id,
+              agreeable: false
+            })
+          }
         } else {
           return this.props.ratePost({
             userId: this.props.currentUser,
@@ -30,11 +38,17 @@ class Opinion extends Component {
         }
       case "Agree":
         if (this.didIVote()){
-          return this.props.patchRating({
-            id: this.didIVote().id,
-            agreeable: true
-          })
-
+          if (this.didIVote().agreeable === true){
+            return this.props.deleteRate({
+              id: this.didIVote().id,
+              opinionId: this.props.opinion.id
+            })
+          } else {
+            return this.props.patchRating({
+              id: this.didIVote().id,
+              agreeable: true
+            })
+          }
         } else {
           return this.props.ratePost({
             userId: this.props.currentUser,
@@ -180,7 +194,8 @@ const mdp = (dispatch) => {
     editPost: (opinion) => dispatch(editOpinion(opinion)),
     deletePost: (opinion) => dispatch(deleteOpinion(opinion)),
     ratePost: (opinion) => dispatch(opinionRated(opinion)),
-    patchRating: (rating) => dispatch(patchRating(rating))
+    patchRating: (rating) => dispatch(patchRating(rating)),
+    deleteRate: (rating) => dispatch(deleteRating(rating))
   };
 };
 
