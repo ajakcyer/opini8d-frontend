@@ -85,3 +85,32 @@ export const opinionRated = (opinion) => {
       });
   };
 };
+
+export const patchRating = (rating) =>{
+    // debugger
+    return (dispatch) =>{
+        fetch(`http://localhost:3000/api/v1/ratings/${rating.id}`,{
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                agreeable: rating.agreeable
+            })
+        })
+        .then(r=>r.json())
+        .then(data => {
+            // debugger
+            dispatch({
+                type: "EDIT_RATING",
+                payload: {
+                    id: data.id,
+                    opinion_id: data.opinion.id,
+                    user_id: data.user.id,
+                    agreeable: data.agreeable
+                }
+            })
+        })
+    }
+}

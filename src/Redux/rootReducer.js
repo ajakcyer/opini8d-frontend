@@ -34,13 +34,20 @@ const opinionsReducer = (state = defaultState.opinions , action) =>{
             const index = sameArray.findIndex(opinion => opinion.id === action.payload.opinion_id)
             sameArray[index].ratings.push(action.payload)
             return sameArray
+        case "EDIT_RATING":
+            // debugger
+            let copy = [...state]
+            const opIndex = copy.findIndex(opinion => opinion.id === action.payload.opinion_id)
+            let ratingIndex = copy[opIndex].ratings.findIndex(rating => rating.id === action.payload.id)
+            copy[opIndex].ratings[ratingIndex] = action.payload
+            return copy
         default:
             return state
     }
 }
 
 const currentUserReducer = (state = defaultState.currentUser, action) =>{
-    switch(action.tye){
+    switch(action.type){
         default:
             return state
     }

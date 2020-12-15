@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { editOpinion, deleteOpinion, opinionRated } from "../Redux/action";
+import { editOpinion, deleteOpinion, opinionRated, patchRating } from "../Redux/action";
 import { withRouter } from "react-router-dom";
 import { Button } from 'semantic-ui-react'
 
@@ -15,17 +15,33 @@ class Opinion extends Component {
     // debugger
     switch (e.target.innerHTML) {
       case "Disagree":
-        return this.props.ratePost({
-          userId: this.props.currentUser,
-          id: this.props.opinion.id,
-          agreeable: false,
-        });
+        if (this.didIVote()){
+          return this.props.patchRating({
+            id: this.didIVote().id,
+            agreeable: false
+          })
+        } else {
+          return this.props.ratePost({
+            userId: this.props.currentUser,
+            id: this.props.opinion.id,
+            agreeable: false,
+          });
+
+        }
       case "Agree":
-        return this.props.ratePost({
-          userId: this.props.currentUser,
-          id: this.props.opinion.id,
-          agreeable: true,
-        });
+        if (this.didIVote()){
+          return this.props.patchRating({
+            id: this.didIVote().id,
+            agreeable: true
+          })
+
+        } else {
+          return this.props.ratePost({
+            userId: this.props.currentUser,
+            id: this.props.opinion.id,
+            agreeable: true,
+          });
+        }
     }
   };
 
@@ -92,6 +108,7 @@ class Opinion extends Component {
   };
 
   didIVote = () =>{
+    // debugger
     let myVote = this.props.opinion.ratings.find(rating => rating.user_id === this.props.currentUser)
     return myVote
   }
@@ -109,7 +126,7 @@ class Opinion extends Component {
 
 
   render() {
-    console.log("My Vote: ", this.iVoted());
+    console.log("My Vote: ", this.didIVote());
     return (
       <div>
         {this.ratings()}
@@ -163,6 +180,7 @@ const mdp = (dispatch) => {
     editPost: (opinion) => dispatch(editOpinion(opinion)),
     deletePost: (opinion) => dispatch(deleteOpinion(opinion)),
     ratePost: (opinion) => dispatch(opinionRated(opinion)),
+    patchRating: (rating) => dispatch(patchRating(rating))
   };
 };
 
