@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { editOpinion, deleteOpinion, opinionRated } from "../Redux/action";
 import { withRouter } from "react-router-dom";
+import { Button } from 'semantic-ui-react'
 
 class Opinion extends Component {
   state = {
@@ -75,7 +76,7 @@ class Opinion extends Component {
           </h5>
           <p>
             Out of {this.props.opinion.ratings.length}{" "}
-            {this.props.opinion.ratings.length > 1 ? "voters" : "voter"}
+            {this.props.opinion.ratings.length > 1 ? "votes" : "vote"}
           </p>
         </>
       );
@@ -95,8 +96,20 @@ class Opinion extends Component {
     return myVote
   }
 
+  iVoted = () =>{
+    if (this.didIVote()){
+      if (this.didIVote().agreeable){
+        return "Agree"
+      } else {
+        return "Disagree"
+      }
+    }
+  }
+
+
+
   render() {
-    console.log("My Vote: ", this.didIVote());
+    console.log("My Vote: ", this.iVoted());
     return (
       <div>
         {this.ratings()}
@@ -132,8 +145,8 @@ class Opinion extends Component {
             <h2>{this.props.opinion.title}</h2>
             <p>{this.props.opinion.content}</p>
 
-            <button onClick={this.onClickHandler}>Agree</button>
-            <button onClick={this.onClickHandler}>Disagree</button>
+            <Button active={this.iVoted() === "Agree" ? true : false} onClick={this.onClickHandler}>Agree</Button>
+            <Button active={this.iVoted() === "Disagree" ? true : false} onClick={this.onClickHandler}>Disagree</Button>
           </>
         )}
       </div>
