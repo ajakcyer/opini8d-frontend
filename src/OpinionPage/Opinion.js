@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { editOpinion, deleteOpinion, opinionRated, patchRating, deleteRating } from "../Redux/action";
 import { withRouter } from "react-router-dom";
-import { Button } from 'semantic-ui-react'
+import { Button, Progress } from 'semantic-ui-react'
 
 class Opinion extends Component {
   state = {
@@ -97,13 +97,15 @@ class Opinion extends Component {
       // debugger
       return (
         <>
-          <h5>
+          {/* <h5>
             {(positive.length / this.props.opinion.ratings.length) * 100}% Agree
-          </h5>
-          <h5>
+          </h5> */}
+          <Progress color="green" percent={((positive.length / this.props.opinion.ratings.length) * 100).toFixed(2)} progress label="Agree" />
+          {/* <h5>
             {(negative.length / this.props.opinion.ratings.length) * 100}%
             disagree
-          </h5>
+          </h5> */}
+          <Progress color="red" percent={((negative.length / this.props.opinion.ratings.length) * 100).toFixed(2)} progress label="Disagree" />
           <p>
             Out of {this.props.opinion.ratings.length}{" "}
             {this.props.opinion.ratings.length > 1 ? "votes" : "vote"}
@@ -113,8 +115,8 @@ class Opinion extends Component {
     } else {
       return (
         <>
-          <h5>0% Agree</h5>
-          <h5>0% Disagree</h5>
+          <Progress color="green" percent={0} progress label="Agree" />
+          <Progress color="red" percent={0} progress label="Disagree" />
           <p>No ratings yet!</p>
         </>
       );

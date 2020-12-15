@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 
 
 const defaultState = {
-    currentUser: 1,
+    currentUser: 3,
     opinions: []
 }
 
