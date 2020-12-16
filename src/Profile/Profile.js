@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import MyOpinions from './MyOpinions'
 
 const Profile = (props) => {
-    // console.log(props)
+    console.log(props)
 
     const myOpinionProps = () =>{
         // debugger
