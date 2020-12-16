@@ -149,3 +149,25 @@ export const loginAction = (userInfo) =>{
     .then(data => dispatch({type: "LOGIN", payload: data}))
   }
 }
+
+export const signupAction = (userInfo) =>{
+  debugger
+  return (dispatch) =>{
+    fetch("http://localhost:3000/api/v1/users", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({ user:
+        {first_name: userInfo.firstName,
+        last_name: userInfo.lastName,
+        email: userInfo.email,
+        username: userInfo.username,
+        password: userInfo.password}
+      })
+    })
+    .then(r=>r.json())
+    .then(data => dispatch({type: "SIGNUP", payload: data}))
+  }
+}

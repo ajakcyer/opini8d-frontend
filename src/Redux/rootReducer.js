@@ -58,6 +58,9 @@ const currentUserReducer = (state = defaultState.currentUser, action) =>{
         case "LOGIN":
             // debugger
             return action.payload.id
+        case "SIGNUP":
+            debugger
+            return action.payload.id    
         default:
             return state
     }
