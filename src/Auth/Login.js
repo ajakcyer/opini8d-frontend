@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { loginAction } from '../Redux/action'
 
 class Login extends Component {
 
@@ -16,9 +18,11 @@ class Login extends Component {
     onSubmitHandler = (e) =>{
         e.preventDefault()
         console.log("Submitted!: ", this.state)
+        this.props.login(this.state)
     }
 
     render() {
+        // console.log(this.props)
         return (
             <div>
                 <h1>Login Component</h1>
@@ -34,4 +38,8 @@ class Login extends Component {
     }
 }
 
-export default Login
+const mdp = (dispatch) =>{
+    return {login: (userInfo) => dispatch(loginAction(userInfo))}
+}
+
+export default connect(null, mdp)(Login);

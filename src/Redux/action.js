@@ -130,3 +130,22 @@ export const deleteRating = (rating)=>{
         })
     }
 }
+
+export const loginAction = (userInfo) =>{
+  // debugger
+  return (dispatch) => {
+    fetch("http://localhost:3000/api/v1/login",{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        username: userInfo.username,
+        password: userInfo.password
+      })
+    })
+    .then(r=>r.json())
+    .then(data => dispatch({type: "LOGIN", payload: data}))
+  }
+}

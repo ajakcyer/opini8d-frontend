@@ -55,6 +55,9 @@ const opinionsReducer = (state = defaultState.opinions , action) =>{
 
 const currentUserReducer = (state = defaultState.currentUser, action) =>{
     switch(action.type){
+        case "LOGIN":
+            // debugger
+            return action.payload.id
         default:
             return state
     }
