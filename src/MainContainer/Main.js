@@ -3,7 +3,7 @@ import { NavLink, Route, Switch, withRouter } from "react-router-dom";
 import AllOpinions from "../ExplorePage/AllOpinions";
 import Profile from "../Profile/Profile";
 import { connect } from "react-redux";
-import { fetchOpinionsFromApi } from "../Redux/action";
+import { fetchOpinionsFromApi, logoutAction } from "../Redux/action";
 
 
 class Main extends Component {
@@ -25,6 +25,12 @@ class Main extends Component {
       <NavLink to="/opinions">Explore Opinions</NavLink>
       <br></br>
       <NavLink to="/profile">View Profile</NavLink>
+      <br></br>
+      <button onClick={()=>{
+
+        this.props.logout()
+        this.props.history.push('/login')
+        }} className="link-button">Log out</button>
 
       {this.props.opinions.length === 0 ? <h1>Loading...</h1> :
       
@@ -43,11 +49,14 @@ class Main extends Component {
 }
 
 const mdp = (dispatch) => {
-  return { fetchOpinions: (data) => dispatch(fetchOpinionsFromApi(data)) };
+  return { 
+    fetchOpinions: (data) => dispatch(fetchOpinionsFromApi(data)),
+    logout: ()=> dispatch(logoutAction()) 
+  };
 };
 
 const msp = (state) => {
   return { opinions: state.opinions };
 };
 
-export default connect(msp, mdp)(Main);
+export default withRouter(connect(msp, mdp)(Main));

@@ -171,3 +171,7 @@ export const signupAction = (userInfo) =>{
     .then(data => dispatch({type: "SIGNUP", payload: data}))
   }
 }
+
+export const logoutAction = ()=>{
+  return {type: "LOGOUT"}
+}
