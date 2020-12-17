@@ -29,7 +29,7 @@ class Main extends Component {
     return (
     <>
       <h1>Main (logged in) Component Container</h1>
-      <img className="logo" src={logo} />
+      <img className="logo" src={logo} alt="logo" />
       <br></br>
       <NavLink to="/explore/opinions">Explore Opinions</NavLink>
       <br></br>

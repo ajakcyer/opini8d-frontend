@@ -20,7 +20,7 @@ class AuthCont extends Component {
         return (
             <div>
                 <div className="auth-logo">
-                <img className="large-logo" src={logo} />
+                <img className="large-logo" src={logo} alt="logo" />
                 <h1 className="large-header">OPINI8'D</h1>
                 </div>
                 {/* <h1>Auth (not logged in) Component Container</h1> */}

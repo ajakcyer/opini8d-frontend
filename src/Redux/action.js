@@ -1,4 +1,4 @@
-const token = localStorage.getItem('token')
+// const token = localStorage.getItem('token')
 
 
 export const fetchOpinionsFromApi = (data) => {
@@ -7,6 +7,8 @@ export const fetchOpinionsFromApi = (data) => {
 
 export const addOpinionToApi = (opinion) => {
   return (dispatch) => {
+    const token = localStorage.getItem('token')
+
     // debugger
     fetch("http://localhost:3000/api/v1/opinions", {
       method: "POST",
@@ -31,6 +33,8 @@ export const addOpinionToApi = (opinion) => {
 export const editOpinion = (opinion) => {
   // debugger
   return (dispatch) => {
+    const token = localStorage.getItem('token')
+
     fetch(`http://localhost:3000/api/v1/opinions/${opinion.id}`, {
       method: "PATCH",
       headers: {
@@ -51,6 +55,8 @@ export const editOpinion = (opinion) => {
 export const deleteOpinion = (opinion) => {
   // debugger
   return (dispatch) => {
+    const token = localStorage.getItem('token')
+
     fetch(`http://localhost:3000/api/v1/opinions/${opinion.id}`, {
       method: "DELETE",
       headers: {Authorization: `Bearer ${token}`}
@@ -63,6 +69,8 @@ export const deleteOpinion = (opinion) => {
 export const opinionRated = (opinion) => {
 //   debugger;
   return (dispatch) => {
+    const token = localStorage.getItem('token')
+
     fetch(`http://localhost:3000/api/v1/ratings`, {
       method: "POST",
       headers: {
@@ -96,6 +104,8 @@ export const opinionRated = (opinion) => {
 export const patchRating = (rating) =>{
     // debugger
     return (dispatch) =>{
+      const token = localStorage.getItem('token')
+
         fetch(`http://localhost:3000/api/v1/ratings/${rating.id}`,{
             method: 'PATCH',
             headers: {
@@ -126,6 +136,8 @@ export const patchRating = (rating) =>{
 export const deleteRating = (rating)=>{
     // debugger
     return (dispatch) => {
+      const token = localStorage.getItem('token')
+
         fetch(`http://localhost:3000/api/v1/ratings/${rating.id}`,{
             method: 'DELETE',
             headers: {Authorization: `Bearer ${token}`}
@@ -185,7 +197,13 @@ export const signupAction = (userInfo) =>{
       })
     })
     .then(r=>r.json())
-    .then(data => dispatch({type: "SIGNUP", payload: data}))
+    .then(data => {
+      // debugger
+      if (data.user){
+        localStorage.setItem('token', data.jwt)
+        dispatch({type: "SIGNUP", payload: data.user})
+      }
+    })
   }
 }
 
@@ -195,9 +213,11 @@ export const logoutAction = ()=>{
 
 export const userLoggedIn = () =>{
   return (dispatch) =>{
-    // const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token')
+    
     fetch("http://localhost:3000/api/v1/profile", {
         method: 'GET',
+
         headers: {Authorization: `Bearer ${token}`}
     })
     .then(r=>r.json())
