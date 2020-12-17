@@ -30,7 +30,7 @@ class Opinion extends Component {
           }
         } else {
           return this.props.ratePost({
-            userId: this.props.currentUser,
+            userId: this.props.currentUser.id,
             id: this.props.opinion.id,
             agreeable: false,
           });
@@ -51,7 +51,7 @@ class Opinion extends Component {
           }
         } else {
           return this.props.ratePost({
-            userId: this.props.currentUser,
+            userId: this.props.currentUser.id,
             id: this.props.opinion.id,
             agreeable: true,
           });
@@ -125,7 +125,7 @@ class Opinion extends Component {
 
   didIVote = () =>{
     // debugger
-    let myVote = this.props.opinion.ratings.find(rating => rating.user_id === this.props.currentUser)
+    let myVote = this.props.opinion.ratings.find(rating => rating.user_id === this.props.currentUser.id)
     return myVote
   }
 
@@ -147,7 +147,7 @@ class Opinion extends Component {
       <div>
         {this.ratings()}
         <h4>By: {this.props.opinion.user.username}</h4>
-        {this.props.currentUser === this.props.opinion.user.id ? (
+        {this.props.currentUser.id === this.props.opinion.user.id ? (
           <>
             <button onClick={this.editClicked}>
               {this.state.editBtn ? "Nevermind" : "Edit Post"}

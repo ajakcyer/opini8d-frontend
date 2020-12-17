@@ -57,10 +57,10 @@ const currentUserReducer = (state = defaultState.currentUser, action) =>{
     switch(action.type){
         case "LOGIN":
             // debugger
-            return action.payload.id
+            return action.payload
         case "SIGNUP":
             // debugger
-            return action.payload.id
+            return action.payload
         case "LOGOUT":
             // debugger
             return null

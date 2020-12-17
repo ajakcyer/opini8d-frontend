@@ -8,7 +8,7 @@ class CreateOpinion extends Component {
     state = {
         title: "",
         content: "",
-        userId: this.props.currentUser
+        userId: this.props.currentUser.id
     }
 
     onChangeHandler = (e) =>{

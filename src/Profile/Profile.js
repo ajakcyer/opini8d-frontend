@@ -7,7 +7,7 @@ const Profile = (props) => {
 
     const myOpinionProps = () =>{
         // debugger
-        return props.opinions.filter(opinion => opinion.user.id === props.currentUser)
+        return props.opinions.filter(opinion => opinion.user.id === props.currentUser.id)
     }
 
     // console.log(myOpinionProps())
