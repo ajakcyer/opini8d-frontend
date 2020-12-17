@@ -55,6 +55,9 @@ const opinionsReducer = (state = defaultState.opinions , action) =>{
 
 const currentUserReducer = (state = defaultState.currentUser, action) =>{
     switch(action.type){
+        case "USER_LOGGED_IN":
+            // debugger
+            return action.payload
         case "LOGIN":
             // debugger
             return action.payload

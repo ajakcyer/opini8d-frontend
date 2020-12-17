@@ -44,14 +44,17 @@ class Main extends Component {
 
       {this.props.opinions.length === 0 ? <h1>Loading...</h1> :
       
-      <Switch>
-        <Route path="/explore/profile" render={() => <Profile opinions={this.getMyOpinions()} />} />
-        <Route path="/explore/opinions" render={() => <AllOpinions opinions={this.props.opinions} />} />
-      </Switch>
-      
+      this.props.currentUser ? 
+        
+        <Switch>
+          <Route path="/explore/profile" render={() => <Profile opinions={this.getMyOpinions()} />} />
+          <Route path="/explore/opinions" render={() => <AllOpinions opinions={this.props.opinions} />} />
+        </Switch>
+        
+        : null
+
       }
-      {/* <hr></hr>
-      <AllOpinions /> */}
+
     </>
       
     )

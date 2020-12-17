@@ -1,3 +1,6 @@
+const token = localStorage.getItem('token')
+
+
 export const fetchOpinionsFromApi = (data) => {
   return { type: "FETCH_OPINIONS", payload: data };
 };
@@ -10,6 +13,7 @@ export const addOpinionToApi = (opinion) => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({
         user_id: opinion.userId,
@@ -32,6 +36,7 @@ export const editOpinion = (opinion) => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({
         title: opinion.title,
@@ -48,6 +53,7 @@ export const deleteOpinion = (opinion) => {
   return (dispatch) => {
     fetch(`http://localhost:3000/api/v1/opinions/${opinion.id}`, {
       method: "DELETE",
+      headers: {Authorization: `Bearer ${token}`}
     })
       .then((r) => r.json())
       .then((data) => dispatch({ type: "DELETE_OPINION", payload: opinion }));
@@ -62,6 +68,7 @@ export const opinionRated = (opinion) => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({
         user_id: opinion.userId,
@@ -93,7 +100,8 @@ export const patchRating = (rating) =>{
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({
                 agreeable: rating.agreeable
@@ -119,7 +127,8 @@ export const deleteRating = (rating)=>{
     // debugger
     return (dispatch) => {
         fetch(`http://localhost:3000/api/v1/ratings/${rating.id}`,{
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {Authorization: `Bearer ${token}`}
         })
         .then(r=>r.json())
         .then(data => {
@@ -147,7 +156,7 @@ export const loginAction = (userInfo) =>{
     })
     .then(r=>r.json())
     .then(data => {
-      debugger
+      // debugger
         if (data.error){
           alert("Username and/or password is incorrect")
         } else {
@@ -182,4 +191,21 @@ export const signupAction = (userInfo) =>{
 
 export const logoutAction = ()=>{
   return {type: "LOGOUT"}
+}
+
+export const userLoggedIn = () =>{
+  return (dispatch) =>{
+    // const token = localStorage.getItem('token')
+    fetch("http://localhost:3000/api/v1/profile", {
+        method: 'GET',
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    .then(r=>r.json())
+    .then(data => {
+      // debugger
+        if(data.user){
+          dispatch({type: "USER_LOGGED_IN", payload: data.user})
+        }
+    })
+  }
 }

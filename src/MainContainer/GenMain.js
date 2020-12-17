@@ -3,8 +3,13 @@ import { NavLink, Redirect, Route, Switch, withRouter } from "react-router-dom";
 import {connect} from 'react-redux'
 import AuthCont from "../Auth/AuthCont"
 import Main from "./Main"
+import { userLoggedIn } from '../Redux/action';
 
 class GenMain extends Component {
+
+  componentDidMount = () => {
+    return this.props.userToken()
+  }
 
   componentDidUpdate = (prevProps) =>{
     if (this.props.currentUser !== prevProps.currentUser){
@@ -29,7 +34,8 @@ class GenMain extends Component {
       <Switch>
         <Route path="/auth" render={()=> <AuthCont/>}/>
 
-        {this.props.currentUser ? 
+        {/* {this.props.currentUser ?  */}
+        {localStorage.getItem('token') ?
         
         <Route path="/explore" render={()=> <Main/>} />
         
@@ -50,4 +56,8 @@ const msp =(state)=>{
     return ({currentUser: state.currentUser})
 }
 
-export default withRouter(connect(msp)(GenMain));
+const mdp = (dispatch) =>{
+  return {userToken: () => dispatch(userLoggedIn())}
+}
+
+export default withRouter(connect(msp, mdp)(GenMain));
