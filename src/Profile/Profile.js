@@ -12,8 +12,8 @@ const Profile = (props) => {
 
     // console.log(myOpinionProps())
     return (
-        <div>
-            <h1>Opinions byy {props.currentUser.username}</h1>
+        <div className="my-opinions">
+            <h1>Opinions by {props.currentUser.username}</h1>
             <MyOpinions opinionsByMe={props.opinions}/>
         </div>
     )
