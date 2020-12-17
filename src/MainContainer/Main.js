@@ -38,6 +38,7 @@ class Main extends Component {
       <button onClick={()=>{
 
         this.props.logout()
+        localStorage.removeItem("token")
         this.props.history.push('/auth/login')
         }} className="link-button">Log out</button>
 

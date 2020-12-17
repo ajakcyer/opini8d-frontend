@@ -147,12 +147,12 @@ export const loginAction = (userInfo) =>{
     })
     .then(r=>r.json())
     .then(data => {
-      // debugger
+      debugger
         if (data.error){
           alert("Username and/or password is incorrect")
         } else {
-          
-          dispatch({type: "LOGIN", payload: data})
+          localStorage.setItem("token", data.jwt)
+          dispatch({type: "LOGIN", payload: data.user})
         }
   })
   }
