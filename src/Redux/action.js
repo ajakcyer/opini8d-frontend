@@ -146,12 +146,20 @@ export const loginAction = (userInfo) =>{
       })
     })
     .then(r=>r.json())
-    .then(data => dispatch({type: "LOGIN", payload: data}))
+    .then(data => {
+      // debugger
+        if (data.error){
+          alert("Username and/or password is incorrect")
+        } else {
+          
+          dispatch({type: "LOGIN", payload: data})
+        }
+  })
   }
 }
 
 export const signupAction = (userInfo) =>{
-  debugger
+  // debugger
   return (dispatch) =>{
     fetch("http://localhost:3000/api/v1/users", {
       method: 'POST',

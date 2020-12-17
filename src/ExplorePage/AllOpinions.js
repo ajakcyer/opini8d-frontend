@@ -28,7 +28,7 @@ class AllOpinions extends Component {
         :
         <Switch>
           <Route
-            path="/opinions/:id"
+            path="/explore/opinions/:id"
             render={({ match }) => {
               let urlId = parseInt(match.params.id);
               let foundOpinion = this.props.opinions.find(
@@ -39,7 +39,7 @@ class AllOpinions extends Component {
             }}
           />
           <Route
-            path="/opinions"
+            path="/explore/opinions"
             render={() => (
               <>
                 <h1 className="title">Explore Opinions</h1>

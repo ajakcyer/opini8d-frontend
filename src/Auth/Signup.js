@@ -24,7 +24,7 @@ class Signup extends Component {
         e.preventDefault()
         console.log("Submitted!: ", this.state)
         this.props.signup(this.state)
-        this.props.history.push('/opinions')
+        // this.props.history.push('/explore/opinions')
     }
 
     render() {
@@ -43,7 +43,7 @@ class Signup extends Component {
                 <button>Sign Up</button>
             </form>
             <br></br>
-            <NavLink to="/login">
+            <NavLink to="/auth/login">
                 Already have an account?
             </NavLink>
             </div>

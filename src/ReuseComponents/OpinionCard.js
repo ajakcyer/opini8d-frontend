@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink, Route, Switch, withRouter } from "react-router-dom";
 
 export const OpinionCard = ({ opinion }) => {
-  console.log(opinion)
+  // console.log(opinion)
 
   const ratings = () =>{
     // debugger
@@ -29,7 +29,7 @@ export const OpinionCard = ({ opinion }) => {
   return (
     <div className={ratings()}>
       {/* <h4>By: {opinion.user.username}</h4> */}
-      <NavLink to={`/opinions/${opinion.id}`}>
+      <NavLink to={`/explore/opinions/${opinion.id}`}>
         <h3>{opinion.title}</h3>
       </NavLink>
       <hr></hr>

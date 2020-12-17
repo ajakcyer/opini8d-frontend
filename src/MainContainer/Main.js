@@ -22,21 +22,21 @@ class Main extends Component {
     return (
     <>
       <h1>Main (logged in) Component Container</h1>
-      <NavLink to="/opinions">Explore Opinions</NavLink>
+      <NavLink to="/explore/opinions">Explore Opinions</NavLink>
       <br></br>
-      <NavLink to="/profile">View Profile</NavLink>
+      <NavLink to="/explore/profile">View Profile</NavLink>
       <br></br>
       <button onClick={()=>{
 
         this.props.logout()
-        this.props.history.push('/login')
+        this.props.history.push('/auth/login')
         }} className="link-button">Log out</button>
 
       {this.props.opinions.length === 0 ? <h1>Loading...</h1> :
       
       <Switch>
-        <Route path="/profile" render={() => <Profile opinions={this.props.opinions} />} />
-        <Route path="/opinions" render={() => <AllOpinions opinions={this.props.opinions} />} />
+        <Route path="/explore/profile" render={() => <Profile opinions={this.props.opinions} />} />
+        <Route path="/explore/opinions" render={() => <AllOpinions opinions={this.props.opinions} />} />
       </Switch>
       
       }

@@ -22,17 +22,17 @@ class AuthCont extends Component {
             <div>
                 <h1>Auth (not logged in) Component Container</h1>
                 <Switch>
-                    <Route path="/login" render={()=> <Login/>} />
-                    <Route path="/signup" render={()=> <Signup/>} />
+                    <Route path="/auth/login" render={()=> <Login/>} />
+                    <Route path="/auth/signup" render={()=> <Signup/>} />
                     <Route path="/" component={() => {
                         return (
                             <>
-                                <NavLink to="/login">
+                                <NavLink to="/auth/login">
                                     Login
                                 </NavLink>
                                 <br></br>
 
-                                <NavLink to="/signup">
+                                <NavLink to="/auth/signup">
                                     Sign Up
                                 </NavLink>
                             </>

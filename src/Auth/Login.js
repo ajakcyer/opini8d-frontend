@@ -20,7 +20,7 @@ class Login extends Component {
         e.preventDefault()
         console.log("Submitted!: ", this.state)
         this.props.login(this.state)
-        this.props.history.push('/opinions')
+        // this.props.history.push('/explore/opinions')
     }
 
     render() {
@@ -35,7 +35,8 @@ class Login extends Component {
                     <br></br>
                     <button>Log in</button>
                 </form>
-                <NavLink to="/signup">
+                <br></br>
+                <NavLink to="/auth/signup">
                     Create an Account
                 </NavLink>
             </div>
