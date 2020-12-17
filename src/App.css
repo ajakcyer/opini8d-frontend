@@ -20,3 +20,26 @@
     padding: 0;
     color: #4183c4;
 }
+
+.large-logo {
+    max-width: 150px;
+    display: inline-block;
+
+}
+
+.large-header {
+    font-size: 50px;
+    display: inline-block;
+    margin: 0px 0px 0px 20px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
+}
+
+.auth-logo {
+    display: inline-block;
+
+}
+
+.logo {
+    max-width: 80px;
+}

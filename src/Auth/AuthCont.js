@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import { NavLink, Route, Switch, withRouter } from 'react-router-dom'
 import Login from './Login'
 import Signup from './Signup'
-
-
+import logo from '../opini8d-logo.png'
 
 class AuthCont extends Component {
 
@@ -20,7 +19,11 @@ class AuthCont extends Component {
         console.log(this.props)
         return (
             <div>
-                <h1>Auth (not logged in) Component Container</h1>
+                <div className="auth-logo">
+                <img className="large-logo" src={logo} />
+                <h1 className="large-header">OPINI8'D</h1>
+                </div>
+                {/* <h1>Auth (not logged in) Component Container</h1> */}
                 <Switch>
                     <Route path="/auth/login" render={()=> <Login/>} />
                     <Route path="/auth/signup" render={()=> <Signup/>} />
