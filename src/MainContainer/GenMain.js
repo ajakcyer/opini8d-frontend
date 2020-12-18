@@ -11,6 +11,7 @@ class GenMain extends Component {
     if (this.props.location.pathname === "/"){
       if (localStorage.getItem('token')){
         this.props.history.push('/explore/opinions')
+        console.log('testing checkout')
       } else {
         this.props.history.push('/auth/login')
       }
