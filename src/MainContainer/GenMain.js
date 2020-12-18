@@ -8,6 +8,13 @@ import { userLoggedIn } from '../Redux/action';
 class GenMain extends Component {
 
   componentDidMount = () => {
+    if (this.props.location.pathname === "/"){
+      if (localStorage.getItem('token')){
+        this.props.history.push('/explore/opinions')
+      } else {
+        this.props.history.push('/auth/login')
+      }
+    }
     return this.props.userToken()
   }
 
