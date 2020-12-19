@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { editOpinion, deleteOpinion, opinionRated, patchRating, deleteRating } from "../Redux/action";
-import { withRouter } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import { Button, Progress } from 'semantic-ui-react'
 
 class Opinion extends Component {
@@ -142,11 +142,17 @@ class Opinion extends Component {
 
 
   render() {
-    console.log("My Vote: ", this.didIVote());
+    // console.log("My Vote: ", this.didIVote(), "Props: ", this.props);
+    // console.log("Opinion User ID: ", this.props.opinion.user.id)
     return (
       <div>
         {this.ratings()}
-        <h4>By: {this.props.opinion.user.username}</h4>
+        <h4>By: {this.props.currentUser.username === this.props.opinion.user.username ? this.props.opinion.user.username : 
+        <NavLink to={`/explore/users/${this.props.opinion.user.id}`}>
+        {this.props.opinion.user.username} 
+        </NavLink>
+
+        }</h4>
         {this.props.currentUser.id === this.props.opinion.user.id ? (
           <>
             <button onClick={this.editClicked}>

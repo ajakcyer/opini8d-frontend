@@ -22,6 +22,13 @@ class Main extends Component {
     }
   }
 
+  renderUserOpinions = (id) =>{
+    // return this.props.opinions.map((opinion, index) => )
+    if (this.props.opinions.length > 0){
+      return this.props.opinions.filter(opinion => opinion.user.id === id)
+    }
+  }
+
 
   render() {
     // debugger
@@ -47,6 +54,18 @@ class Main extends Component {
       this.props.currentUser ? 
         
         <Switch>
+          <Route
+            path="/explore/users/:id" exact
+            render={({ match }) => {
+              let urlId = parseInt(match.params.id);
+              let foundUser = this.props.opinions.find(
+                (opinion) => opinion.user.id === urlId
+              ).user;
+                // debugger
+                
+              return <Profile userObj={foundUser} userOpinions={this.renderUserOpinions(foundUser.id)} />;
+            }}
+          />
           <Route path="/explore/profile" render={() => <Profile opinions={this.getMyOpinions()} />} />
           <Route path="/explore/opinions" render={() => <AllOpinions opinions={this.props.opinions} />} />
         </Switch>

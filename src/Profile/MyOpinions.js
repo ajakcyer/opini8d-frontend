@@ -16,7 +16,8 @@ class MyOpinions extends Component {
             <>
 
             {this.renderMyOpinions()}
-            <CreateOpinion/>
+            {this.props.opinionsByUser ? null : 
+            <CreateOpinion/>}
             </>
         )
     }
