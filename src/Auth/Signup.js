@@ -10,7 +10,8 @@ class Signup extends Component {
         lastName: "",
         email: "",
         username: "",
-        password: ""
+        password: "",
+        avatar: null
     }
 
 
@@ -33,6 +34,8 @@ class Signup extends Component {
             <div>
                 <h1>Sign up Component</h1>
             <form onSubmit={this.onSubmitHandler}>
+                <input type="file" name="avatar" value={this.state.avatar} accept="image/png, image/jpeg" />
+                <br></br>
                 <input onChange={this.onChangeHandler} type="text" name="firstName" placeholder="First Name" value={this.state.firstName} />
                 <input onChange={this.onChangeHandler} type="text" name="lastName" placeholder="Last Name" value={this.state.lastName} />
                 <input onChange={this.onChangeHandler} type="email" name="email" placeholder="Email" value={this.state.email} />

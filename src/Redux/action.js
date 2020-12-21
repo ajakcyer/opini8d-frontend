@@ -180,7 +180,7 @@ export const loginAction = (userInfo) =>{
 }
 
 export const signupAction = (userInfo) =>{
-  // debugger
+  debugger
   return (dispatch) =>{
     fetch("http://localhost:3000/api/v1/users", {
       method: 'POST',
@@ -193,12 +193,13 @@ export const signupAction = (userInfo) =>{
         last_name: userInfo.lastName,
         email: userInfo.email,
         username: userInfo.username,
-        password: userInfo.password}
+        password: userInfo.password,
+        main_image: userInfo.avatar}
       })
     })
     .then(r=>r.json())
     .then(data => {
-      // debugger
+      debugger
       if (data.user){
         localStorage.setItem('token', data.jwt)
         dispatch({type: "SIGNUP", payload: data.user})
