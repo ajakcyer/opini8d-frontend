@@ -198,8 +198,14 @@ class Opinion extends Component {
           </form>
         ) : (
           <>
+            <div>
+
+
             <h2>{this.props.opinion.title}</h2>
+            {this.props.opinion.other_image ? <img className="opinion-image" src={this.props.opinion.other_image.url} alt="opinion-image" /> : null}
+            <br></br><br></br>
             <p>{this.props.opinion.content}</p>
+            </div>
 
             <Button active={this.iVoted() === "Agree" ? true : false} onClick={this.onClickHandler}>Agree</Button>
             <Button active={this.iVoted() === "Disagree" ? true : false} onClick={this.onClickHandler}>Disagree</Button>
