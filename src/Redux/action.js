@@ -180,22 +180,31 @@ export const loginAction = (userInfo) =>{
 }
 
 export const signupAction = (userInfo) =>{
-  debugger
   return (dispatch) =>{
+    const formData = new FormData();
+    formData.append('first_name', userInfo.firstName);
+    formData.append('last_name', userInfo.lastName);
+    formData.append('email', userInfo.email);
+    formData.append('username', userInfo.username);
+    formData.append('password', userInfo.password);
+    formData.append('avatar', userInfo.avatar);
+    
+    debugger
+
     fetch("http://localhost:3000/api/v1/users", {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({ user:
+      // headers: {
+      //   'Content-Type': undefined,
+      //   'Accept': 'application/json'
+      // },
+      body: formData /* JSON.stringify({ user:
         {first_name: userInfo.firstName,
         last_name: userInfo.lastName,
         email: userInfo.email,
         username: userInfo.username,
         password: userInfo.password,
-        main_image: userInfo.avatar}
-      })
+        avatar: userInfo.avatar}
+      }) */
     })
     .then(r=>r.json())
     .then(data => {

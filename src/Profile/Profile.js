@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import MyOpinions from './MyOpinions'
+import profile from '../default-profile.png'
 
 const Profile = (props) => {
     console.log(props)
@@ -15,6 +16,16 @@ const Profile = (props) => {
     // debugger
     return (
         <div className="my-opinions">
+            {props.userObj ? 
+            
+            
+            <img src={props.userObj.avatar ? props.userObj.avatar.url : profile} alt="avatar" className="avatar" />
+            
+            : 
+            <img src={props.currentUser.avatar ? props.currentUser.avatar.url : profile} alt="avatar" className="avatar" />
+            }
+            {/* <img src={props.currentUser.avatar ? props.currentUser.avatar.url : "https://freesvg.org/img/abstract-user-flat-4.png"} alt="avatar" className="avatar" /> */}
+
             <h2>{props.userObj ? 
             props.userObj.username
             

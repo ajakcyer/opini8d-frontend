@@ -21,6 +21,13 @@ class Signup extends Component {
         }))
     }
 
+    imageChangeHandler = (e) =>{
+        // debugger
+        this.setState(prev=>({
+            avatar: e.target.files[0]
+        }))
+    }
+
     onSubmitHandler = (e) =>{
         e.preventDefault()
         console.log("Submitted!: ", this.state)
@@ -34,7 +41,7 @@ class Signup extends Component {
             <div>
                 <h1>Sign up Component</h1>
             <form onSubmit={this.onSubmitHandler}>
-                <input type="file" name="avatar" value={this.state.avatar} accept="image/png, image/jpeg" />
+                <input onChange={this.imageChangeHandler} type="file" name="avatar" accept="image/*" />
                 <br></br>
                 <input onChange={this.onChangeHandler} type="text" name="firstName" placeholder="First Name" value={this.state.firstName} />
                 <input onChange={this.onChangeHandler} type="text" name="lastName" placeholder="Last Name" value={this.state.lastName} />
