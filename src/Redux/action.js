@@ -216,7 +216,7 @@ export const signupAction = (userInfo) =>{
     formData.append('password', userInfo.password);
     formData.append('avatar', userInfo.avatar);
     
-    debugger
+    // debugger
 
     fetch("http://localhost:3000/api/v1/users", {
       method: 'POST',
@@ -235,7 +235,7 @@ export const signupAction = (userInfo) =>{
     })
     .then(r=>r.json())
     .then(data => {
-      debugger
+      // debugger
       if (data.user){
         localStorage.setItem('token', data.jwt)
         dispatch({type: "SIGNUP", payload: data.user})
