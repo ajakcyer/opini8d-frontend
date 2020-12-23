@@ -6,7 +6,7 @@ export const fetchOpinionsFromApi = (data) => {
 };
 
 export const addOpinionToApi = (opinion) => {
-  debugger
+  // debugger
   return (dispatch) => {
     const token = localStorage.getItem('token')
 

@@ -21,7 +21,7 @@ class CreateOpinion extends Component {
     onSubmitHandler = (e) =>{
         e.preventDefault()
         // console.log(this.state)
-        debugger
+        // debugger
         this.props.addOpinion(this.state)
         this.setState(prev => ({
             title: "",
