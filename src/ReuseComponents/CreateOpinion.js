@@ -8,7 +8,8 @@ class CreateOpinion extends Component {
     state = {
         title: "",
         content: "",
-        userId: this.props.currentUser.id
+        userId: this.props.currentUser.id,
+        otherImage: null
     }
 
     onChangeHandler = (e) =>{
@@ -24,7 +25,15 @@ class CreateOpinion extends Component {
         this.props.addOpinion(this.state)
         this.setState(prev => ({
             title: "",
-            content: ""
+            content: "",
+            otherImage: null
+        }))
+    }
+
+    imageChangeHandler = (e) =>{
+        // debugger
+        this.setState(prev=>({
+            otherImage: e.target.files[0]
         }))
     }
 
@@ -34,6 +43,8 @@ class CreateOpinion extends Component {
             <div>
             <h3>Create an Opinion</h3>
             <form onSubmit={this.onSubmitHandler}>
+                <input onChange={this.imageChangeHandler} type="file" accept="image/*"/>
+                <br></br>
                 <input name="title" type="text" placeholder="Title" onChange={this.onChangeHandler} value={this.state.title}/>
                 <br></br>
                 <textarea name="content" placeholder="What's your opinion?..." onChange={this.onChangeHandler} value={this.state.content}/>

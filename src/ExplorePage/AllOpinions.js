@@ -17,6 +17,7 @@ class AllOpinions extends Component {
   // };
 
   renderOpinions = () => {
+    // debugger
     return this.props.opinions.map((opinion, index) => <OpinionCard key={index} opinion={opinion}/>);
   };
 

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { editOpinion, deleteOpinion, opinionRated, patchRating, deleteRating } from "../Redux/action";
 import { NavLink, withRouter } from "react-router-dom";
 import { Button, Progress } from 'semantic-ui-react'
+import profile from '../default-profile.png'
 
 class Opinion extends Component {
   state = {
@@ -144,10 +145,26 @@ class Opinion extends Component {
   render() {
     // console.log("My Vote: ", this.didIVote(), "Props: ", this.props);
     // console.log("Opinion User ID: ", this.props.opinion.user.id)
+    console.log(this.props)
     return (
       <div>
         {this.ratings()}
-        <h4>By: {this.props.currentUser.username === this.props.opinion.user.username ? this.props.opinion.user.username : 
+        <h4> 
+          
+        {/* {this.props.currentUser.username === this.props.opinion.user.username ? 
+            
+            
+            <img src={this.props.opinion.user.avatar ? this.props.opinion.user.avatar.url : "https://freesvg.org/img/abstract-user-flat-4.png"} alt="avatar" className="avatar" />
+            
+            : 
+            <img src={props.currentUser.avatar ? props.currentUser.avatar.url : "https://freesvg.org/img/abstract-user-flat-4.png"} alt="avatar" className="avatar" />
+        } */}
+          
+          <img src={this.props.opinion.user.avatar ? this.props.opinion.user.avatar.url : profile} alt="avatar" className="avatar" />
+
+
+
+        By: {this.props.currentUser.username === this.props.opinion.user.username ? this.props.opinion.user.username : 
         <NavLink to={`/explore/users/${this.props.opinion.user.id}`}>
         {this.props.opinion.user.username} 
         </NavLink>
@@ -181,8 +198,14 @@ class Opinion extends Component {
           </form>
         ) : (
           <>
+            <div>
+
+
             <h2>{this.props.opinion.title}</h2>
+            {this.props.opinion.other_image ? <img className="opinion-image" src={this.props.opinion.other_image.url} alt="opinion-image" /> : null}
+            <br></br><br></br>
             <p>{this.props.opinion.content}</p>
+            </div>
 
             <Button active={this.iVoted() === "Agree" ? true : false} onClick={this.onClickHandler}>Agree</Button>
             <Button active={this.iVoted() === "Disagree" ? true : false} onClick={this.onClickHandler}>Disagree</Button>

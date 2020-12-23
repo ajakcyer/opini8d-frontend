@@ -6,25 +6,52 @@ export const fetchOpinionsFromApi = (data) => {
 };
 
 export const addOpinionToApi = (opinion) => {
+  // debugger
   return (dispatch) => {
     const token = localStorage.getItem('token')
+
+    const formData = new FormData();
+    formData.append('user_id', opinion.userId);
+    formData.append('title', opinion.title);
+    formData.append('content', opinion.content);
+    formData.append('other_image', opinion.otherImage);
+
+    // fetch("http://localhost:3000/api/v1/users", {
+    //   method: 'POST',
+    //   // headers: {
+    //   //   'Content-Type': undefined,
+    //   //   'Accept': 'application/json'
+    //   // },
+    //   body: formData /* JSON.stringify({ user:
+    //     {first_name: userInfo.firstName,
+    //     last_name: userInfo.lastName,
+    //     email: userInfo.email,
+    //     username: userInfo.username,
+    //     password: userInfo.password,
+    //     avatar: userInfo.avatar}
+    //   }) */
+    // })
 
     // debugger
     fetch("http://localhost:3000/api/v1/opinions", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        // "Content-Type": "application/json",
+        // Accept: "application/json",
         Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify({
+      body: formData /* JSON.stringify({
         user_id: opinion.userId,
         title: opinion.title,
         content: opinion.content,
-      }),
+      }) */
     })
       .then((r) => r.json())
-      .then((data) => dispatch({ type: "ADD_OPINION", payload: data }));
+      .then((data) => {
+        // debugger
+        dispatch({ type: "ADD_OPINION", payload: data })
+      
+      });
 
     // return({type: "ADD_OPINION", payload: opinion})
   };
@@ -180,25 +207,35 @@ export const loginAction = (userInfo) =>{
 }
 
 export const signupAction = (userInfo) =>{
-  // debugger
   return (dispatch) =>{
+    const formData = new FormData();
+    formData.append('first_name', userInfo.firstName);
+    formData.append('last_name', userInfo.lastName);
+    formData.append('email', userInfo.email);
+    formData.append('username', userInfo.username);
+    formData.append('password', userInfo.password);
+    formData.append('avatar', userInfo.avatar);
+    
+    debugger
+
     fetch("http://localhost:3000/api/v1/users", {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({ user:
+      // headers: {
+      //   'Content-Type': undefined,
+      //   'Accept': 'application/json'
+      // },
+      body: formData /* JSON.stringify({ user:
         {first_name: userInfo.firstName,
         last_name: userInfo.lastName,
         email: userInfo.email,
         username: userInfo.username,
-        password: userInfo.password}
-      })
+        password: userInfo.password,
+        avatar: userInfo.avatar}
+      }) */
     })
     .then(r=>r.json())
     .then(data => {
-      // debugger
+      debugger
       if (data.user){
         localStorage.setItem('token', data.jwt)
         dispatch({type: "SIGNUP", payload: data.user})
