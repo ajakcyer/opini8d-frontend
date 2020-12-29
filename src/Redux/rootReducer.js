@@ -64,6 +64,15 @@ const currentUserReducer = (state = defaultState.currentUser, action) =>{
         case "SIGNUP":
             // debugger
             return action.payload
+        case "UNFOLLOW":
+            // debugger
+            let userCopy = {...state}
+            let indexC = userCopy.categories.findIndex(category => category.id === action.payload.category_id)
+            userCopy.categories.splice(indexC, 1)
+            let indexUC = userCopy.user_categories.findIndex(uc => uc.id === action.payload.uc_id)
+            userCopy.user_categories.splice(indexUC, 1)
+            // debugger
+            return userCopy
         case "LOGOUT":
             // debugger
             return null

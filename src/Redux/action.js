@@ -266,3 +266,25 @@ export const userLoggedIn = () =>{
     })
   }
 }
+
+export const unfollowCategory = (object) =>{
+  // debugger
+  return (dispatch) =>{
+    const token = localStorage.getItem('token')
+
+    fetch(`http://localhost:3000/api/v1/user_categories/${object.id}`,{
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(r=>r.json())
+    .then(data => {
+      // debugger
+      dispatch({type: "UNFOLLOW", payload: data})
+
+    })
+  }
+}

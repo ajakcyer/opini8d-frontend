@@ -65,3 +65,17 @@
 .opinion-image {
     max-width: 300px;
 }
+
+.categories-followed p {
+    display: inline;
+}
+
+.categories-followed:hover {
+    background-color: rgba(211, 126, 77, 0.733);
+}
+
+.categories-followed svg {
+    /* color: red; */
+    cursor: pointer;
+    float: right;
+}

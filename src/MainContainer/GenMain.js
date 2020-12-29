@@ -20,7 +20,17 @@ class GenMain extends Component {
 
   componentDidUpdate = (prevProps) =>{
     if (this.props.currentUser !== prevProps.currentUser){
-      this.props.history.push('/explore/opinions')
+      if (this.props.currentUser && prevProps.currentUser){
+        if (prevProps.currentUser.username === this.props.currentUser.username){
+          // debugger
+          return null
+        }
+      } else if (!this.props.currentUser){
+        this.props.history.push('/auth/login')
+      } else {
+        this.props.history.push('/explore/opinions')
+
+      }
     }
   }
 
