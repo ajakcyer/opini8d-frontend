@@ -141,7 +141,7 @@ class Opinion extends Component {
   }
 
   renderCategories = () =>{
-    return this.props.opinion.categories.map((category, index) => <p>#{category.name}</p>)
+    return this.props.opinion.categories.map((category, index) => <p key={index}>#{category.name}</p>)
   }
 
   render() {

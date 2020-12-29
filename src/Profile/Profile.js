@@ -6,6 +6,7 @@ import MyOpinions from './MyOpinions'
 import profile from '../default-profile.png'
 import { Button, Icon, Modal } from 'semantic-ui-react'
 import { AiFillDelete } from "react-icons/ai";
+import { IoAddCircle } from "react-icons/io5";
 import { unfollowCategory } from '../Redux/action'
 
 
@@ -77,15 +78,31 @@ class Profile extends Component {
     }
 
     renderFollowedCategories = () =>{
-        return this.props.currentUser.categories.map((category, index) => {
-        return (
-            <div key={index} className="categories-followed">
-                <p>{category.name}</p>
-                <AiFillDelete onClick={()=> this.onClickUnfollow(category)}/>
-            </div>
+        if (this.props.userObj){
 
-        )
-    })
+            return this.props.userObj.categories.map((category, index) => {
+                return (
+                    <div key={index} className="categories-followed">
+                        <p>{category.name}</p>
+                        <IoAddCircle onClick={()=> alert("Added!")}/>
+                    </div>
+        
+                )
+            })
+            
+        } else {
+
+            return this.props.currentUser.categories.map((category, index) => {
+            return (
+                <div key={index} className="categories-followed">
+                    <p>{category.name}</p>
+                    <AiFillDelete onClick={()=> this.onClickUnfollow(category)}/>
+                </div>
+    
+            )
+        })
+
+        }
     }
     
     render() {
@@ -110,7 +127,7 @@ class Profile extends Component {
 
             {/* {this.renderFollowedCategories()} */}
             <Button onClick={()=> this.setState(prevState => ({open: true}))}>
-                Following
+                {this.props.userObj ? this.props.userObj.categories.length : this.props.currentUser.categories.length} Following
             </Button>
 
             <Modal

@@ -3,7 +3,8 @@ import { combineReducers } from "redux";
 
 const defaultState = {
     currentUser: null,
-    opinions: []
+    opinions: [],
+    categories: []
 }
 
 
@@ -84,11 +85,22 @@ const currentUserReducer = (state = defaultState.currentUser, action) =>{
     }
 }
 
+const categoriesReducer = (state = defaultState.categories, action) =>{
+    switch (action.type) {
+        case "FETCH_CATEGORIES":
+            // debugger
+            return action.payload
+        default:
+            return state
+    }
+}
+
 
 
 const rootReducer = combineReducers({
     currentUser: currentUserReducer,
-    opinions: opinionsReducer
+    opinions: opinionsReducer,
+    categories: categoriesReducer
 })
 
 export default rootReducer

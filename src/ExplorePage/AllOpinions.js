@@ -21,6 +21,57 @@ class AllOpinions extends Component {
     return this.props.opinions.map((opinion, index) => <OpinionCard key={index} opinion={opinion}/>);
   };
 
+  // renderCatOpinions = (apiCategory) =>{
+  //   return this.props.opinions.map((opinion, index) => {
+  //     return opinion.categories.map((category, catIndex) => )
+  //   })
+  // }
+
+  // userCategories = () =>{
+  //   let categoryArray = []
+  //   this.props.categories.forEach(category => {
+  //       categoryArray.push(category.name)
+  //   });
+  //   // debugger
+  //   return categoryArray
+  // }
+
+  categoryIncluded = (category) =>{
+      let opinionArray = []
+      let opinionCategories = this.props.opinions.forEach(opinion => {
+          opinion.categories.forEach(opCategory => {
+              if (opCategory.name === category){
+                  opinionArray.push(opinion)
+                  // if (opinionArray[category]){
+                  //     opinionArray[category].push(opinion)
+                  // } else {
+                  //     opinionArray[category] = [opinion]
+                  // }
+              }
+              // return opCategory.name === category
+          })
+      })
+      return opinionArray
+      // debugger
+  }
+
+  renderCatOpinions = (opinions) =>{
+      return opinions.map((opinion, index) => <OpinionCard key={index} opinion={opinion} />)
+  }
+
+  filterOpinions = () =>{
+    return this.props.categories.map((category, index) => {
+        let result = this.categoryIncluded(category)
+        return (
+            <div key={index}>
+                <h2>{category}</h2>
+                {result.length > 0 ? this.renderCatOpinions(result) : <p>No opinions yet...</p>}
+            </div>
+        )
+        // debugger
+    })
+  }
+
   // renderUserOpinions = (id) =>{
   //   // return this.props.opinions.map((opinion, index) => )
   //   if (this.props.opinions.length > 0){
@@ -65,7 +116,8 @@ class AllOpinions extends Component {
               <>
                 <h1 className="title">Explore Opinions</h1>
                 <div className="all-opinions">
-                    {this.renderOpinions()}
+                    {/* {this.renderOpinions()} */}
+                    {this.filterOpinions()}
                 </div>
                 <CreateOpinion/>
               </>

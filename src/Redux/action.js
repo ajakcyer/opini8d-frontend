@@ -1,5 +1,18 @@
 // const token = localStorage.getItem('token')
 
+export const fetchCategories = () =>{
+  return (dispatch) =>{
+    fetch("http://localhost:3000/api/v1/categories")
+    .then(r=>r.json())
+    .then(data => {
+      let catName = data.map(category => category.name)
+
+      // debugger
+      dispatch({type: "FETCH_CATEGORIES", payload: catName})
+    })
+  }
+}
+
 
 export const fetchOpinionsFromApi = (data) => {
   return { type: "FETCH_OPINIONS", payload: data };
