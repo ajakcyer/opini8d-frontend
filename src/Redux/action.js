@@ -288,3 +288,26 @@ export const unfollowCategory = (object) =>{
     })
   }
 }
+
+export const followCategory = (object) =>{
+  return (dispatch) =>{
+    const token = localStorage.getItem('token')
+
+    fetch("http://localhost:3000/api/v1/user_categories", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        user_id: object.user.id,
+        category_id: object.category.id
+      })
+    })
+    .then(r=>r.json())
+    .then(data => {
+      debugger
+    })
+  }
+}

@@ -73,6 +73,9 @@ const currentUserReducer = (state = defaultState.currentUser, action) =>{
             userCopy.user_categories.splice(indexUC, 1)
             // debugger
             return userCopy
+        case "FOLLOW":
+            debugger
+        break
         case "LOGOUT":
             // debugger
             return null
