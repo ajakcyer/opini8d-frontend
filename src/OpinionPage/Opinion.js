@@ -140,7 +140,9 @@ class Opinion extends Component {
     }
   }
 
-
+  renderCategories = () =>{
+    return this.props.opinion.categories.map((category, index) => <p>#{category.name}</p>)
+  }
 
   render() {
     // console.log("My Vote: ", this.didIVote(), "Props: ", this.props);
@@ -200,7 +202,7 @@ class Opinion extends Component {
           <>
             <div>
 
-
+            {this.renderCategories()}
             <h2>{this.props.opinion.title}</h2>
             {this.props.opinion.other_image ? <img className="opinion-image" src={this.props.opinion.other_image.url} alt="opinion-image" /> : null}
             <br></br><br></br>
