@@ -43,7 +43,7 @@ class CreateOpinion extends Component {
             <div>
             <h3>Create an Opinion</h3>
             <form onSubmit={this.onSubmitHandler}>
-                <label for="opinion-photo"> Click to add a photo</label>
+                <label htmlFor="opinion-photo"> Click to add a photo</label>
                 <input id="opinion-photo" onChange={this.imageChangeHandler} type="file" accept="image/*" style={{display: "none"}}/>
                 <br></br>
                 <input name="title" type="text" placeholder="Title" onChange={this.onChangeHandler} value={this.state.title}/>

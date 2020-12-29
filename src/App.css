@@ -18,6 +18,10 @@
     background-color: red;
 }
 
+.Grey h3, .Green h3, .Red h3 {
+    color: white
+}
+
 .link-button {
     background-color: transparent;
     border: none;

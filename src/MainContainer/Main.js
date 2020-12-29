@@ -5,6 +5,7 @@ import Profile from "../Profile/Profile";
 import { connect } from "react-redux";
 import { fetchOpinionsFromApi, logoutAction } from "../Redux/action";
 import logo from '../opini8d-logo.png'
+import Followed from '../ExplorePage/Followed';
 
 
 class Main extends Component {
@@ -42,6 +43,8 @@ class Main extends Component {
       <br></br>
       <NavLink to="/explore/profile">View Profile</NavLink>
       <br></br>
+      <NavLink to="/explore/home">Home</NavLink>
+      <br></br>
       <button onClick={()=>{
 
         this.props.logout()
@@ -68,6 +71,7 @@ class Main extends Component {
           />
           <Route path="/explore/profile" render={() => <Profile opinions={this.getMyOpinions()} />} />
           <Route path="/explore/opinions" render={() => <AllOpinions opinions={this.props.opinions} />} />
+          <Route path="/explore/home" render={() => <Followed/>} />
         </Switch>
         
         : null
