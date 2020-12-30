@@ -306,7 +306,7 @@ export const unfollowCategory = (object) =>{
 export const followCategory = (object) =>{
   return (dispatch) =>{
     const token = localStorage.getItem('token')
-
+    // debugger
     fetch("http://localhost:3000/api/v1/user_categories", {
       method: 'POST',
       headers: {
@@ -316,12 +316,13 @@ export const followCategory = (object) =>{
       },
       body: JSON.stringify({
         user_id: object.user.id,
-        category_id: object.category.id
+        category: object.category
       })
     })
     .then(r=>r.json())
     .then(data => {
-      debugger
+      // debugger
+      dispatch({type: "FOLLOW", payload: data})
     })
   }
 }

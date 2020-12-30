@@ -75,8 +75,12 @@ const currentUserReducer = (state = defaultState.currentUser, action) =>{
             // debugger
             return userCopy
         case "FOLLOW":
-            debugger
-        break
+            // debugger
+            let uCopy = {...state}
+            uCopy.categories.push(action.payload.category)
+            uCopy.user_categories.push(action.payload.uc)
+            // debugger
+            return uCopy
         case "LOGOUT":
             // debugger
             return null

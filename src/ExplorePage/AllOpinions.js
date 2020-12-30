@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchOpinionsFromApi } from "../Redux/action";
+import { fetchOpinionsFromApi, followCategory } from "../Redux/action";
 import { NavLink, Route, Switch, withRouter } from "react-router-dom";
 import Opinion from "../OpinionPage/Opinion";
 import { OpinionCard } from "../ReuseComponents/OpinionCard";
@@ -60,12 +60,24 @@ class AllOpinions extends Component {
       return opinions.map((opinion, index) => <OpinionCard key={index} opinion={opinion} />)
   }
 
+
+  onClickFollowCat = (category) =>{
+    // debugger
+    let object = {
+      user: this.props.currentUser,
+      category: category
+    }
+    // debugger
+    // alert(category)
+    this.props.followCategory(object)
+  }
+
   filterOpinions = () =>{
     return this.props.categories.map((category, index) => {
         let result = this.categoryIncluded(category)
         return (
             <div key={index} className="category-name">
-                <h2>{category}<IoAddCircle onClick={()=> alert(category)} /></h2>
+                <h2>{category}<IoAddCircle onClick={()=> this.onClickFollowCat(category)} /></h2>
                 
                 {result.length > 0 ? this.renderCatOpinions(result) : <p>No opinions yet...</p>}
             </div>
@@ -132,12 +144,12 @@ class AllOpinions extends Component {
   }
 }
 
-// const mdp = (dispatch) => {
-//   return { fetchOpinions: (data) => dispatch(fetchOpinionsFromApi(data)) };
-// };
+const mdp = (dispatch) => {
+  return { followCategory: (object) => dispatch(followCategory(object)) };
+};
 
-// const msp = (state) => {
-//   return { opinions: state.opinions };
-// };
+const msp = (state) => {
+  return { currentUser: state.currentUser };
+};
 
-export default AllOpinions;
+export default connect(msp, mdp)(AllOpinions);
