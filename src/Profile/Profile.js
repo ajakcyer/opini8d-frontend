@@ -87,7 +87,7 @@ class Profile extends Component {
     }
     
     render() {
-        console.log(this.state.following)
+        // console.log(this.props)
         return (
             <div className="my-opinions">
             {this.props.userObj ? 
