@@ -9,6 +9,7 @@ export const fetchCategories = () =>{
 
       // debugger
       dispatch({type: "FETCH_CATEGORIES", payload: catName})
+      // dispatch({type: "FETCH_CATEGORIES", payload: data})
     })
   }
 }

@@ -6,6 +6,7 @@ import Opinion from "../OpinionPage/Opinion";
 import { OpinionCard } from "../ReuseComponents/OpinionCard";
 import CreateOpinion from "../ReuseComponents/CreateOpinion";
 import Profile from '../Profile/Profile'
+import { IoAddCircle } from "react-icons/io5";
 
 class AllOpinions extends Component {
   // componentDidMount = () => {
@@ -63,8 +64,9 @@ class AllOpinions extends Component {
     return this.props.categories.map((category, index) => {
         let result = this.categoryIncluded(category)
         return (
-            <div key={index}>
-                <h2>{category}</h2>
+            <div key={index} className="category-name">
+                <h2>{category}<IoAddCircle onClick={()=> alert(category)} /></h2>
+                
                 {result.length > 0 ? this.renderCatOpinions(result) : <p>No opinions yet...</p>}
             </div>
         )

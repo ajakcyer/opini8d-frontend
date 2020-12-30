@@ -49,7 +49,6 @@ class GenMain extends Component {
       } */}
 
       <Switch>
-        <Route path="/auth" render={()=> <AuthCont/>}/>
 
         {/* {this.props.currentUser ?  */}
         {localStorage.getItem('token') ?
@@ -57,8 +56,11 @@ class GenMain extends Component {
         <Route path="/explore" render={()=> <Main/>} />
         
         :
-
+        <>
+        <Route path="/auth" render={()=> <AuthCont/>}/>
         <Redirect to="/auth/login" />
+
+        </>
         }
 
 

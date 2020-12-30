@@ -79,3 +79,8 @@
     cursor: pointer;
     float: right;
 }
+
+.category-name svg {
+    cursor: pointer;
+    float: right;
+}
