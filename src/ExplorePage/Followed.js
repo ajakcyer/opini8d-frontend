@@ -1,67 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { unfollowCategory } from '../Redux/action'
 import {OpinionCard} from '../ReuseComponents/OpinionCard'
+import { AiFillDelete } from "react-icons/ai";
 
 class Followed extends Component {
-
-    // followedOpinionHash = () =>{
-    //     let hashMap = {}
-    //     let array = this.props.userCat
-        
-    //     array.forEach(category => {
-    //         // debugger
-    //         if (hashMap[category.name]) {
-                
-    //         } else {
-    //             return hashMap[category.name] = []
-    //         }
-    //     });
-    //     // debugger
-    //     let opinions = this.props.opinions
-
-    //     opinions.forEach(opinion => {
-
-    //         return opinion.categories.forEach(category => {
-    //             if (hashMap[category.name]){
-    //                 hashMap[category.name].push(opinion)
-    //             } else {
-    //                 return
-    //             }
-    //             // return category.name
-    //         })
-    //     })
-
-    //     // return Object.entries(hashMap).forEach(([key, value]) => {
-    //     //     debugger
-    //     //     return (
-    //     //         <>
-    //     //             <h2>{key}</h2>
-    //     //         </>
-    //     //     )
-    //     // })
-    //     return hashMap
-    // }
-
-    // iterateOpinionArray = (array) =>{
-    //     // debugger
-    //     return array.map((opinion, index) => <OpinionCard key={index} opinion={opinion}/>)
-    // }
-
-    // renderOpinions = () => {
-    //     let hash = this.followedOpinionHash()
-    //     // debugger
-    //     for (const property in hash){
-    //         debugger
-    //         return (
-    //             <>
-    //                 <h3>{property}</h3>
-    //                 {this.iterateOpinionArray(hash[property])}
-    //             </>
-    //         )
-    //     }
-    //     // debugger
-    //     // return hash.forEach(([key, value]))
-    // }
 
     
     userCategories = () =>{
@@ -96,12 +39,21 @@ class Followed extends Component {
         return opinions.map((opinion, index) => <OpinionCard key={index} opinion={opinion} />)
     }
 
+    onClickUnfollow = (category) =>{
+        let thisCat = this.props.currentUser.categories.find(c => c.name === category)
+        let ucID = this.props.currentUser.user_categories.find(uc => uc.category_id === thisCat.id)
+        this.props.unfollow(ucID)
+        // debugger
+      }
+
     filterOpinions = () =>{
         return this.userCategories().map((category, index) => {
             let result = this.categoryIncluded(category)
+            // debugger
             return (
-                <div key={index}>
-                    <h3>{category}</h3>
+                <div className="category-name" key={index}>
+                    <h3>{category}
+                    <AiFillDelete onClick={()=> this.onClickUnfollow(category)}/></h3>
                     {result.length > 0 ? this.renderOpinions(result) : <p>No opinions yet...</p>}
                 </div>
             )
@@ -109,9 +61,12 @@ class Followed extends Component {
         })
     }
 
+
+
     render() {
-        console.log("User followed categories: ", this.props.userCat)
-        console.log("All Opinions: ", this.props.opinions)
+        // console.log("User followed categories: ", this.props.userCat)
+        // console.log("All Opinions: ", this.props.opinions)
+        console.log(this.props)
         return (
             <div>
                 <h2>Homepage for followed categories</h2>
@@ -122,9 +77,14 @@ class Followed extends Component {
     }
 }
 
-const msp = (state) =>{
-    return {userCat: state.currentUser.categories,
-            opinions: state.opinions}
+const mdp = (dispatch) =>{
+    return {unfollow: (object)=> dispatch(unfollowCategory(object))}
 }
 
-export default connect(msp)(Followed)
+const msp = (state) =>{
+    return {userCat: state.currentUser.categories,
+            opinions: state.opinions,
+            currentUser: state.currentUser}
+}
+
+export default connect(msp, mdp)(Followed)
