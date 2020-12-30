@@ -7,64 +7,14 @@ import profile from '../default-profile.png'
 import { Button, Icon, Modal } from 'semantic-ui-react'
 import { AiFillDelete } from "react-icons/ai";
 import { IoAddCircle } from "react-icons/io5";
-import { unfollowCategory } from '../Redux/action'
-
-
-// const Profile = (props) => {
-//     console.log(props)
-//     const [open, setOpen] = React.useState(false)
-//     // const myOpinionProps = () =>{
-//     //     // debugger
-//     //     return props.opinions.filter(opinion => opinion.user.id === props.currentUser.id)
-//     // }
-
-//     // console.log(myOpinionProps())
-//     // debugger
-
-//     const renderFollowedCategories = () =>{
-//         return props.currentUser.categories.map((category, index) => <p key={index}>{category.name}</p>)
-//     }
-
-//     return (
-//         <div className="my-opinions">
-//             {props.userObj ? 
-            
-            
-//             <img src={props.userObj.avatar ? props.userObj.avatar.url : profile} alt="avatar" className="avatar" />
-            
-//             : 
-//             <img src={props.currentUser.avatar ? props.currentUser.avatar.url : profile} alt="avatar" className="avatar" />
-//             }
-//             {/* <img src={props.currentUser.avatar ? props.currentUser.avatar.url : "https://freesvg.org/img/abstract-user-flat-4.png"} alt="avatar" className="avatar" /> */}
-
-//             <h2>{props.userObj ? 
-//             props.userObj.username
-            
-//             : props.currentUser.username}</h2>
-//             <h1>{props.userObj ? "Opinions:" : "My Opinions:"}</h1>
-
-//             {renderFollowedCategories()}
-//             {/* <Modal
-            
-            
-//             >
-
-
-
-//             </Modal> */}
-
-
-//             <MyOpinions opinionsByUser={props.userOpinions} opinionsByMe={props.userObj ? props.userOpinions : props.opinions}/>
-//         </div>
-//     )
-// }
-
+import { followCategory, unfollowCategory } from '../Redux/action'
 
 
 class Profile extends Component {
 
     state = {
-        open: false
+        open: false,
+        following: false
     }
     
     onClickUnfollow = (category) =>{
@@ -77,6 +27,30 @@ class Profile extends Component {
         // debugger
     }
 
+    onClickFollowCat = (category) =>{
+        // debugger
+        let object = {
+          user: this.props.currentUser,
+          category: category
+        }
+        // debugger
+        // alert(category)
+        this.props.followCategory(object)
+    }
+
+    doesUserFollow = (category) =>{
+        let result = this.props.currentUser.categories.some(cat => cat.name === category );
+
+        // debugger
+        // if (result){
+        //     this.setState(prevState=>({following: true}))
+        // } else {
+        //     this.setState(prevState=>({following: false}))
+        // }
+        return result
+
+    }
+
     renderFollowedCategories = () =>{
         if (this.props.userObj){
 
@@ -84,7 +58,14 @@ class Profile extends Component {
                 return (
                     <div key={index} className="categories-followed">
                         <p>{category.name}</p>
-                        <IoAddCircle onClick={()=> alert("Added!")}/>
+                        {this.doesUserFollow(category.name) ?
+                            <AiFillDelete onClick={()=> this.onClickUnfollow(category)}/>
+                        :
+                            <IoAddCircle onClick={()=> this.onClickFollowCat(category.name)}/>
+                        }
+                        {/* {this.doesUserFollow(category.name)} */}
+                        {/* {this.doesUserFollow(category.name) ? <p>YES</p> : <p>NO</p>} */}
+                        {/* <IoAddCircle onClick={()=> this.onClickFollowCat(category.name)}/> */}
                     </div>
         
                 )
@@ -106,7 +87,7 @@ class Profile extends Component {
     }
     
     render() {
-        console.log(this.props)
+        console.log(this.state.following)
         return (
             <div className="my-opinions">
             {this.props.userObj ? 
@@ -125,7 +106,6 @@ class Profile extends Component {
             : this.props.currentUser.username}</h2>
             <h1>{this.props.userObj ? "Opinions:" : "My Opinions:"}</h1>
 
-            {/* {this.renderFollowedCategories()} */}
             <Button onClick={()=> this.setState(prevState => ({open: true}))}>
                 {this.props.userObj ? this.props.userObj.categories.length : this.props.currentUser.categories.length} Following
             </Button>
@@ -156,7 +136,9 @@ const msp = (state) => {
   };
 
 const mdp = (dispatch) =>{
-    return {unfollow: (object)=> dispatch(unfollowCategory(object))}
+    return {unfollow: (object)=> dispatch(unfollowCategory(object)),
+        followCategory: (object) => dispatch(followCategory(object))
+    }
 }
 
   export default connect(msp, mdp)(Profile);

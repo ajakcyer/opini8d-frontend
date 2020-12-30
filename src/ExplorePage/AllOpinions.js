@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchOpinionsFromApi, followCategory } from "../Redux/action";
+import { fetchOpinionsFromApi, followCategory, unfollowCategory } from "../Redux/action";
 import { NavLink, Route, Switch, withRouter } from "react-router-dom";
 import Opinion from "../OpinionPage/Opinion";
 import { OpinionCard } from "../ReuseComponents/OpinionCard";
 import CreateOpinion from "../ReuseComponents/CreateOpinion";
 import Profile from '../Profile/Profile'
 import { IoAddCircle } from "react-icons/io5";
+import { AiFillDelete } from "react-icons/ai";
 
 class AllOpinions extends Component {
   // componentDidMount = () => {
@@ -72,13 +73,36 @@ class AllOpinions extends Component {
     this.props.followCategory(object)
   }
 
+  doesUserFollow = (category) =>{
+    let result = this.props.currentUser.categories.some(cat => cat.name === category );
+
+    // debugger
+    // if (result){
+    //     this.setState(prevState=>({following: true}))
+    // } else {
+    //     this.setState(prevState=>({following: false}))
+    // }
+    return result
+
+  }
+
+  onClickUnfollow = (category) =>{
+    let thisCat = this.props.currentUser.categories.find(c => c.name === category)
+    let ucID = this.props.currentUser.user_categories.find(uc => uc.category_id === thisCat.id)
+    this.props.unfollow(ucID)
+  }
+
   filterOpinions = () =>{
     return this.props.categories.map((category, index) => {
         let result = this.categoryIncluded(category)
         return (
             <div key={index} className="category-name">
-                <h2>{category}<IoAddCircle onClick={()=> this.onClickFollowCat(category)} /></h2>
-                
+                <h2>{category}{/*<IoAddCircle onClick={()=> this.onClickFollowCat(category)} /> */}
+                {this.doesUserFollow(category) ?
+                <AiFillDelete onClick={()=> this.onClickUnfollow(category)}/>
+                :
+                <IoAddCircle onClick={()=> this.onClickFollowCat(category)} />
+                }</h2>
                 {result.length > 0 ? this.renderCatOpinions(result) : <p>No opinions yet...</p>}
             </div>
         )
@@ -145,7 +169,9 @@ class AllOpinions extends Component {
 }
 
 const mdp = (dispatch) => {
-  return { followCategory: (object) => dispatch(followCategory(object)) };
+  return { unfollow: (object)=> dispatch(unfollowCategory(object)),
+          followCategory: (object) => dispatch(followCategory(object))
+        };
 };
 
 const msp = (state) => {

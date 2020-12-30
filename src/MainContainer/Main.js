@@ -13,6 +13,7 @@ class Main extends Component {
     fetch("http://localhost:3000/api/v1/opinions")
       .then((r) => r.json())
       .then((data) => {
+        // debugger
         return this.props.fetchOpinions(data);
       });
     this.props.fetchCategories()
