@@ -77,20 +77,34 @@ export const editOpinion = (opinion) => {
   return (dispatch) => {
     const token = localStorage.getItem('token')
 
+    const formData = new FormData();
+    formData.append('title', opinion.title);
+    formData.append('content', opinion.content);
+    if (opinion.delete){
+      formData.append('delete', opinion.delete);
+    }
+    if (opinion.otherImage){
+      formData.append('other_image', opinion.otherImage);
+    }
+    
     fetch(`http://localhost:3000/api/v1/opinions/${opinion.id}`, {
       method: "PATCH",
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        // "Content-Type": "application/json",
+        // Accept: "application/json",
         Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify({
-        title: opinion.title,
-        content: opinion.content,
-      }),
+      body: formData
+      // JSON.stringify({
+      //   title: opinion.title,
+      //   content: opinion.content,
+      // }),
     })
       .then((r) => r.json())
-      .then((data) => dispatch({ type: "EDIT_OPINION", payload: data }));
+      .then((data) => {
+        // debugger
+        dispatch({ type: "EDIT_OPINION", payload: data })
+      });
   };
 };
 
