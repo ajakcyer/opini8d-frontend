@@ -162,7 +162,7 @@ class CreateOpinion extends Component {
                             value={this.state.content}
                             />
 
-                            <label className="label-image" htmlFor="opinion-photo"> <RiImageAddFill/></label>
+                            <label style={this.state.otherImage ? {color: "purple"} : {color: "black"}} className="label-image" htmlFor="opinion-photo"> <RiImageAddFill/></label>
                             <input id="opinion-photo" onChange={this.imageChangeHandler} type="file" accept="image/*" style={{display: "none"}}/>
                             <br></br>
                             {this.categoryArrayObj()}
