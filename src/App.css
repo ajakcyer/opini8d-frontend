@@ -97,3 +97,17 @@
 .text-area textarea {
     height: 160px;
 }
+
+.img_wrap {
+    display: inline-block;
+    position: relative;
+}
+
+.close {
+    display: inline;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 20px;
+    cursor: pointer;
+}

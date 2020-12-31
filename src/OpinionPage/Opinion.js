@@ -4,6 +4,7 @@ import { editOpinion, deleteOpinion, opinionRated, patchRating, deleteRating } f
 import { NavLink, withRouter } from "react-router-dom";
 import { Button, Progress } from 'semantic-ui-react'
 import profile from '../default-profile.png'
+import { CgClose } from "react-icons/cg";
 
 class Opinion extends Component {
   state = {
@@ -189,6 +190,12 @@ class Opinion extends Component {
               name="title"
               value={this.state.title}
             />
+            <br></br>
+            <div className="img_wrap">
+              <img className="opinion-image" src={this.props.opinion.other_image.url} alt="opinion-image" />
+              <CgClose className="close"/>
+            </div>
+
             <br></br>
             <textarea
               onChange={this.onChangeUpdate}
