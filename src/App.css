@@ -88,3 +88,12 @@
 .black-h4 {
     color: black;
 }
+
+.label-image svg{
+    cursor: pointer;
+    font-size: 40px;
+}
+
+.text-area textarea {
+    height: 160px;
+}

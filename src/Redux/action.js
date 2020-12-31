@@ -29,6 +29,7 @@ export const addOpinionToApi = (opinion) => {
     formData.append('title', opinion.title);
     formData.append('content', opinion.content);
     formData.append('other_image', opinion.otherImage);
+    formData.append('category_array', opinion.categoryArray)
 
     // fetch("http://localhost:3000/api/v1/users", {
     //   method: 'POST',
