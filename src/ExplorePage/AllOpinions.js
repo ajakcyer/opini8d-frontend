@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchOpinionsFromApi } from "../Redux/action";
+import { fetchOpinionsFromApi, followCategory, unfollowCategory } from "../Redux/action";
 import { NavLink, Route, Switch, withRouter } from "react-router-dom";
 import Opinion from "../OpinionPage/Opinion";
 import { OpinionCard } from "../ReuseComponents/OpinionCard";
 import CreateOpinion from "../ReuseComponents/CreateOpinion";
 import Profile from '../Profile/Profile'
+import { IoAddCircle } from "react-icons/io5";
+import { AiFillDelete } from "react-icons/ai";
 
 class AllOpinions extends Component {
   // componentDidMount = () => {
@@ -20,6 +22,93 @@ class AllOpinions extends Component {
     // debugger
     return this.props.opinions.map((opinion, index) => <OpinionCard key={index} opinion={opinion}/>);
   };
+
+  // renderCatOpinions = (apiCategory) =>{
+  //   return this.props.opinions.map((opinion, index) => {
+  //     return opinion.categories.map((category, catIndex) => )
+  //   })
+  // }
+
+  // userCategories = () =>{
+  //   let categoryArray = []
+  //   this.props.categories.forEach(category => {
+  //       categoryArray.push(category.name)
+  //   });
+  //   // debugger
+  //   return categoryArray
+  // }
+
+  categoryIncluded = (category) =>{
+      let opinionArray = []
+      let opinionCategories = this.props.opinions.forEach(opinion => {
+          opinion.categories.forEach(opCategory => {
+              if (opCategory.name === category){
+                  opinionArray.push(opinion)
+                  // if (opinionArray[category]){
+                  //     opinionArray[category].push(opinion)
+                  // } else {
+                  //     opinionArray[category] = [opinion]
+                  // }
+              }
+              // return opCategory.name === category
+          })
+      })
+      return opinionArray
+      // debugger
+  }
+
+  renderCatOpinions = (opinions) =>{
+      return opinions.map((opinion, index) => <OpinionCard key={index} opinion={opinion} />)
+  }
+
+
+  onClickFollowCat = (category) =>{
+    // debugger
+    let object = {
+      user: this.props.currentUser,
+      category: category
+    }
+    // debugger
+    // alert(category)
+    this.props.followCategory(object)
+  }
+
+  doesUserFollow = (category) =>{
+    let result = this.props.currentUser.categories.some(cat => cat.name === category );
+
+    // debugger
+    // if (result){
+    //     this.setState(prevState=>({following: true}))
+    // } else {
+    //     this.setState(prevState=>({following: false}))
+    // }
+    return result
+
+  }
+
+  onClickUnfollow = (category) =>{
+    let thisCat = this.props.currentUser.categories.find(c => c.name === category)
+    let ucID = this.props.currentUser.user_categories.find(uc => uc.category_id === thisCat.id)
+    this.props.unfollow(ucID)
+  }
+
+  filterOpinions = () =>{
+    return this.props.categories.map((category, index) => {
+        let result = this.categoryIncluded(category)
+        return (
+            <div key={index} className="category-name">
+                <h2>{category}{/*<IoAddCircle onClick={()=> this.onClickFollowCat(category)} /> */}
+                {this.doesUserFollow(category) ?
+                <AiFillDelete onClick={()=> this.onClickUnfollow(category)}/>
+                :
+                <IoAddCircle onClick={()=> this.onClickFollowCat(category)} />
+                }</h2>
+                {result.length > 0 ? this.renderCatOpinions(result) : <p>No opinions yet...</p>}
+            </div>
+        )
+        // debugger
+    })
+  }
 
   // renderUserOpinions = (id) =>{
   //   // return this.props.opinions.map((opinion, index) => )
@@ -65,7 +154,8 @@ class AllOpinions extends Component {
               <>
                 <h1 className="title">Explore Opinions</h1>
                 <div className="all-opinions">
-                    {this.renderOpinions()}
+                    {/* {this.renderOpinions()} */}
+                    {this.filterOpinions()}
                 </div>
                 <CreateOpinion/>
               </>
@@ -78,12 +168,14 @@ class AllOpinions extends Component {
   }
 }
 
-// const mdp = (dispatch) => {
-//   return { fetchOpinions: (data) => dispatch(fetchOpinionsFromApi(data)) };
-// };
+const mdp = (dispatch) => {
+  return { unfollow: (object)=> dispatch(unfollowCategory(object)),
+          followCategory: (object) => dispatch(followCategory(object))
+        };
+};
 
-// const msp = (state) => {
-//   return { opinions: state.opinions };
-// };
+const msp = (state) => {
+  return { currentUser: state.currentUser };
+};
 
-export default AllOpinions;
+export default connect(msp, mdp)(AllOpinions);

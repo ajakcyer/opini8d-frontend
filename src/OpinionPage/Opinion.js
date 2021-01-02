@@ -4,12 +4,16 @@ import { editOpinion, deleteOpinion, opinionRated, patchRating, deleteRating } f
 import { NavLink, withRouter } from "react-router-dom";
 import { Button, Progress } from 'semantic-ui-react'
 import profile from '../default-profile.png'
+import { CgClose } from "react-icons/cg";
+import { RiImageAddFill } from "react-icons/ri";
 
 class Opinion extends Component {
   state = {
     editBtn: false,
     title: this.props.opinion.title,
     content: this.props.opinion.content,
+    imgClosed: false,
+    otherImage: null
   };
 
   onClickHandler = (e) => {
@@ -60,8 +64,17 @@ class Opinion extends Component {
     }
   };
 
-  editClicked = () => {
-    this.setState((prev) => ({ editBtn: !prev.editBtn }));
+  editClicked = (e) => {
+    // debugger
+    if (e.target.innerText === "Edit Post"){
+      this.setState((prev) => ({ editBtn: true }));
+    } else if (e.target.innerText === "Nevermind"){
+      this.setState((prev) => ({ 
+        editBtn: false,
+        imgClosed: false,
+        otherImage: null
+      }));
+    }
   };
 
   onChangeUpdate = (e) => {
@@ -72,12 +85,49 @@ class Opinion extends Component {
 
   updatePost = (e) => {
     e.preventDefault();
-    this.props.editPost({
-      id: this.props.opinion.id,
-      title: this.state.title,
-      content: this.state.content,
-    });
-    this.setState((prev) => ({ editBtn: false }));
+    // debugger
+    if (this.state.imgClosed === true && this.state.otherImage === null){
+      // alert('delete image only')
+      this.props.editPost({
+        id: this.props.opinion.id,
+        title: this.state.title,
+        content: this.state.content,
+        delete: true,
+        // otherImage: false
+      });
+    } else if (this.state.imgClosed === true && this.state.otherImage ){
+      // alert('delete image and new picture')
+      this.props.editPost({
+        id: this.props.opinion.id,
+        title: this.state.title,
+        content: this.state.content,
+        delete: true,
+        otherImage: this.state.otherImage
+    })
+    } else if (this.state.imgClosed === false && this.state.otherImage){
+        this.props.editPost({
+          id: this.props.opinion.id,
+          title: this.state.title,
+          content: this.state.content,
+          // delete: true,
+          otherImage: this.state.otherImage
+        })
+    } else {
+      // alert('no change to image')
+      this.props.editPost({
+        id: this.props.opinion.id,
+        title: this.state.title,
+        content: this.state.content,
+        // delete: false,
+        // otherImage: false
+      });
+
+    }
+    this.setState((prev) => ({ 
+      editBtn: false,
+      imgClosed: false,
+      otherImage: null
+    }));
   };
 
   deleteBtn = () => {
@@ -140,7 +190,16 @@ class Opinion extends Component {
     }
   }
 
+  renderCategories = () =>{
+    return this.props.opinion.categories.map((category, index) => <p key={index}>#{category.name}</p>)
+  }
 
+  imageChangeHandler = (e) =>{
+    // debugger
+    this.setState(prev=>({
+        otherImage: e.target.files[0]
+    }))
+  }
 
   render() {
     // console.log("My Vote: ", this.didIVote(), "Props: ", this.props);
@@ -172,7 +231,7 @@ class Opinion extends Component {
         }</h4>
         {this.props.currentUser.id === this.props.opinion.user.id ? (
           <>
-            <button onClick={this.editClicked}>
+            <button onClick={(e)=>this.editClicked(e)}>
               {this.state.editBtn ? "Nevermind" : "Edit Post"}
             </button>
             <button onClick={this.deleteBtn}>Delete Post</button>
@@ -188,6 +247,36 @@ class Opinion extends Component {
               value={this.state.title}
             />
             <br></br>
+            <div className="img_wrap">
+              {this.state.imgClosed ? 
+              <>
+                <label style={this.state.otherImage ? {color: "purple"} : {color: "black"}} className="label-image" htmlFor="opinion-photo"> <RiImageAddFill/></label>
+                <input id="opinion-photo" onChange={this.imageChangeHandler} type="file" accept="image/*" style={{display: "none"}}/>
+              </>
+              
+              : 
+              
+              <>
+                {this.props.opinion.other_image ? 
+                <>
+                  <img style={this.state.imgClosed ? {display: "none"} : {display: "visible"}} className="opinion-image" src={this.props.opinion.other_image.url} alt="opinion-image" />
+                  <CgClose onClick={()=> this.setState(prev=>({imgClosed: true}))} className="close"/>
+                </>
+                :
+                
+                <>
+                  <label style={this.state.otherImage ? {color: "purple"} : {color: "black"}} className="label-image" htmlFor="opinion-photo"> <RiImageAddFill/></label>
+                  <input id="opinion-photo" onChange={this.imageChangeHandler} type="file" accept="image/*" style={{display: "none"}}/>
+                </>
+                
+                }
+                {/* <img style={this.state.imgClosed ? {display: "none"} : {display: "visible"}} className="opinion-image" src={this.props.opinion.other_image.url} alt="opinion-image" />
+                <CgClose onClick={()=> this.setState(prev=>({imgClosed: true}))} className="close"/> */}
+              </>
+              }
+            </div>
+
+            <br></br>
             <textarea
               onChange={this.onChangeUpdate}
               name="content"
@@ -200,7 +289,7 @@ class Opinion extends Component {
           <>
             <div>
 
-
+            {this.renderCategories()}
             <h2>{this.props.opinion.title}</h2>
             {this.props.opinion.other_image ? <img className="opinion-image" src={this.props.opinion.other_image.url} alt="opinion-image" /> : null}
             <br></br><br></br>

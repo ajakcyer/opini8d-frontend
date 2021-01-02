@@ -1,5 +1,19 @@
 // const token = localStorage.getItem('token')
 
+export const fetchCategories = () =>{
+  return (dispatch) =>{
+    fetch("http://localhost:3000/api/v1/categories")
+    .then(r=>r.json())
+    .then(data => {
+      let catName = data.map(category => category.name)
+
+      // debugger
+      dispatch({type: "FETCH_CATEGORIES", payload: catName})
+      // dispatch({type: "FETCH_CATEGORIES", payload: data})
+    })
+  }
+}
+
 
 export const fetchOpinionsFromApi = (data) => {
   return { type: "FETCH_OPINIONS", payload: data };
@@ -15,6 +29,7 @@ export const addOpinionToApi = (opinion) => {
     formData.append('title', opinion.title);
     formData.append('content', opinion.content);
     formData.append('other_image', opinion.otherImage);
+    formData.append('category_array', opinion.categoryArray)
 
     // fetch("http://localhost:3000/api/v1/users", {
     //   method: 'POST',
@@ -62,20 +77,34 @@ export const editOpinion = (opinion) => {
   return (dispatch) => {
     const token = localStorage.getItem('token')
 
+    const formData = new FormData();
+    formData.append('title', opinion.title);
+    formData.append('content', opinion.content);
+    if (opinion.delete){
+      formData.append('delete', opinion.delete);
+    }
+    if (opinion.otherImage){
+      formData.append('other_image', opinion.otherImage);
+    }
+    
     fetch(`http://localhost:3000/api/v1/opinions/${opinion.id}`, {
       method: "PATCH",
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        // "Content-Type": "application/json",
+        // Accept: "application/json",
         Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify({
-        title: opinion.title,
-        content: opinion.content,
-      }),
+      body: formData
+      // JSON.stringify({
+      //   title: opinion.title,
+      //   content: opinion.content,
+      // }),
     })
       .then((r) => r.json())
-      .then((data) => dispatch({ type: "EDIT_OPINION", payload: data }));
+      .then((data) => {
+        // debugger
+        dispatch({ type: "EDIT_OPINION", payload: data })
+      });
   };
 };
 
@@ -216,7 +245,7 @@ export const signupAction = (userInfo) =>{
     formData.append('password', userInfo.password);
     formData.append('avatar', userInfo.avatar);
     
-    debugger
+    // debugger
 
     fetch("http://localhost:3000/api/v1/users", {
       method: 'POST',
@@ -235,7 +264,7 @@ export const signupAction = (userInfo) =>{
     })
     .then(r=>r.json())
     .then(data => {
-      debugger
+      // debugger
       if (data.user){
         localStorage.setItem('token', data.jwt)
         dispatch({type: "SIGNUP", payload: data.user})
@@ -263,6 +292,52 @@ export const userLoggedIn = () =>{
         if(data.user){
           dispatch({type: "USER_LOGGED_IN", payload: data.user})
         }
+    })
+  }
+}
+
+export const unfollowCategory = (object) =>{
+  // debugger
+  return (dispatch) =>{
+    const token = localStorage.getItem('token')
+
+    fetch(`http://localhost:3000/api/v1/user_categories/${object.id}`,{
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(r=>r.json())
+    .then(data => {
+      // debugger
+      dispatch({type: "UNFOLLOW", payload: data})
+
+    })
+  }
+}
+
+export const followCategory = (object) =>{
+  return (dispatch) =>{
+    const token = localStorage.getItem('token')
+    // debugger
+    fetch("http://localhost:3000/api/v1/user_categories", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        user_id: object.user.id,
+        category: object.category
+      })
+    })
+    .then(r=>r.json())
+    .then(data => {
+      // debugger
+      dispatch({type: "FOLLOW", payload: data})
     })
   }
 }

@@ -18,6 +18,10 @@
     background-color: red;
 }
 
+.Grey h3, .Green h3, .Red h3 {
+    color: white
+}
+
 .link-button {
     background-color: transparent;
     border: none;
@@ -60,4 +64,50 @@
 
 .opinion-image {
     max-width: 300px;
+}
+
+.categories-followed p {
+    display: inline;
+}
+
+.categories-followed:hover {
+    background-color: rgba(211, 126, 77, 0.733);
+}
+
+.categories-followed svg {
+    /* color: red; */
+    cursor: pointer;
+    float: right;
+}
+
+.category-name svg {
+    cursor: pointer;
+    float: right;
+}
+
+.black-h4 {
+    color: black;
+}
+
+.label-image svg{
+    cursor: pointer;
+    font-size: 40px;
+}
+
+.text-area textarea {
+    height: 160px;
+}
+
+.img_wrap {
+    display: inline-block;
+    position: relative;
+}
+
+.close {
+    display: inline;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 20px;
+    cursor: pointer;
 }

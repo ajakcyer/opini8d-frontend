@@ -20,7 +20,17 @@ class GenMain extends Component {
 
   componentDidUpdate = (prevProps) =>{
     if (this.props.currentUser !== prevProps.currentUser){
-      this.props.history.push('/explore/opinions')
+      if (this.props.currentUser && prevProps.currentUser){
+        if (prevProps.currentUser.username === this.props.currentUser.username){
+          // debugger
+          return null
+        }
+      } else if (!this.props.currentUser){
+        this.props.history.push('/auth/login')
+      } else {
+        this.props.history.push('/explore/opinions')
+
+      }
     }
   }
 
@@ -39,7 +49,6 @@ class GenMain extends Component {
       } */}
 
       <Switch>
-        <Route path="/auth" render={()=> <AuthCont/>}/>
 
         {/* {this.props.currentUser ?  */}
         {localStorage.getItem('token') ?
@@ -47,8 +56,11 @@ class GenMain extends Component {
         <Route path="/explore" render={()=> <Main/>} />
         
         :
-
+        <>
+        <Route path="/auth" render={()=> <AuthCont/>}/>
         <Redirect to="/auth/login" />
+
+        </>
         }
 
 

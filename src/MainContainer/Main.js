@@ -3,17 +3,20 @@ import { NavLink, Route, Switch, withRouter } from "react-router-dom";
 import AllOpinions from "../ExplorePage/AllOpinions";
 import Profile from "../Profile/Profile";
 import { connect } from "react-redux";
-import { fetchOpinionsFromApi, logoutAction } from "../Redux/action";
+import { fetchCategories, fetchOpinionsFromApi, logoutAction } from "../Redux/action";
 import logo from '../opini8d-logo.png'
-
+import Followed from '../ExplorePage/Followed';
+import { Menu } from 'semantic-ui-react'
 
 class Main extends Component {
   componentDidMount = () => {
     fetch("http://localhost:3000/api/v1/opinions")
       .then((r) => r.json())
       .then((data) => {
+        // debugger
         return this.props.fetchOpinions(data);
       });
+    this.props.fetchCategories()
   };
 
   getMyOpinions = () =>{
@@ -42,6 +45,8 @@ class Main extends Component {
       <br></br>
       <NavLink to="/explore/profile">View Profile</NavLink>
       <br></br>
+      <NavLink to="/explore/home">Home</NavLink>
+      <br></br>
       <button onClick={()=>{
 
         this.props.logout()
@@ -67,7 +72,8 @@ class Main extends Component {
             }}
           />
           <Route path="/explore/profile" render={() => <Profile opinions={this.getMyOpinions()} />} />
-          <Route path="/explore/opinions" render={() => <AllOpinions opinions={this.props.opinions} />} />
+          <Route path="/explore/opinions" render={() => <AllOpinions categories={this.props.categories.length > 0 ? this.props.categories : null} opinions={this.props.opinions.length > 0 ? this.props.opinions : null} />} />
+          <Route path="/explore/home" render={() => <Followed/>} />
         </Switch>
         
         : null
@@ -83,14 +89,16 @@ class Main extends Component {
 const mdp = (dispatch) => {
   return { 
     fetchOpinions: (data) => dispatch(fetchOpinionsFromApi(data)),
-    logout: ()=> dispatch(logoutAction()) 
+    logout: ()=> dispatch(logoutAction()),
+    fetchCategories: () => dispatch(fetchCategories())
   };
 };
 
 const msp = (state) => {
   return {
     opinions: state.opinions,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    categories: state.categories
   };
 };
 

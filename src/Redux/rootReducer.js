@@ -3,7 +3,8 @@ import { combineReducers } from "redux";
 
 const defaultState = {
     currentUser: null,
-    opinions: []
+    opinions: [],
+    categories: []
 }
 
 
@@ -64,9 +65,35 @@ const currentUserReducer = (state = defaultState.currentUser, action) =>{
         case "SIGNUP":
             // debugger
             return action.payload
+        case "UNFOLLOW":
+            // debugger
+            let userCopy = {...state}
+            let indexC = userCopy.categories.findIndex(category => category.id === action.payload.category_id)
+            userCopy.categories.splice(indexC, 1)
+            let indexUC = userCopy.user_categories.findIndex(uc => uc.id === action.payload.uc_id)
+            userCopy.user_categories.splice(indexUC, 1)
+            // debugger
+            return userCopy
+        case "FOLLOW":
+            // debugger
+            let uCopy = {...state}
+            uCopy.categories.push(action.payload.category)
+            uCopy.user_categories.push(action.payload.uc)
+            // debugger
+            return uCopy
         case "LOGOUT":
             // debugger
             return null
+        default:
+            return state
+    }
+}
+
+const categoriesReducer = (state = defaultState.categories, action) =>{
+    switch (action.type) {
+        case "FETCH_CATEGORIES":
+            // debugger
+            return action.payload
         default:
             return state
     }
@@ -76,7 +103,8 @@ const currentUserReducer = (state = defaultState.currentUser, action) =>{
 
 const rootReducer = combineReducers({
     currentUser: currentUserReducer,
-    opinions: opinionsReducer
+    opinions: opinionsReducer,
+    categories: categoriesReducer
 })
 
 export default rootReducer
