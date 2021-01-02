@@ -111,3 +111,21 @@
     font-size: 20px;
     cursor: pointer;
 }
+
+.all-content {
+    display: grid;
+    /* grid-template-columns: repeat(5, 1fr); */
+    grid-template-columns: 15% auto;
+    grid-template-rows: repeat(5, 1fr);
+    /* grid-template-rows: 20% auto; */
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.navbar {
+    grid-area: 1/1/6/2
+}
+
+.main-content {
+    grid-area: 1/2/6/6;
+}
