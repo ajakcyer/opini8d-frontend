@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { fetchCategories, fetchOpinionsFromApi, logoutAction } from "../Redux/action";
 import logo from '../opini8d-logo.png'
 import Followed from '../ExplorePage/Followed';
-
+import { Menu } from 'semantic-ui-react'
 
 class Main extends Component {
   componentDidMount = () => {
