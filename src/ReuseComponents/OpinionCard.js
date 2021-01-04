@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink, Route, Switch, withRouter } from "react-router-dom";
+// import { Card } from 'semantic-ui-react'
+
 
 export const OpinionCard = ({ opinion }) => {
   // console.log(opinion)
@@ -27,12 +29,14 @@ export const OpinionCard = ({ opinion }) => {
   // console.log(ratings())
 
   return (
-    <div className={ratings()}>
-      {/* <h4>By: {opinion.user.username}</h4> */}
-      <NavLink to={`/explore/opinions/${opinion.id}`}>
-        <h3>{opinion.title}</h3>
-      </NavLink>
-      <hr></hr>
-    </div>
+    // <div className="opinion-card">
+      <div className={ratings()}>
+        {/* <h4>By: {opinion.user.username}</h4> */}
+        <NavLink to={`/explore/opinions/${opinion.id}`}>
+          <h3>{opinion.title}</h3>
+        </NavLink>
+        {/* <hr></hr> */}
+      </div>
+    // </div>
   );
 };

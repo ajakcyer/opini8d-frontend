@@ -1,3 +1,7 @@
+* {
+    /* border: 1px solid black; */
+}
+
 .all-opinions h3 {
     color: white
 }
@@ -7,16 +11,34 @@
 }
 
 .Grey {
-    background-color: grey;
+    background-color: rgb(180, 179, 179);
+    /* width: 100px; */
+    /* height: 75px; */
+    /* text-decoration: none; */
+    margin: 0px
 }
 
 .Green {
-    background-color: green;
+    background-color: rgb(99, 204, 99);
+    /* width: 100px;
+    height: 75px; */
+    /* text-decoration: none; */
+    margin: 0px
+
 }
 
 .Red {
-    background-color: red;
+    background-color: rgb(241, 93, 93);
+    /* width: 100px;
+    height: 75px; */
+    /* text-decoration: none; */
+    margin: 0px
+
 }
+
+/* .Grey a, .Green a, .Red a {
+    text-decoration: none;
+} */
 
 .Grey h3, .Green h3, .Red h3 {
     color: white
@@ -85,6 +107,10 @@
     float: right;
 }
 
+.category-name:not(:first-child) {
+    border-top: 1px solid rgb(211, 209, 209);
+}
+
 .black-h4 {
     color: black;
 }
@@ -120,6 +146,7 @@
     /* grid-template-rows: 20% auto; */
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+    background-color: rgb(229, 220, 248);
 }
 
 .navbar {
@@ -129,3 +156,53 @@
 .main-content {
     grid-area: 1/2/6/6;
 }
+
+/* .opinion-card {
+    width: 100px;
+    height: 75px;
+    display: inline-block;
+} */
+
+.card h3 {
+    display: inline-block;
+    height: 100px; 
+    margin: 0px; 
+    padding: 25px 0px;
+    /* line-height: 100px; */
+    /* padding: 0 calc(50% - 160px); */
+}
+
+.card {
+    text-align: center;
+}
+
+/* .cards {
+    display: inline;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    white-space: nowrap;
+    white-space: normal;
+    white-space: nowrap;
+    overflow: scroll;
+    display: inline-block;
+} */
+
+.scrolling {
+    /* display: flex;
+    overflow-x: auto; */
+
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-flow: row;
+    /* height: 100%; */
+    /* position: absolute; */
+    /* width: 100%; */
+}
+
+/* .scrolling div {
+    flex:1;
+    -webkit-flex:1;
+} */

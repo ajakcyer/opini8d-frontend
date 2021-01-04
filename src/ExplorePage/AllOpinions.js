@@ -8,6 +8,7 @@ import CreateOpinion from "../ReuseComponents/CreateOpinion";
 import Profile from '../Profile/Profile'
 import { IoAddCircle } from "react-icons/io5";
 import { AiFillDelete } from "react-icons/ai";
+import { Card } from 'semantic-ui-react'
 
 class AllOpinions extends Component {
   // componentDidMount = () => {
@@ -58,7 +59,7 @@ class AllOpinions extends Component {
   }
 
   renderCatOpinions = (opinions) =>{
-      return opinions.map((opinion, index) => <OpinionCard key={index} opinion={opinion} />)
+      return opinions.map((opinion, index) => <Card key={index} style={{width: '150px'}} ><OpinionCard key={index} opinion={opinion} /></Card>)
   }
 
 
@@ -103,7 +104,7 @@ class AllOpinions extends Component {
                 :
                 <IoAddCircle onClick={()=> this.onClickFollowCat(category)} />
                 }</h2>
-                {result.length > 0 ? this.renderCatOpinions(result) : <p>No opinions yet...</p>}
+                {result.length > 0 ? <Card.Group className="scrolling" fluid="true">{this.renderCatOpinions(result)}</Card.Group> : <p>No opinions yet...</p>}
             </div>
         )
         // debugger

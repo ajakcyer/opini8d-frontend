@@ -52,8 +52,8 @@ class Main extends Component {
     <div className="all-content">
       {/* <h1>Main (logged in) Component Container</h1> */}
       {/* <img className="logo" src={logo} alt="logo" /> */}
-      <br></br>
-        <Rail>
+      {/* <br></br> */}
+        {/* <Rail position="left"> */}
       <Sticky context={this.contextRef}>
       <div className="navbar">
 
@@ -63,6 +63,7 @@ class Main extends Component {
       <img className="logo" src={logo} alt="logo" />
         <NavLink to="/explore/home">
           <Menu.Item
+            as="p"
             name="Home"
             active={this.state.activeItem === 'Home'}
             onClick={this.handleItemClick}
@@ -71,6 +72,7 @@ class Main extends Component {
 
         <NavLink to="/explore/profile">
           <Menu.Item
+            as="p"
             name="Profile"
             active={this.state.activeItem === 'Profile'}
             onClick={this.handleItemClick}
@@ -79,6 +81,7 @@ class Main extends Component {
 
         <NavLink to="/explore/opinions">
           <Menu.Item
+            as="p"
             name="Explore"
             active={this.state.activeItem === 'Explore'}
             onClick={this.handleItemClick}
@@ -99,7 +102,7 @@ class Main extends Component {
       </Menu>
       </div>
       </Sticky>
-      </Rail>
+      {/* </Rail> */}
       
 
       {/* <NavLink to="/explore/opinions">Explore Opinions</NavLink>
