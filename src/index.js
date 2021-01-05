@@ -8,14 +8,18 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import rootReducer from "./Redux/rootReducer";
 import 'semantic-ui-css/semantic.min.css'
+import { ActionCableProvider } from 'react-actioncable-provider'
 
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
-  <Provider store={store}>
+  // <ActionCableProvider url={"ws://localhost:3000/cable" + `?user=`} >
+    <Provider store={store}>
       <App />
-  </Provider>,
+    </Provider>
+  // </ActionCableProvider>
+  ,
   document.getElementById("root")
 );
 

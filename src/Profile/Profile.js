@@ -8,6 +8,7 @@ import { Button, Icon, Modal } from 'semantic-ui-react'
 import { AiFillDelete } from "react-icons/ai";
 import { IoAddCircle } from "react-icons/io5";
 import { followCategory, unfollowCategory } from '../Redux/action'
+import StartChatButton from '../Messages/StartChatButton'
 
 
 class Profile extends Component {
@@ -99,11 +100,13 @@ class Profile extends Component {
             <img src={this.props.currentUser.avatar ? this.props.currentUser.avatar.url : profile} alt="avatar" className="avatar" />
             }
             {/* <img src={this.props.currentUser.avatar ? this.props.currentUser.avatar.url : "https://freesvg.org/img/abstract-user-flat-4.png"} alt="avatar" className="avatar" /> */}
-
-            <h2>{this.props.userObj ? 
-            this.props.userObj.username
+            {this.props.userObj ? 
+            <>
+                <h2>{this.props.userObj.username}</h2>
+                <StartChatButton user={this.props.userObj}/>
+            </>
             
-            : this.props.currentUser.username}</h2>
+            : <h2>{this.props.currentUser.username}</h2>}
             <h1>{this.props.userObj ? "Opinions:" : "My Opinions:"}</h1>
 
             <Button onClick={()=> this.setState(prevState => ({open: true}))}>

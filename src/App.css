@@ -206,3 +206,98 @@
     flex:1;
     -webkit-flex:1;
 } */
+
+
+.chat-box ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    /* width: 500px;
+    height: 500px; */
+}
+
+.chat-box li {
+    padding: 20px;
+    border-radius: 30px;
+    margin-bottom: 2px;
+}
+
+.chat-box .my-message, .chat-box .their-message {
+    clear: both;
+    display: inline-block;
+}
+
+.time {
+    font-size: 2vh;
+}
+
+.my-message {
+    float: right;
+    /* background-color: skyblue; */
+}
+
+.my-message li {
+    background-color: skyblue;
+}
+
+.their-message {
+    float: left;
+}
+
+.their-message li {
+    background-color: lightgray;
+}
+
+.their-message li + .my-message li {
+    border-bottom-right-radius: 5px;
+}
+
+.my-message li + .my-message li {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.messages-container {
+    display: flex;
+    /* margin: 0px; */
+}
+
+
+.convo-list {
+    flex: 0 0 30%;
+}
+
+.messages {
+    flex: 0 50%;
+    height: 95vh;
+    border: 1px solid grey;
+    border-radius: 7px;
+    padding: 0 3%;
+    position: relative;
+}
+
+.messages form {
+    position: absolute;
+    bottom: 0;
+    width: 80%;
+    display: flex;
+    margin-bottom: 3vh;
+}
+
+.messages textarea {
+    width: 100%;
+    flex: 0 0 100%;
+}
+
+.messages button {
+    flex: 0 50%;
+}
+
+
+.messages h1 {
+    text-align: center;
+    border-bottom: 1px solid grey;
+}
+
+
+

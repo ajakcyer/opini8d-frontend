@@ -7,6 +7,7 @@ import { fetchCategories, fetchOpinionsFromApi, logoutAction } from "../Redux/ac
 import logo from '../opini8d-logo.png'
 import Followed from '../ExplorePage/Followed';
 import { Menu, Ref, Sticky, Rail } from 'semantic-ui-react'
+import { ActionCableConsumer } from 'react-actioncable-provider';
 
 class Main extends Component {
 
@@ -42,6 +43,15 @@ class Main extends Component {
       return this.props.opinions.filter(opinion => opinion.user.id === id)
     }
   }
+
+  handleReceivedConversation = (response)=>{
+    const {conversation} = response
+    // debugger
+    if (conversation.user_conversations.map( uc => uc.user.id).includes(this.props.currentUser.id)){
+        // debugger
+        this.props.appendNewConvo(conversation)
+    }
+}
 
 
   render() {
@@ -88,6 +98,15 @@ class Main extends Component {
           />
         </NavLink>
 
+        <NavLink to="/messages">
+          <Menu.Item
+            as="p"
+            name="Messages"
+            active={this.state.activeItem === 'Messages'}
+            onClick={this.handleItemClick}
+          />
+        </NavLink>
+
         <Menu.Item
           name="Log Out"
           active={this.state.activeItem === 'Log Out'}
@@ -95,6 +114,7 @@ class Main extends Component {
             this.handleItemClick(e, name)
             this.props.logout()
             localStorage.removeItem("token")
+            document.cookie = 'X-Authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/'
             this.props.history.push('/auth/login')
             }}
         />
@@ -124,7 +144,12 @@ class Main extends Component {
       {this.props.opinions.length === 0 ? <h1>Loading...</h1> :
       
       this.props.currentUser ? 
-        
+        <>
+        <ActionCableConsumer 
+                    channel={{channel: 'ConversationsChannel'}}
+                    onReceived={(response)=> this.handleReceivedConversation(response)}
+        />
+                
         <Switch>
           <Route
             path="/explore/users/:id" exact
@@ -142,6 +167,8 @@ class Main extends Component {
           <Route path="/explore/opinions" render={() => <AllOpinions categories={this.props.categories.length > 0 ? this.props.categories : null} opinions={this.props.opinions.length > 0 ? this.props.opinions : null} />} />
           <Route path="/explore/home" render={() => <Followed/>} />
         </Switch>
+
+        </>
         
         : null
 
@@ -159,7 +186,8 @@ const mdp = (dispatch) => {
   return { 
     fetchOpinions: (data) => dispatch(fetchOpinionsFromApi(data)),
     logout: ()=> dispatch(logoutAction()),
-    fetchCategories: () => dispatch(fetchCategories())
+    fetchCategories: () => dispatch(fetchCategories()),
+    appendNewConvo: (conversation)=> dispatch({type: "ADD_CONVO", payload: conversation})
   };
 };
 

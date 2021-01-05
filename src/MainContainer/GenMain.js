@@ -4,6 +4,10 @@ import {connect} from 'react-redux'
 import AuthCont from "../Auth/AuthCont"
 import Main from "./Main"
 import { userLoggedIn } from '../Redux/action';
+import ConversationList from '../Messages/ConversationsCables';
+import MessageArea from '../Messages/MessageArea';
+import { ActionCableProvider } from 'react-actioncable-provider'
+
 
 class GenMain extends Component {
 
@@ -52,8 +56,24 @@ class GenMain extends Component {
 
         {/* {this.props.currentUser ?  */}
         {localStorage.getItem('token') ?
-        
-        <Route path="/explore" render={()=> <Main/>} />
+        <>
+        <ActionCableProvider url={"ws://localhost:3000/cable"}>
+          <Route path="/explore" render={()=> <Main/>} />
+          <Route path="/messages" render={()=> <ConversationList/>}/>
+        </ActionCableProvider>
+          {/* <Route
+            path="/messages/:id" exact
+            render={({ match }) => {
+              let urlId = parseInt(match.params.id);
+              let foundConversation = this.props.conversations.find(
+                (conversation) => conversation.id === urlId
+              )
+                // debugger
+                return <MessageArea conversationObj={foundConversation} />
+              
+            }}
+          /> */}
+        </>
         
         :
         <>
@@ -65,6 +85,7 @@ class GenMain extends Component {
 
 
       </Switch>
+      
       </>
     )
   }
@@ -72,7 +93,8 @@ class GenMain extends Component {
 
 
 const msp =(state)=>{
-    return ({currentUser: state.currentUser})
+    return ({currentUser: state.currentUser,
+            conversations: state.conversations})
 }
 
 const mdp = (dispatch) =>{
