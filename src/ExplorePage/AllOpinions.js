@@ -59,7 +59,7 @@ class AllOpinions extends Component {
   }
 
   renderCatOpinions = (opinions) =>{
-      return opinions.map((opinion, index) => <Card key={index} style={{width: '150px'}} ><OpinionCard key={index} opinion={opinion} /></Card>)
+      return opinions.map((opinion, index) => <Card key={index} style={{width: '150px', height: '100px'}}><OpinionCard key={index} opinion={opinion} /></Card>)
   }
 
 
@@ -104,7 +104,7 @@ class AllOpinions extends Component {
                 :
                 <IoAddCircle onClick={()=> this.onClickFollowCat(category)} />
                 }</h2>
-                {result.length > 0 ? <Card.Group className="scrolling" fluid="true">{this.renderCatOpinions(result)}</Card.Group> : <p>No opinions yet...</p>}
+                {result.length > 0 ? <Card.Group style={{'flex-wrap': 'nowrap'}} className="scrolling">{this.renderCatOpinions(result)}</Card.Group> : <p>No opinions yet...</p>}
             </div>
         )
         // debugger

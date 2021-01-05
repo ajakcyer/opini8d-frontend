@@ -2,6 +2,17 @@
     /* border: 1px solid black; */
 }
 
+html {
+    overflow: hidden;
+    height: 100%
+}
+
+body {
+    overflow: auto;
+    height: 100%;
+    /* background-color: rgb(229, 220, 248); */
+}
+
 .all-opinions h3 {
     color: white
 }
@@ -15,7 +26,8 @@
     /* width: 100px; */
     /* height: 75px; */
     /* text-decoration: none; */
-    margin: 0px
+    margin: 0px;
+    display: inline-block;
 }
 
 .Green {
@@ -23,7 +35,8 @@
     /* width: 100px;
     height: 75px; */
     /* text-decoration: none; */
-    margin: 0px
+    margin: 0px;
+    display: inline-block;
 
 }
 
@@ -32,7 +45,9 @@
     /* width: 100px;
     height: 75px; */
     /* text-decoration: none; */
-    margin: 0px
+    margin: 0px;
+    display: inline-block;
+
 
 }
 
@@ -138,30 +153,27 @@
     cursor: pointer;
 }
 
+
 .all-content {
     display: grid;
     /* grid-template-columns: repeat(5, 1fr); */
-    grid-template-columns: 15% auto;
+    /* grid-template-columns: 15% 85%; */
+    grid-template-columns: 16% 21% 21% 21% 21%;
     grid-template-rows: repeat(5, 1fr);
     /* grid-template-rows: 20% auto; */
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     background-color: rgb(229, 220, 248);
+    height: 100%;
 }
 
 .navbar {
-    grid-area: 1/1/6/2
+    grid-area: 1/1/6/2;
 }
 
 .main-content {
     grid-area: 1/2/6/6;
 }
-
-/* .opinion-card {
-    width: 100px;
-    height: 75px;
-    display: inline-block;
-} */
 
 .card h3 {
     display: inline-block;
@@ -176,36 +188,16 @@
     text-align: center;
 }
 
-/* .cards {
-    display: inline;
-    overflow-y: hidden;
-    overflow-x: scroll;
-    white-space: nowrap;
-    white-space: normal;
-    white-space: nowrap;
-    overflow: scroll;
-    display: inline-block;
-} */
-
 .scrolling {
-    /* display: flex;
-    overflow-x: auto; */
-
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    flex-flow: row;
-    /* height: 100%; */
-    /* position: absolute; */
-    /* width: 100%; */
+    overflow: auto;
+    height: 150px;
+    width: 100%;
 }
 
-/* .scrolling div {
-    flex:1;
-    -webkit-flex:1;
-} */
+
+.scrolling .card {
+    flex: 0 0 auto;
+}
 
 
 .chat-box ul{

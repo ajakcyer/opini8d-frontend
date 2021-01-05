@@ -65,12 +65,11 @@ class Main extends Component {
       {/* <img className="logo" src={logo} alt="logo" /> */}
       {/* <br></br> */}
         {/* <Rail position="left"> */}
-      <Sticky context={this.contextRef}>
       <div className="navbar">
+      <Sticky context={this.contextRef}>
 
       
       <Menu  pointing secondary vertical >
-        {/* <Menu.Item header><img className="logo" src={logo} alt="logo" /></Menu.Item> */}
       <img className="logo" src={logo} alt="logo" />
         <NavLink to="/explore/home">
           <Menu.Item
@@ -121,8 +120,8 @@ class Main extends Component {
         />
 
       </Menu>
-      </div>
       </Sticky>
+      </div>
       {/* </Rail> */}
       
 
