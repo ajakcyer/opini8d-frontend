@@ -26,8 +26,10 @@ body {
     /* width: 100px; */
     /* height: 75px; */
     /* text-decoration: none; */
-    margin: 0px;
-    display: inline-block;
+    /* margin: 0px; */
+    /* display: inline-block; */
+    width: 100%;
+    height: 100%;
 }
 
 .Green {
@@ -35,8 +37,10 @@ body {
     /* width: 100px;
     height: 75px; */
     /* text-decoration: none; */
-    margin: 0px;
-    display: inline-block;
+    /* margin: 0px; */
+    /* display: inline-block; */
+    width: 100%;
+    height: 100%;
 
 }
 
@@ -45,8 +49,10 @@ body {
     /* width: 100px;
     height: 75px; */
     /* text-decoration: none; */
-    margin: 0px;
-    display: inline-block;
+    /* margin: 0px; */
+    /* display: inline-block; */
+    width: 100%;
+    height: 100%;
 
 
 }
@@ -117,14 +123,38 @@ body {
     float: right;
 }
 
-.category-name svg {
-    cursor: pointer;
-    float: right;
+.all-opinions {
+    background-color: #eae2f9;
+    border-radius: 10px;
+    padding: 0 1%;
 }
 
-.category-name:not(:first-child) {
-    border-top: 1px solid rgb(211, 209, 209);
+.category-name {
+    /* margin-bottom: 2%; */
+    clear: both;
+    padding: 1% 0;
 }
+
+.category-name p {
+    display: inline-block;
+}
+
+.category-name svg {
+    cursor: pointer;
+    position: absolute;
+    bottom: 10%;
+    margin-left: 15%;
+}
+
+.category-name h2 {
+    text-align: center;
+    float: left;
+    position: relative;
+}
+
+/* .category-name:not(:first-child) {
+    border-top: 1px solid rgb(211, 209, 209);
+} */
 
 .black-h4 {
     color: black;
@@ -165,6 +195,7 @@ body {
     grid-row-gap: 0px;
     background-color: rgb(229, 220, 248);
     height: 100%;
+    padding: 0 1%;
 }
 
 .navbar {
@@ -173,15 +204,29 @@ body {
 
 .main-content {
     grid-area: 1/2/6/6;
+    margin-left: 1%;
 }
 
 .card h3 {
-    display: inline-block;
-    height: 100px; 
-    margin: 0px; 
-    padding: 25px 0px;
-    /* line-height: 100px; */
-    /* padding: 0 calc(50% - 160px); */
+    /* display: inline-block; */
+    /* height: 100px;  */
+    /* height: 100%;  */
+    /* margin: 0px;  */
+    /* padding: 25px 0px; */
+}
+
+.card a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eae2f9;
 }
 
 .card {
@@ -190,10 +235,13 @@ body {
 
 .scrolling {
     overflow: auto;
-    height: 150px;
+    height: 130px;
     width: 100%;
 }
 
+/* .category-name {
+    margin-bottom: 2%;
+} */
 
 .scrolling .card {
     flex: 0 0 auto;
