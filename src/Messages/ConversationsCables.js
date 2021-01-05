@@ -19,7 +19,7 @@ class ConversationsCables extends Component {
         return this.props.conversations.map((convo, index1) => {
             let names = convo.user_conversations.map((uc, index2)=> uc.user.username)
             // debugger
-            return <NavLink key={index1} to={`/messages/${convo.id}`}><li >{names[0] + ' & ' + names[1]}</li></NavLink>
+            return <NavLink key={index1} to={`/explore/messages/${convo.id}`}><li >{names[0] + ' & ' + names[1]}</li></NavLink>
         })
     }
 
@@ -67,7 +67,7 @@ class ConversationsCables extends Component {
             {this.props.conversations.length > 0 ? 
 
             <Route
-                path="/messages/:id" exact
+                path="/explore/messages/:id"
                 render={({ match }) => {
                 let urlId = parseInt(match.params.id);
                 let foundConversation = this.props.conversations.find(

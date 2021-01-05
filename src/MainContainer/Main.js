@@ -8,6 +8,7 @@ import logo from '../opini8d-logo.png'
 import Followed from '../ExplorePage/Followed';
 import { Menu, Ref, Sticky, Rail } from 'semantic-ui-react'
 import { ActionCableConsumer } from 'react-actioncable-provider';
+import ConversationsCables from '../Messages/ConversationsCables';
 
 class Main extends Component {
 
@@ -98,7 +99,7 @@ class Main extends Component {
           />
         </NavLink>
 
-        <NavLink to="/messages">
+        <NavLink to="/explore/messages">
           <Menu.Item
             as="p"
             name="Messages"
@@ -166,6 +167,7 @@ class Main extends Component {
           <Route path="/explore/profile" render={() => <Profile opinions={this.getMyOpinions()} />} />
           <Route path="/explore/opinions" render={() => <AllOpinions categories={this.props.categories.length > 0 ? this.props.categories : null} opinions={this.props.opinions.length > 0 ? this.props.opinions : null} />} />
           <Route path="/explore/home" render={() => <Followed/>} />
+          <Route path="/explore/messages" render={()=> <ConversationsCables/>}/>
         </Switch>
 
         </>

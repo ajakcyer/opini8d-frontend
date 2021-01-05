@@ -59,7 +59,7 @@ class GenMain extends Component {
         <>
         <ActionCableProvider url={"ws://localhost:3000/cable"}>
           <Route path="/explore" render={()=> <Main/>} />
-          <Route path="/messages" render={()=> <ConversationList/>}/>
+          {/* <Route path="/messages" render={()=> <ConversationList/>}/> */}
         </ActionCableProvider>
           {/* <Route
             path="/messages/:id" exact
