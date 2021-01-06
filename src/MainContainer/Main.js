@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { fetchCategories, fetchOpinionsFromApi, logoutAction } from "../Redux/action";
 import logo from '../opini8d-logo.png'
 import Followed from '../ExplorePage/Followed';
-import { Menu, Ref, Sticky, Rail } from 'semantic-ui-react'
+import { Menu, Ref, Sticky, Rail, Dimmer, Loader, Segment } from 'semantic-ui-react'
 import { ActionCableConsumer } from 'react-actioncable-provider';
 import ConversationsCables from '../Messages/ConversationsCables';
 
@@ -175,15 +175,37 @@ class Main extends Component {
               return <Profile userObj={foundUser} userOpinions={this.renderUserOpinions(foundUser.id)} />;
             }}
           />
-          {this.props.opinions.length > 0 ?
-          <Route path="/explore/profile" render={() => <Profile opinions={this.getMyOpinions()} />} />
-          
-        :
-        
-        null
-        }
+          <Route path="/explore/profile" render={() => {
+            return (
+              <>
+                <div className="title">
+                  <h1>My Opinions:</h1>
+                </div>
+                  {this.props.opinions.length > 0 ?
+                  <Profile opinions={this.getMyOpinions()} />
+                  
+                  :
+                  
+                  <Loader style={{'marginLeft': '8%'}} active size='massive'>Loading</Loader>
 
-          <Route path="/explore/opinions" render={() => <AllOpinions /* categories={this.props.categories.length > 0 ? this.props.categories : null} opinions={this.props.opinions.length > 0 ? this.props.opinions : null} */ />} />
+                  }
+              </>
+            )
+          }} />
+          
+
+          <Route path="/explore/opinions" render={() => {
+            return (
+              <>
+                <div className="title">
+
+                  <h1>Explore Opinions</h1>
+                </div>
+                <AllOpinions /* categories={this.props.categories.length > 0 ? this.props.categories : null} opinions={this.props.opinions.length > 0 ? this.props.opinions : null} */ />
+              </>
+            )
+          
+          }} />
           <Route path="/explore/home" render={() => <Followed/>} />
           <Route path="/explore/messages" render={()=> <ConversationsCables/>}/>
         </Switch>

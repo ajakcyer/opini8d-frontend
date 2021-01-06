@@ -91,9 +91,9 @@ class Profile extends Component {
         console.log(this.props)
         return (
             <div className="my-opinions">
-                <div className="title">
+                {/* <div className="title">
                     <h1>{this.props.userObj ? "Opinions:" : "My Opinions:"}</h1>
-                </div>
+                </div> */}
                 
                 <div className="user-pic-info">
                     {this.props.userObj ? 

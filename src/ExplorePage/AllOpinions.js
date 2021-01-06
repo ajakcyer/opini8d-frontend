@@ -142,10 +142,10 @@ class AllOpinions extends Component {
       <>
 
         {/* <Sticky context={this.contextRef}> */}
-        <div className="title">
+        {/* <div className="title">
 
-                <h1 >Explore Opinions</h1>
-        </div>
+                <h1>Explore Opinions</h1>
+        </div> */}
         {/* </Sticky> */}
         {this.props.opinions.length === 0 ?
             <>
