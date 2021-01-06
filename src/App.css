@@ -4,7 +4,7 @@
 
 html {
     overflow: hidden;
-    height: 100%
+    height: 100%;
 }
 
 body {
@@ -124,15 +124,15 @@ body {
 }
 
 .all-opinions {
-    background-color: #eae2f9;
-    border-radius: 10px;
+    /* background-color: #eae2f9;
+    border-radius: 10px; */
     padding: 0 1%;
 }
 
 .category-name {
-    /* margin-bottom: 2%; */
+    margin-bottom: 2%;
     clear: both;
-    padding: 1% 0;
+    /* padding: 1% 0; */
 }
 
 .category-name p {
@@ -150,6 +150,7 @@ body {
     text-align: center;
     float: left;
     position: relative;
+    margin-bottom: 0;
 }
 
 /* .category-name:not(:first-child) {
@@ -188,19 +189,35 @@ body {
     display: grid;
     /* grid-template-columns: repeat(5, 1fr); */
     /* grid-template-columns: 15% 85%; */
-    grid-template-columns: 16% 21% 21% 21% 21%;
+    /* grid-template-columns: 16% 21% 21% 21% 21%; */
+
+    grid-template-columns: 15% 21.25% 21.25% 21.25% 21.25%;
+
     grid-template-rows: repeat(5, 1fr);
     /* grid-template-rows: 20% auto; */
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     background-color: rgb(229, 220, 248);
     height: 100%;
-    padding: 0 1%;
+    padding: 0 1% 0 0;
 }
 
 .navbar {
     grid-area: 1/1/6/2;
+    border-bottom-width: 0;
+    border-right-width: 2px;
+    border-right-style: solid;
+    /* border-right-color: rgba(34,36,38,.15); */
+    border-right-color: rgb(144 147 150 / 15%);
+    background-color: rgb(238 231 253);
 }
+
+/* .navbar:not(div){
+    border-bottom-width: 0;
+    border-right-width: 2px;
+    border-right-style: solid;
+    border-right-color: rgba(34,36,38,.15);
+} */
 
 .main-content {
     grid-area: 1/2/6/6;
@@ -217,12 +234,14 @@ body {
 
 .card a {
     height: 100%;
+
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .card .header {
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -235,7 +254,7 @@ body {
 
 .scrolling {
     overflow: auto;
-    height: 130px;
+    height: 140px;
     width: 100%;
 }
 

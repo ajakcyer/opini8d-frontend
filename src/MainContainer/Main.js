@@ -1,5 +1,5 @@
 import React, { Component, createRef } from 'react'
-import { NavLink, Route, Switch, withRouter } from "react-router-dom";
+import { Link, NavLink, Route, Switch, withRouter } from "react-router-dom";
 import AllOpinions from "../ExplorePage/AllOpinions";
 import Profile from "../Profile/Profile";
 import { connect } from "react-redux";
@@ -69,45 +69,55 @@ class Main extends Component {
       <Sticky context={this.contextRef}>
 
       
-      <Menu  pointing secondary vertical >
+      <Menu style={{'padding-left': '10%'}} borderless secondary vertical >
       <img className="logo" src={logo} alt="logo" />
-        <NavLink to="/explore/home">
+        {/* <NavLink className="item" to="/explore/home"> */}
           <Menu.Item
-            as="p"
+            // className={false}
+            // as="p"
+            as={ Link }
+            to='/explore/home'
             name="Home"
             active={this.state.activeItem === 'Home'}
             onClick={this.handleItemClick}
           />
-        </NavLink>
+        {/* </NavLink> */}
 
-        <NavLink to="/explore/profile">
+        {/* <NavLink to="/explore/profile"> */}
           <Menu.Item
-            as="p"
+            // as="p"
+            as={ Link }
+            to="/explore/profile"
             name="Profile"
             active={this.state.activeItem === 'Profile'}
             onClick={this.handleItemClick}
           />
-        </NavLink>
+        {/* </NavLink> */}
 
-        <NavLink to="/explore/opinions">
+        {/* <NavLink to="/explore/opinions"> */}
           <Menu.Item
-            as="p"
+            // as="p"
+            as={ Link }
+            to="/explore/opinions"
             name="Explore"
             active={this.state.activeItem === 'Explore'}
             onClick={this.handleItemClick}
           />
-        </NavLink>
+        {/* </NavLink> */}
 
-        <NavLink to="/explore/messages">
+        {/* <NavLink to="/explore/messages"> */}
           <Menu.Item
-            as="p"
+            // as="p"
+            as={ Link }
+            to="/explore/messages"
             name="Messages"
             active={this.state.activeItem === 'Messages'}
             onClick={this.handleItemClick}
           />
-        </NavLink>
+        {/* </NavLink> */}
 
         <Menu.Item
+          // style={{margin: '0 .35714286em .35714286em'}}
           name="Log Out"
           active={this.state.activeItem === 'Log Out'}
           onClick={(e, {name})=>{

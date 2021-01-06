@@ -104,7 +104,7 @@ class AllOpinions extends Component {
                 :
                 <IoAddCircle onClick={()=> this.onClickFollowCat(category)} />
                 }</h2>
-                {result.length > 0 ? <Card.Group style={{'flex-wrap': 'nowrap'}} className="scrolling">{this.renderCatOpinions(result)}</Card.Group> : <Card.Group style={{'flex-wrap': 'nowrap'}} className="scrolling"><Card style={{width: '150px', height: '100px'}}><Card.Header>No opinions yet...</Card.Header></Card></Card.Group>}
+                {result.length > 0 ? <Card.Group style={{'flex-wrap': 'nowrap', 'margin': '0', 'padding': '0'}} className="scrolling">{this.renderCatOpinions(result)}</Card.Group> : <Card.Group style={{'flex-wrap': 'nowrap'}} className="scrolling"><Card style={{width: '150px', height: '100px'}}><Card.Header>No opinions yet...</Card.Header></Card></Card.Group>}
             </div>
         )
         // debugger
