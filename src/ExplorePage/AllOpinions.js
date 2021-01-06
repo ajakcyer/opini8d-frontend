@@ -8,7 +8,7 @@ import CreateOpinion from "../ReuseComponents/CreateOpinion";
 import Profile from '../Profile/Profile'
 import { IoAddCircle } from "react-icons/io5";
 import { AiFillDelete } from "react-icons/ai";
-import { Card } from 'semantic-ui-react'
+import { Card, Sticky, Ref, Placeholder, Grid } from 'semantic-ui-react'
 
 class AllOpinions extends Component {
   // componentDidMount = () => {
@@ -98,13 +98,13 @@ class AllOpinions extends Component {
         let result = this.categoryIncluded(category)
         return (
             <div key={index} className="category-name">
-                <h2>{category}{/*<IoAddCircle onClick={()=> this.onClickFollowCat(category)} /> */}
+                <h2>{category}
                 {this.doesUserFollow(category) ?
                 <AiFillDelete onClick={()=> this.onClickUnfollow(category)}/>
                 :
                 <IoAddCircle onClick={()=> this.onClickFollowCat(category)} />
                 }</h2>
-                {result.length > 0 ? <Card.Group style={{'flex-wrap': 'nowrap', 'margin': '0', 'padding': '0'}} className="scrolling">{this.renderCatOpinions(result)}</Card.Group> : <Card.Group style={{'flex-wrap': 'nowrap'}} className="scrolling"><Card style={{width: '150px', height: '100px'}}><Card.Header>No opinions yet...</Card.Header></Card></Card.Group>}
+                {result.length > 0 ? <Card.Group style={{'flexWrap': 'nowrap', 'margin': '0', 'padding': '0'}} className="scrolling">{this.renderCatOpinions(result)}</Card.Group> : <Card.Group style={{'flexWrap': 'nowrap', 'margin': '0', 'padding': '0'}} className="scrolling"><Card style={{width: '150px', height: '100px'}}><Card.Header>No opinions yet...</Card.Header></Card></Card.Group>}
             </div>
         )
         // debugger
@@ -120,10 +120,62 @@ class AllOpinions extends Component {
 
   render() {
     console.log(this.props);
+    const placeholderCard = <Grid.Column>
+    <Placeholder style={{'backgroundColor': 'rgb(229, 220, 248)'}}>
+      <Placeholder.Image rectangular/>
+    </Placeholder>
+  </Grid.Column>
+
+    const officialPlaceHolder = <div style={{'margin': '2% 0 3% 0'}}><Placeholder style={{'backgroundColor': 'rgb(229, 220, 248)', 'marginBottom': '1%'}}>
+    <Placeholder.Line style={{'backgroundColor': 'rgb(229, 220, 248)'}} length="short"/>
+</Placeholder>
+<Grid textAlign="center" columns={7}>
+{placeholderCard}
+{placeholderCard}
+{placeholderCard}
+{placeholderCard}
+{placeholderCard}
+{placeholderCard}
+{placeholderCard}
+</Grid></div>
     return (
       <>
+      
+      {/* <Ref innerRef={}> */}
+      {/* <div style={{'padding': '0 3%'}}>
+            {officialPlaceHolder}
+            {officialPlaceHolder}
+            {officialPlaceHolder}
+            {officialPlaceHolder}
+      </div> */}
+        <Sticky context={this.contextRef}>
+                <h1 className="title">Explore Opinions</h1>
+        </Sticky>
         {this.props.opinions.length === 0 ?
-            <h1>Loading...</h1>
+            <>
+            {/* <h1>Loading...</h1> */}
+            <div className="opinions-placeholder">
+            {officialPlaceHolder}
+            {officialPlaceHolder}
+            {officialPlaceHolder}
+            {officialPlaceHolder}
+          </div>
+
+
+            {/* <Card.Group itemsPerRow={7}>
+
+            </Card.Group>
+
+
+            <Card.Group itemsPerRow={7}>
+
+            </Card.Group>
+
+
+            <Card.Group itemsPerRow={7}>
+
+            </Card.Group> */}
+            </>
         :
         <Switch>
           {/* <Route
@@ -153,17 +205,27 @@ class AllOpinions extends Component {
             path="/explore/opinions"
             render={() => (
               <>
+              {/* <Sticky context={this.contextRef}>
                 <h1 className="title">Explore Opinions</h1>
+              </Sticky> */}
                 <div className="all-opinions">
                     {/* {this.renderOpinions()} */}
                     {this.filterOpinions()}
                 </div>
-                <CreateOpinion/>
+                {/* <Sticky 
+                  context={this.contextRef}> */}
+                  <div className="sticky-opinion">
+
+                    <CreateOpinion/>
+                  </div>
+                {/* </Sticky> */}
               </>
             )}
           />
         </Switch>
+        
         }
+        {/* </Ref> */}
       </>
     );
   }
@@ -176,7 +238,10 @@ const mdp = (dispatch) => {
 };
 
 const msp = (state) => {
-  return { currentUser: state.currentUser };
+  return { currentUser: state.currentUser,
+          opinions: state.opinions,
+          categories: state.categories
+         };
 };
 
 export default connect(msp, mdp)(AllOpinions);

@@ -36,6 +36,7 @@ class Main extends Component {
     if (this.props.opinions.length > 0){
       return this.props.opinions.filter(opinion => opinion.user.id === this.props.currentUser.id)
     }
+    // return this.props.currentUser.opinions
   }
 
   renderUserOpinions = (id) =>{
@@ -59,6 +60,7 @@ class Main extends Component {
     // debugger
     console.log(this.props)
     return (
+      <div className="super-main-content">
       <Ref innerRef={this.contextRef}>
     <div className="all-content">
       {/* <h1>Main (logged in) Component Container</h1> */}
@@ -66,10 +68,10 @@ class Main extends Component {
       {/* <br></br> */}
         {/* <Rail position="left"> */}
       <div className="navbar">
-      <Sticky context={this.contextRef}>
+      {/* <Sticky context={this.contextRef}> */}
 
       
-      <Menu style={{'padding-left': '10%'}} borderless secondary vertical >
+      <Menu style={{'paddingLeft': '10%'}} borderless secondary vertical >
       <img className="logo" src={logo} alt="logo" />
         {/* <NavLink className="item" to="/explore/home"> */}
           <Menu.Item
@@ -130,7 +132,7 @@ class Main extends Component {
         />
 
       </Menu>
-      </Sticky>
+      {/* </Sticky> */}
       </div>
       {/* </Rail> */}
       
@@ -148,12 +150,12 @@ class Main extends Component {
         this.props.history.push('/auth/login')
         }} className="link-button">Log out</button> */}
       <div className="main-content">
-      <h1>Main (logged in) Component Container</h1>
+      {/* <h1>Main (logged in) Component Container</h1> */}
 
       
-      {this.props.opinions.length === 0 ? <h1>Loading...</h1> :
+      {/* {this.props.opinions.length === 0 ? <h1>Loading...</h1> : */}
       
-      this.props.currentUser ? 
+      {this.props.currentUser ? 
         <>
         <ActionCableConsumer 
                     channel={{channel: 'ConversationsChannel'}}
@@ -174,7 +176,7 @@ class Main extends Component {
             }}
           />
           <Route path="/explore/profile" render={() => <Profile opinions={this.getMyOpinions()} />} />
-          <Route path="/explore/opinions" render={() => <AllOpinions categories={this.props.categories.length > 0 ? this.props.categories : null} opinions={this.props.opinions.length > 0 ? this.props.opinions : null} />} />
+          <Route path="/explore/opinions" render={() => <AllOpinions /* categories={this.props.categories.length > 0 ? this.props.categories : null} opinions={this.props.opinions.length > 0 ? this.props.opinions : null} */ />} />
           <Route path="/explore/home" render={() => <Followed/>} />
           <Route path="/explore/messages" render={()=> <ConversationsCables/>}/>
         </Switch>
@@ -188,7 +190,7 @@ class Main extends Component {
 
     </div>
     </Ref>
-      
+    </div>
     )
   }
 }

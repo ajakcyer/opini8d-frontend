@@ -97,6 +97,8 @@ body {
 
 .logo {
     max-width: 80px;
+    display: block;
+    margin: 5px auto;
 }
 
 .avatar {
@@ -123,10 +125,17 @@ body {
     float: right;
 }
 
+.title {
+    text-align: center;
+    background-color: #eee7fc;
+    font-size: 35px;
+    padding: .3% 0;
+}
+
 .all-opinions {
     /* background-color: #eae2f9;
     border-radius: 10px; */
-    padding: 0 1%;
+    padding: 0 2%;
 }
 
 .category-name {
@@ -139,11 +148,15 @@ body {
     display: inline-block;
 }
 
+.category-name:first-child{
+    margin-top: 2%;
+}
+
 .category-name svg {
     cursor: pointer;
     position: absolute;
     bottom: 10%;
-    margin-left: 15%;
+    margin-left: 10px;
 }
 
 .category-name h2 {
@@ -151,6 +164,7 @@ body {
     float: left;
     position: relative;
     margin-bottom: 0;
+    padding-left: 1%;
 }
 
 /* .category-name:not(:first-child) {
@@ -199,7 +213,7 @@ body {
     grid-row-gap: 0px;
     background-color: rgb(229, 220, 248);
     height: 100%;
-    padding: 0 1% 0 0;
+    /* padding: 0 1% 0 0; */
 }
 
 .navbar {
@@ -210,18 +224,17 @@ body {
     /* border-right-color: rgba(34,36,38,.15); */
     border-right-color: rgb(144 147 150 / 15%);
     background-color: rgb(238 231 253);
+    
 }
 
-/* .navbar:not(div){
-    border-bottom-width: 0;
-    border-right-width: 2px;
-    border-right-style: solid;
-    border-right-color: rgba(34,36,38,.15);
-} */
+.navbar .borderless {
+    position: sticky;
+    top: 0;
+}
 
 .main-content {
     grid-area: 1/2/6/6;
-    margin-left: 1%;
+    /* margin-left: 1%; */
 }
 
 .card h3 {
@@ -358,5 +371,27 @@ body {
     border-bottom: 1px solid grey;
 }
 
+.sticky-opinion {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+    /* align-items: center; */
+    text-align: center;
+}
 
+/* .sticky-opinion button {
+    margin-bottom: 5px;
+} */
 
+.opinions-placeholder {
+    padding: 0 2% 4%;
+    /* height: 100vh; */
+}
+
+.super-main-content {
+    height: 100%;
+}
+
+body ::-webkit-scrollbar {
+    height: 5px !important; 
+}

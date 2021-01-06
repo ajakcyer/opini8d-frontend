@@ -137,7 +137,7 @@ class CreateOpinion extends Component {
                 onClose={(e)=> this.handleClose(e)}
                 onOpen={()=> this.handleShow()}
                 centered={false}
-                trigger={<Button>Add Your Opinion</Button>}
+                trigger={<Button color="violet" size="big">Add Your Opinion</Button>}
                 >
                     <Modal.Header>Opinion</Modal.Header>
                     <Modal.Content>
