@@ -27,6 +27,12 @@ class CreateOpinion extends Component {
         }))
     }
 
+    componentDidUpdate = (prevProps) =>{
+        if(prevProps.opinions.length < this.props.opinions.length){
+            this.setState(prev=>({loading: false, show: false}))
+        }
+    }
+
     onSubmitHandler = (e) =>{
         e.preventDefault()
         // console.log(this.state)
@@ -49,9 +55,9 @@ class CreateOpinion extends Component {
                 categoryArray: []
             }))
     
-            setTimeout(() => {
-                this.setState(prev=>({loading: false, show: false}))
-            }, 500);
+            // setTimeout(() => {
+            //     this.setState(prev=>({loading: false, show: false}))
+            // }, 500);
     
             e.target.querySelectorAll('a').forEach(node => node.remove())
         } else {
@@ -139,7 +145,7 @@ class CreateOpinion extends Component {
                 centered={false}
                 trigger={<Button color="violet" size="big">Add Your Opinion</Button>}
                 >
-                    <Modal.Header>Opinion</Modal.Header>
+                    <Modal.Header className="modal-header">Opinion</Modal.Header>
                     <Modal.Content>
                         <Dimmer inverted active={this.state.loading} >
                         <Loader content="Loading" size="large"/>
@@ -205,7 +211,8 @@ const mdp = (dispatch) =>{
 
 const msp = (state) =>{
     return ({currentUser: state.currentUser,
-            categories: state.categories
+            categories: state.categories,
+            opinions: state.opinions
     })
 }
 

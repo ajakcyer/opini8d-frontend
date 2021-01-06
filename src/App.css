@@ -117,7 +117,7 @@ body {
 }
 
 .categories-followed:hover {
-    background-color: rgba(211, 126, 77, 0.733);
+    background-color: rgba(224, 184, 243, 0.733);
 }
 
 .categories-followed svg {
@@ -137,9 +137,10 @@ body {
 }
 
 .title h1 {
-    padding: 0.3% 0;
+    padding: 0.5% 0;
     font-size: 35px;
 
+    /* font-size: 5vh; */
 }
 
 .all-opinions {
@@ -445,13 +446,20 @@ body ::-webkit-scrollbar {
 .my-opinions .cards {
     padding: 0 2% 2%;
     width: 100%;
+    min-height: 60%;
+    /* min-height: 100vh; */
+
+    /* max-height: */
 }
 
 .my-opinions {
-    /* height: 92% */
     height: 93%;
-    /* min-height: 100vh; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.modal-header {
+    text-align: center;
+    padding: 0 1%;
 }

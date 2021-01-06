@@ -16,7 +16,7 @@ class MyOpinions extends Component {
 
         return (
             <>
-            <Card.Group style={{'margin': '0'}} centered itemsPerRow={3}>
+            <Card.Group style={{'margin': '0 0 4%'}} centered itemsPerRow={3}>
                 {this.renderMyOpinions()}
             </Card.Group>
 

@@ -166,13 +166,31 @@ class Main extends Component {
           <Route
             path="/explore/users/:id" exact
             render={({ match }) => {
-              let urlId = parseInt(match.params.id);
-              let foundUser = this.props.opinions.find(
-                (opinion) => opinion.user.id === urlId
-              ).user;
+              const lookingForUser = () =>{
+                let urlId = parseInt(match.params.id);
+                let foundUser = this.props.opinions.find(
+                  (opinion) => opinion.user.id === urlId
+                ).user;
+                return foundUser
+              }
                 // debugger
                 
-              return <Profile userObj={foundUser} userOpinions={this.renderUserOpinions(foundUser.id)} />;
+              return (
+              <>
+              <div className="title">
+                  <h1>Opinions:</h1>
+                </div>
+                {this.props.opinions.length > 0 ?
+              <Profile userObj={lookingForUser()} userOpinions={this.renderUserOpinions(lookingForUser().id)} />
+                
+              :
+              
+              
+              <Loader style={{'marginLeft': '8%'}} active size='massive'>Loading</Loader>
+              }
+              </>
+              
+              )
             }}
           />
           <Route path="/explore/profile" render={() => {

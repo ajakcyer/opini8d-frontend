@@ -129,7 +129,7 @@ class Profile extends Component {
                 open={this.state.open}
                 onClose={()=> this.setState(prevState => ({open: false}))}
             >
-                <Modal.Header>Followed Categories: </Modal.Header>
+                <Modal.Header className="modal-header">Following Categories: </Modal.Header>
                 <Modal.Content>
                     {this.renderFollowedCategories()}
                 </Modal.Content>
