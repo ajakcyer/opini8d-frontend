@@ -140,17 +140,13 @@ class AllOpinions extends Component {
 </Grid></div>
     return (
       <>
-      
-      {/* <Ref innerRef={}> */}
-      {/* <div style={{'padding': '0 3%'}}>
-            {officialPlaceHolder}
-            {officialPlaceHolder}
-            {officialPlaceHolder}
-            {officialPlaceHolder}
-      </div> */}
-        <Sticky context={this.contextRef}>
-                <h1 className="title">Explore Opinions</h1>
-        </Sticky>
+
+        {/* <Sticky context={this.contextRef}> */}
+        <div className="title">
+
+                <h1 >Explore Opinions</h1>
+        </div>
+        {/* </Sticky> */}
         {this.props.opinions.length === 0 ?
             <>
             {/* <h1>Loading...</h1> */}
@@ -160,21 +156,6 @@ class AllOpinions extends Component {
             {officialPlaceHolder}
             {officialPlaceHolder}
           </div>
-
-
-            {/* <Card.Group itemsPerRow={7}>
-
-            </Card.Group>
-
-
-            <Card.Group itemsPerRow={7}>
-
-            </Card.Group>
-
-
-            <Card.Group itemsPerRow={7}>
-
-            </Card.Group> */}
             </>
         :
         <Switch>

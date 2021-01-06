@@ -175,7 +175,14 @@ class Main extends Component {
               return <Profile userObj={foundUser} userOpinions={this.renderUserOpinions(foundUser.id)} />;
             }}
           />
+          {this.props.opinions.length > 0 ?
           <Route path="/explore/profile" render={() => <Profile opinions={this.getMyOpinions()} />} />
+          
+        :
+        
+        null
+        }
+
           <Route path="/explore/opinions" render={() => <AllOpinions /* categories={this.props.categories.length > 0 ? this.props.categories : null} opinions={this.props.opinions.length > 0 ? this.props.opinions : null} */ />} />
           <Route path="/explore/home" render={() => <Followed/>} />
           <Route path="/explore/messages" render={()=> <ConversationsCables/>}/>

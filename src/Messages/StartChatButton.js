@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ActionCableConsumer } from 'react-actioncable-provider'
 import { connect } from 'react-redux'
+import { AiFillMail } from "react-icons/ai";
 
 class StartChatButton extends Component {
 
@@ -56,13 +57,13 @@ class StartChatButton extends Component {
     render() {
         console.log(this.props)
         return (
-            <div>
+            <>
                 <ActionCableConsumer 
                     channel={{channel: 'ConversationsChannel'}}
                     onReceived={(response)=> this.handleReceivedConversation(response)}
                 />
-                <p onClick={this.clickHandler} >Message</p>
-            </div>
+                <p onClick={this.clickHandler}><AiFillMail/></p>
+            </>
         )
     }
 }

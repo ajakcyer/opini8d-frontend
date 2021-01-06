@@ -128,8 +128,17 @@ body {
 .title {
     text-align: center;
     background-color: #eee7fc;
+
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.title h1 {
+    padding: 0.3% 0;
     font-size: 35px;
-    padding: .3% 0;
+
 }
 
 .all-opinions {
@@ -394,4 +403,41 @@ body {
 
 body ::-webkit-scrollbar {
     height: 5px !important; 
+}
+
+.user-pic-info img {
+    display: block;
+    margin: 1% auto 0;
+}
+
+.user-pic-info h2 {
+    /* display: block; */
+    /* text-align: center; */
+    /* margin: 0; */
+}
+
+/* .user-pic-info {
+    width: 100%
+} */
+
+.user-pic-info button {
+    display: inline-block;
+}
+
+.user-follow-info {
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 3%;
+
+}
+
+.user-follow-info p {
+    cursor: pointer;
+    font-size: 26px;
+    margin-bottom: 1%;
+}
+
+.user-follow-info svg {
+    curson: pointer;
 }
