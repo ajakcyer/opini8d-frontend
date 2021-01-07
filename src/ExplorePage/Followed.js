@@ -101,7 +101,7 @@ class Followed extends Component {
         return (
             <>
             <div className="title">
-                <h1>Homepage for followed categories</h1>
+                <h1>Home</h1>
             </div>
                 {/* {this.renderOpinions()} */}
                 {this.filterAllOpinions()}

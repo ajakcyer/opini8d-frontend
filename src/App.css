@@ -110,6 +110,8 @@ body {
 
 .opinion-image {
     max-width: 300px;
+    display: block;
+    margin: 0 auto 3%;
 }
 
 .categories-followed p {
@@ -127,7 +129,7 @@ body {
 }
 
 .title {
-    text-align: center;
+    text-align: left;
     background-color: #eee7fc;
 
     width: 100%;
@@ -137,7 +139,7 @@ body {
 }
 
 .title h1 {
-    padding: 0.5% 0;
+    padding: 0.5% 0 0 2%;
     font-size: 35px;
 
     /* font-size: 5vh; */
@@ -471,4 +473,66 @@ body ::-webkit-scrollbar {
 
 .followed-opinions h3 {
     text-align: center;
+}
+
+.user-opinion {
+    min-height: 93%;
+    padding: 2% 2% 0;
+}
+
+.opinion-ratings {
+    margin: 0 15% 2%;
+}
+
+.user-info h4 {
+    display: inline-block;
+    margin: 0 0 0 1%;
+}
+
+.category-tags p {
+    display: inline-block;
+    margin: 0 2% 0 0;
+    font-weight: bold;
+}
+
+.opinion-stuff {
+    border: 1px solid #c7c1d6;
+    margin: 2% 10%;
+    min-height: 61%;
+    border-radius: 5px;
+    background-color: rgb(238 231 253);
+    /* position: relative; */
+}
+
+.user-opinion-buttons {
+    /* text-align: right; */
+    float: right;
+}
+
+.category-tags {
+    padding-left: 2%;
+    padding-right: 24%;
+}
+
+.opinion-content h2 {
+    padding: 0 20%;
+    text-align: center;
+    font-size: 35px;
+}
+
+.opinion-content .text-content {
+    padding: 0px 12%;
+    text-align: center;
+}
+
+.voting-buttons {
+    /* position: absolute;
+    bottom: 0; */
+    margin-top: 5%;
+    width: 100%;
+    text-align: center;
+}
+
+.user-info {
+    padding-left: 5%;
 }

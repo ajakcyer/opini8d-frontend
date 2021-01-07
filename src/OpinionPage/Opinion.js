@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { editOpinion, deleteOpinion, opinionRated, patchRating, deleteRating } from "../Redux/action";
 import { NavLink, withRouter } from "react-router-dom";
-import { Button, Progress } from 'semantic-ui-react'
+import { Button, Form, Input, Progress } from 'semantic-ui-react'
 import profile from '../default-profile.png'
 import { CgClose } from "react-icons/cg";
 import { RiImageAddFill } from "react-icons/ri";
@@ -151,12 +151,12 @@ class Opinion extends Component {
           {/* <h5>
             {(positive.length / this.props.opinion.ratings.length) * 100}% Agree
           </h5> */}
-          <Progress color="green" percent={((positive.length / this.props.opinion.ratings.length) * 100).toFixed(2)} progress label="Agree" />
+          <Progress size="small" color="green" percent={((positive.length / this.props.opinion.ratings.length) * 100).toFixed(2)} progress label="Agree" />
           {/* <h5>
             {(negative.length / this.props.opinion.ratings.length) * 100}%
             disagree
           </h5> */}
-          <Progress color="red" percent={((negative.length / this.props.opinion.ratings.length) * 100).toFixed(2)} progress label="Disagree" />
+          <Progress size="small" color="red" percent={((negative.length / this.props.opinion.ratings.length) * 100).toFixed(2)} progress label="Disagree" />
           <p>
             Out of {this.props.opinion.ratings.length}{" "}
             {this.props.opinion.ratings.length > 1 ? "votes" : "vote"}
@@ -166,8 +166,8 @@ class Opinion extends Component {
     } else {
       return (
         <>
-          <Progress color="green" percent={0} progress label="Agree" />
-          <Progress color="red" percent={0} progress label="Disagree" />
+          <Progress size="small" color="green" percent={0} progress label="Agree" />
+          <Progress size="small" color="red" percent={0} progress label="Disagree" />
           <p>No ratings yet!</p>
         </>
       );
@@ -206,101 +206,111 @@ class Opinion extends Component {
     // console.log("Opinion User ID: ", this.props.opinion.user.id)
     console.log(this.props)
     return (
-      <div>
-        {this.ratings()}
-        <h4> 
+      <>
+        <div className="title">
+          <h1>Opinion</h1>
+        </div>
+
+        <div className="user-opinion">
+          <div className="opinion-ratings">
+            {this.ratings()}
+          </div>
           
-        {/* {this.props.currentUser.username === this.props.opinion.user.username ? 
-            
-            
-            <img src={this.props.opinion.user.avatar ? this.props.opinion.user.avatar.url : "https://freesvg.org/img/abstract-user-flat-4.png"} alt="avatar" className="avatar" />
-            
-            : 
-            <img src={props.currentUser.avatar ? props.currentUser.avatar.url : "https://freesvg.org/img/abstract-user-flat-4.png"} alt="avatar" className="avatar" />
-        } */}
-          
-          <img src={this.props.opinion.user.avatar ? this.props.opinion.user.avatar.url : profile} alt="avatar" className="avatar" />
+          <div className="user-info">
 
+            <img src={this.props.opinion.user.avatar ? this.props.opinion.user.avatar.url : profile} alt="avatar" className="avatar" />
 
+            <h4>
+              By: {this.props.currentUser.username === this.props.opinion.user.username ? this.props.opinion.user.username : 
+              <NavLink to={`/explore/users/${this.props.opinion.user.id}`}>
+              {this.props.opinion.user.username} 
+              </NavLink>}
+            </h4>
+          </div>
 
-        By: {this.props.currentUser.username === this.props.opinion.user.username ? this.props.opinion.user.username : 
-        <NavLink to={`/explore/users/${this.props.opinion.user.id}`}>
-        {this.props.opinion.user.username} 
-        </NavLink>
+          <div className="opinion-stuff">
+            {this.props.currentUser.id === this.props.opinion.user.id ? (
+              <div className="user-opinion-buttons">
+                <Button color="violet" onClick={(e)=>this.editClicked(e)}>
+                  {this.state.editBtn ? "Nevermind" : "Edit Post"}
+                </Button>
+                <Button color="violet" style={{'marginRight': '0'}} onClick={this.deleteBtn}>Delete Post</Button>
+              </div>
+            ) : null}
 
-        }</h4>
-        {this.props.currentUser.id === this.props.opinion.user.id ? (
-          <>
-            <button onClick={(e)=>this.editClicked(e)}>
-              {this.state.editBtn ? "Nevermind" : "Edit Post"}
-            </button>
-            <button onClick={this.deleteBtn}>Delete Post</button>
-          </>
-        ) : null}
-
-        {this.state.editBtn ? (
-          <form onSubmit={this.updatePost}>
-            <input
-              onChange={this.onChangeUpdate}
-              type="text"
-              name="title"
-              value={this.state.title}
-            />
-            <br></br>
-            <div className="img_wrap">
-              {this.state.imgClosed ? 
-              <>
-                <label style={this.state.otherImage ? {color: "purple"} : {color: "black"}} className="label-image" htmlFor="opinion-photo"> <RiImageAddFill/></label>
-                <input id="opinion-photo" onChange={this.imageChangeHandler} type="file" accept="image/*" style={{display: "none"}}/>
-              </>
+            {this.state.editBtn ? (
               
-              : 
-              
+              <Form onSubmit={this.updatePost}>
+                <Input
+                  onChange={this.onChangeUpdate}
+                  type="text"
+                  name="title"
+                  value={this.state.title}
+                />
+                <br></br>
+                <div className="img_wrap">
+                  {this.state.imgClosed ? 
+                  <>
+                    <label style={this.state.otherImage ? {color: "purple"} : {color: "black"}} className="label-image" htmlFor="opinion-photo"> <RiImageAddFill/></label>
+                    <input id="opinion-photo" onChange={this.imageChangeHandler} type="file" accept="image/*" style={{display: "none"}}/>
+                  </>
+                  
+                  : 
+                  
+                  <>
+                    {this.props.opinion.other_image ? 
+                    <>
+                      <img style={this.state.imgClosed ? {display: "none"} : {display: "visible"}} className="opinion-image" src={this.props.opinion.other_image.url} alt="opinion-image" />
+                      <CgClose onClick={()=> this.setState(prev=>({imgClosed: true}))} className="close"/>
+                    </>
+                    :
+                    
+                    <>
+                      <label style={this.state.otherImage ? {color: "purple"} : {color: "black"}} className="label-image" htmlFor="opinion-photo"> <RiImageAddFill/></label>
+                      <input id="opinion-photo" onChange={this.imageChangeHandler} type="file" accept="image/*" style={{display: "none"}}/>
+                    </>
+                    
+                    }
+                    {/* <img style={this.state.imgClosed ? {display: "none"} : {display: "visible"}} className="opinion-image" src={this.props.opinion.other_image.url} alt="opinion-image" />
+                    <CgClose onClick={()=> this.setState(prev=>({imgClosed: true}))} className="close"/> */}
+                  </>
+                  }
+                </div>
+
+                <br></br>
+                <Form.TextArea
+                  onChange={this.onChangeUpdate}
+                  name="content"
+                  value={this.state.content}
+                ></Form.TextArea>
+                <br></br>
+                <button>Update</button>
+              </Form>
+            ) : (
               <>
-                {this.props.opinion.other_image ? 
-                <>
-                  <img style={this.state.imgClosed ? {display: "none"} : {display: "visible"}} className="opinion-image" src={this.props.opinion.other_image.url} alt="opinion-image" />
-                  <CgClose onClick={()=> this.setState(prev=>({imgClosed: true}))} className="close"/>
-                </>
-                :
-                
-                <>
-                  <label style={this.state.otherImage ? {color: "purple"} : {color: "black"}} className="label-image" htmlFor="opinion-photo"> <RiImageAddFill/></label>
-                  <input id="opinion-photo" onChange={this.imageChangeHandler} type="file" accept="image/*" style={{display: "none"}}/>
-                </>
-                
-                }
-                {/* <img style={this.state.imgClosed ? {display: "none"} : {display: "visible"}} className="opinion-image" src={this.props.opinion.other_image.url} alt="opinion-image" />
-                <CgClose onClick={()=> this.setState(prev=>({imgClosed: true}))} className="close"/> */}
+                <div className="opinion-content">
+
+                  <div className="category-tags">{this.renderCategories()}</div> 
+
+                  <h2>{this.props.opinion.title}</h2>
+
+                  {this.props.opinion.other_image ? <img className="opinion-image" src={this.props.opinion.other_image.url} alt="opinion-image" /> : null}
+
+                  {/* <br></br><br></br> */}
+                  <p className="text-content">{this.props.opinion.content}</p>
+
+                </div>
+
+                <div className="voting-buttons">
+                  <Button color="green" active={this.iVoted() === "Agree" ? true : false} onClick={this.onClickHandler}>Agree</Button>
+
+                  <Button color="red" active={this.iVoted() === "Disagree" ? true : false} onClick={this.onClickHandler}>Disagree</Button>
+                </div>
               </>
-              }
-            </div>
-
-            <br></br>
-            <textarea
-              onChange={this.onChangeUpdate}
-              name="content"
-              value={this.state.content}
-            ></textarea>
-            <br></br>
-            <button>Update</button>
-          </form>
-        ) : (
-          <>
-            <div>
-
-            {this.renderCategories()}
-            <h2>{this.props.opinion.title}</h2>
-            {this.props.opinion.other_image ? <img className="opinion-image" src={this.props.opinion.other_image.url} alt="opinion-image" /> : null}
-            <br></br><br></br>
-            <p>{this.props.opinion.content}</p>
-            </div>
-
-            <Button active={this.iVoted() === "Agree" ? true : false} onClick={this.onClickHandler}>Agree</Button>
-            <Button active={this.iVoted() === "Disagree" ? true : false} onClick={this.onClickHandler}>Disagree</Button>
-          </>
-        )}
-      </div>
+            )}
+        </div>
+        </div>
+      </>
     );
   }
 }
