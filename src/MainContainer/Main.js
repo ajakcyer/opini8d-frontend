@@ -215,10 +215,10 @@ class Main extends Component {
           <Route path="/explore/opinions" render={() => {
             return (
               <>
-                <div className="title">
+                {/* <div className="title">
 
                   <h1>Explore Opinions</h1>
-                </div>
+                </div> */}
                 <AllOpinions /* categories={this.props.categories.length > 0 ? this.props.categories : null} opinions={this.props.opinions.length > 0 ? this.props.opinions : null} */ />
               </>
             )

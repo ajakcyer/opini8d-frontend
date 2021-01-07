@@ -189,6 +189,10 @@ class AllOpinions extends Component {
               {/* <Sticky context={this.contextRef}>
                 <h1 className="title">Explore Opinions</h1>
               </Sticky> */}
+              <div className="title">
+
+                <h1>Explore Opinions</h1>
+              </div>
                 <div className="all-opinions">
                     {/* {this.renderOpinions()} */}
                     {this.filterOpinions()}

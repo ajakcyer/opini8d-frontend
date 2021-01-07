@@ -463,3 +463,12 @@ body ::-webkit-scrollbar {
     text-align: center;
     padding: 0 1%;
 }
+
+.followed-opinions .cards {
+    padding: 2% 2%;
+    width: 100%;
+}
+
+.followed-opinions h3 {
+    text-align: center;
+}
