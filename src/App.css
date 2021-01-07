@@ -92,8 +92,9 @@ body {
 }
 
 .auth-logo {
-    display: inline-block;
-
+    /* display: inline-block; */
+    text-align: center;
+    padding: 2% 0;
 }
 
 .logo {
@@ -589,4 +590,32 @@ body ::-webkit-scrollbar {
     padding: 0 20%;
 }
 
-/* .convo-list */
+.beginning-auth {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(229, 220, 248);
+}
+
+.auth-login-c {
+    text-align: center;
+    margin: 5% 0;
+}
+
+.auth-login-form .input {
+    width: 16%;
+    margin: .6% 0;
+}
+
+.auth-signin-c {
+    text-align: center;
+    margin: 5% 0;
+}
+
+.auth-signin-form .input {
+    width: 16%;
+    margin: .6% 0.5%;
+}
+
+.user-image-label {
+    font-size: 30px;
+}
