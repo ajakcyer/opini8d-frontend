@@ -200,6 +200,8 @@ body {
 .img_wrap {
     display: inline-block;
     position: relative;
+    margin: 2% 0 0 34%;
+
 }
 
 .close {
@@ -209,6 +211,8 @@ body {
     right: 0;
     font-size: 20px;
     cursor: pointer;
+    color: white;
+    font-weight: bold;
 }
 
 
@@ -535,4 +539,21 @@ body ::-webkit-scrollbar {
 
 .user-info {
     padding-left: 5%;
+}
+
+.edit-opinion-form {
+    margin: 4% 0 0 0;
+}
+
+.edit-opinion-form .input {
+    width: 100%;
+    padding: 0 27%;
+}
+
+.edit-opinion-form .field {
+    padding: 0 20%;
+}
+
+.edit-submit-btn {
+    
 }

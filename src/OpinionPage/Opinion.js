@@ -240,7 +240,7 @@ class Opinion extends Component {
 
             {this.state.editBtn ? (
               
-              <Form onSubmit={this.updatePost}>
+              <Form className="edit-opinion-form" onSubmit={this.updatePost}>
                 <Input
                   onChange={this.onChangeUpdate}
                   type="text"
@@ -251,7 +251,7 @@ class Opinion extends Component {
                 <div className="img_wrap">
                   {this.state.imgClosed ? 
                   <>
-                    <label style={this.state.otherImage ? {color: "purple"} : {color: "black"}} className="label-image" htmlFor="opinion-photo"> <RiImageAddFill/></label>
+                    <label style={this.state.otherImage ? {color: "purple", 'marginLeft': '300%'} : {color: "black", 'marginLeft': '300%'}} className="label-image" htmlFor="opinion-photo"> <RiImageAddFill/></label>
                     <input id="opinion-photo" onChange={this.imageChangeHandler} type="file" accept="image/*" style={{display: "none"}}/>
                   </>
                   
@@ -266,7 +266,7 @@ class Opinion extends Component {
                     :
                     
                     <>
-                      <label style={this.state.otherImage ? {color: "purple"} : {color: "black"}} className="label-image" htmlFor="opinion-photo"> <RiImageAddFill/></label>
+                      <label style={this.state.otherImage ? {color: "purple", 'marginLeft': '300%'} : {color: "black", 'marginLeft': '300%'}} className="label-image" htmlFor="opinion-photo"> <RiImageAddFill/></label>
                       <input id="opinion-photo" onChange={this.imageChangeHandler} type="file" accept="image/*" style={{display: "none"}}/>
                     </>
                     
@@ -284,7 +284,7 @@ class Opinion extends Component {
                   value={this.state.content}
                 ></Form.TextArea>
                 <br></br>
-                <button>Update</button>
+                <Button className="edit-submit-btn" style={{'display': 'block', 'margin': '0 45%'}} color="purple">Update</Button>
               </Form>
             ) : (
               <>
