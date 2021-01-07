@@ -142,13 +142,13 @@ class AllOpinions extends Component {
       <>
 
         {/* <Sticky context={this.contextRef}> */}
-        {/* <div className="title">
-
-                <h1>Explore Opinions</h1>
-        </div> */}
         {/* </Sticky> */}
         {this.props.opinions.length === 0 ?
             <>
+            <div className="title">
+    
+                    <h1 style={{color: '#eee7fc'}}>.</h1>
+            </div>
             {/* <h1>Loading...</h1> */}
             <div className="opinions-placeholder">
             {officialPlaceHolder}

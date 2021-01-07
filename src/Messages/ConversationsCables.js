@@ -48,13 +48,16 @@ class ConversationsCables extends Component {
             {this.props.conversations.length > 0 ?
 
             <>
+                <div className="convo-list">
+                    <h3>Direct Messages</h3>
+                    <ul>
 
-                <ul className="convo-list">
-                <h3>Direct Messages</h3>
+                        {this.renderConversations()}
 
-                    {this.renderConversations()}
+                    </ul>
 
-                </ul>
+
+                </div>
             </>
 
         

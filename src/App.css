@@ -302,10 +302,12 @@ body {
     padding: 0;
     /* width: 500px;
     height: 500px; */
+    overflow: auto;
+    height: 84vh;
 }
 
 .chat-box li {
-    padding: 20px;
+    padding: 10%;
     border-radius: 30px;
     margin-bottom: 2px;
 }
@@ -351,13 +353,39 @@ body {
 }
 
 
+
+
 .convo-list {
     flex: 0 0 30%;
 }
 
+.convo-list h3 {
+    margin: 0% 0% 2% 0;
+    padding: 2% 0 0 2%;
+}
+
+.convo-list ul {
+    list-style: none;
+    
+    padding-left: 0px;
+    overflow: auto;
+    height: 95vh;
+    margin: 0px;
+}
+
+.convo-list li {
+    padding: 3% 0 3% 2%;
+    font-size: 18px;
+    border-top: 1px solid black;
+}
+
+.convo-list li:hover {
+    background-color: rgb(238 231 253);
+}
+
 .messages {
     flex: 0 50%;
-    height: 95vh;
+    height: 100vh;
     border: 1px solid grey;
     border-radius: 7px;
     padding: 0 3%;
@@ -365,11 +393,18 @@ body {
 }
 
 .messages form {
-    position: absolute;
+    /* position: absolute;
     bottom: 0;
-    width: 80%;
+    display: flex; */
+    bottom: 0;
+    height: 6%;
+    width: 74%;
     display: flex;
-    margin-bottom: 3vh;
+    margin-bottom: 3%;
+}
+
+.message-form .field {
+    margin: 0
 }
 
 .messages textarea {
@@ -554,6 +589,4 @@ body ::-webkit-scrollbar {
     padding: 0 20%;
 }
 
-.edit-submit-btn {
-    
-}
+/* .convo-list */

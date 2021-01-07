@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ActionCableConsumer } from 'react-actioncable-provider'
 import { connect } from 'react-redux'
+import { Form, Button, TextArea } from 'semantic-ui-react'
 
 class MessageArea extends Component {
 
@@ -19,14 +20,14 @@ class MessageArea extends Component {
             let date = new Date (message.created_at).toLocaleString()
             if (message.user_id === this.props.currentUser.id){
                 return (
-                <div className="my-message">  
+                <div key={index} className="my-message">  
                     <li key={index} >{message.text}</li>
                     <p className="time">{date}</p>
                 
                 </div>)
             } else {
                 return (
-                <div className="their-message">
+                <div key={index} className="their-message">
                     <li key={index} >{message.text}</li>
                     <p className="time">{date}</p>
                 </div>)
@@ -94,10 +95,11 @@ class MessageArea extends Component {
                                 {this.renderMessages()}
                             </ul>
                         </div>
-                            <form onSubmit={this.onSubmitHandler}>
-                                <textarea onChange={this.onChangeHandler} placeholder="Send a message" value={this.state.text}></textarea>
-                                <button>Submit</button>
-                            </form>
+                        
+                            <Form style={{'position': 'absolute'}} className="message-form" onSubmit={this.onSubmitHandler}>
+                                <TextArea onChange={this.onChangeHandler} placeholder="Send a message" value={this.state.text}></TextArea>
+                                <Button>Submit</Button>
+                            </Form>
 
                     </>
                 
