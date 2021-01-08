@@ -55,7 +55,7 @@ class Signup extends Component {
                 <Input onChange={this.onChangeHandler} type="email" name="email" placeholder="Email" value={this.state.email} />
                 <br></br>
                 <Input onChange={this.onChangeHandler} type="text" name="username" placeholder="Username" value={this.state.username} />
-                <Input onChange={this.onChangeHandler} type="text" name="password" placeholder="Password" value={this.state.password} />
+                <Input onChange={this.onChangeHandler} type="password" name="password" placeholder="Password" value={this.state.password} />
                 <br></br>
                 <Button color="violet">Sign Up</Button>
             </Form>

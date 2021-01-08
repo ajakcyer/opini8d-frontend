@@ -13,7 +13,7 @@ import ConversationsCables from '../Messages/ConversationsCables';
 class Main extends Component {
 
   state = {
-    activeItem: 'Home'
+    activeItem: 'Explore'
   }
 
   contextRef = createRef()

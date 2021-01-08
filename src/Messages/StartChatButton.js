@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { ActionCableConsumer } from 'react-actioncable-provider'
 import { connect } from 'react-redux'
 import { AiFillMail } from "react-icons/ai";
+import { Redirect, withRouter } from 'react-router-dom';
 
 class StartChatButton extends Component {
 
@@ -35,12 +36,15 @@ class StartChatButton extends Component {
         }
 
         if(this.conversationExists(this.props.user.id)){
-            alert('Conversation Exists!')
-            return
+            // alert('Conversation Exists!')
+            return this.props.history.push(`/explore/messages`)
+            // return (<Redirect push to={`/explore/messages/${this.props.user.id}`} />)
+
+            // return
             // this.props.exit()
         } else {
             this.fetchWebSocket("conversations", body)
-            alert('New Convo creating...')
+            // alert('New Convo creating...')
             // this.props.exit()
         }
     }
@@ -51,6 +55,7 @@ class StartChatButton extends Component {
         if (conversation.user_conversations.map( uc => uc.user.id).includes(this.props.currentUser.id)){
             // debugger
             this.props.appendNewConvo(conversation)
+            return this.props.history.push(`/explore/messages`)
         }
     }
 
@@ -77,4 +82,4 @@ const mdp = (dispatch) =>{
     return ({appendNewConvo: (conversation)=> dispatch({type: "ADD_CONVO", payload: conversation})})
 }
 
-export default connect(msp, mdp)(StartChatButton)
+export default withRouter(connect(msp, mdp)(StartChatButton))

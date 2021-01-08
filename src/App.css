@@ -479,6 +479,7 @@ body ::-webkit-scrollbar {
     /* cursor: pointer; */
     font-size: 26px;
     margin-bottom: 1%;
+    margin: 0% 48%;
 }
 
 .user-follow-info svg {
@@ -513,6 +514,7 @@ body ::-webkit-scrollbar {
 
 .followed-opinions h3 {
     text-align: center;
+    padding-top: 10%;
 }
 
 .user-opinion {
@@ -618,4 +620,9 @@ body ::-webkit-scrollbar {
 
 .user-image-label {
     font-size: 30px;
+}
+
+.messages-container h4 {
+    padding: 2% 0 0 2%;
+    font-size: 25px;
 }

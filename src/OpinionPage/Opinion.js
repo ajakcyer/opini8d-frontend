@@ -302,9 +302,9 @@ class Opinion extends Component {
                 </div>
 
                 <div className="voting-buttons">
-                  <Button color="green" active={this.iVoted() === "Agree" ? true : false} onClick={this.onClickHandler}>Agree</Button>
+                  <Button color="green" basic={this.iVoted() === "Agree" ? false : true} onClick={this.onClickHandler}>Agree</Button>
 
-                  <Button color="red" active={this.iVoted() === "Disagree" ? true : false} onClick={this.onClickHandler}>Disagree</Button>
+                  <Button color="red" basic={this.iVoted() === "Disagree" ? false : true} onClick={this.onClickHandler}>Disagree</Button>
                 </div>
               </>
             )}
