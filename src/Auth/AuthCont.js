@@ -18,10 +18,10 @@ class AuthCont extends Component {
     render() {
         console.log(this.props)
         return (
-            <div>
+            <div className="beginning-auth">
                 <div className="auth-logo">
-                <img className="large-logo" src={logo} alt="logo" />
-                <h1 className="large-header">OPINI8'D</h1>
+                    <img className="large-logo" src={logo} alt="logo" />
+                    <h1 className="large-header">OPINI8'D</h1>
                 </div>
                 {/* <h1>Auth (not logged in) Component Container</h1> */}
                 <Switch>
@@ -42,13 +42,6 @@ class AuthCont extends Component {
                         )
                     }}/>
                 </Switch>
-
-                
-                
-
-                {/* <Login/> */}
-                <hr></hr>
-                {/* <Signup/> */}
                 
             </div>
         )

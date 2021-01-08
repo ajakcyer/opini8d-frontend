@@ -1,3 +1,19 @@
+* {
+    /* border: 1px solid black; */
+}
+
+html {
+    overflow: hidden;
+    height: 100%;
+    /* background: rgb(229, 220, 248); */
+}
+
+body {
+    overflow: auto;
+    height: 100%;
+    
+}
+
 .all-opinions h3 {
     color: white
 }
@@ -7,16 +23,44 @@
 }
 
 .Grey {
-    background-color: grey;
+    background-color: rgb(180, 179, 179);
+    /* width: 100px; */
+    /* height: 75px; */
+    /* text-decoration: none; */
+    /* margin: 0px; */
+    /* display: inline-block; */
+    width: 100%;
+    height: 100%;
 }
 
 .Green {
-    background-color: green;
+    background-color: rgb(99, 204, 99);
+    /* width: 100px;
+    height: 75px; */
+    /* text-decoration: none; */
+    /* margin: 0px; */
+    /* display: inline-block; */
+    width: 100%;
+    height: 100%;
+
 }
 
 .Red {
-    background-color: red;
+    background-color: rgb(241, 93, 93);
+    /* width: 100px;
+    height: 75px; */
+    /* text-decoration: none; */
+    /* margin: 0px; */
+    /* display: inline-block; */
+    width: 100%;
+    height: 100%;
+
+
 }
+
+/* .Grey a, .Green a, .Red a {
+    text-decoration: none;
+} */
 
 .Grey h3, .Green h3, .Red h3 {
     color: white
@@ -48,12 +92,15 @@
 }
 
 .auth-logo {
-    display: inline-block;
-
+    /* display: inline-block; */
+    text-align: center;
+    padding: 2% 0;
 }
 
 .logo {
     max-width: 80px;
+    display: block;
+    margin: 5px auto;
 }
 
 .avatar {
@@ -64,6 +111,8 @@
 
 .opinion-image {
     max-width: 300px;
+    display: block;
+    margin: 0 auto 3%;
 }
 
 .categories-followed p {
@@ -71,7 +120,7 @@
 }
 
 .categories-followed:hover {
-    background-color: rgba(211, 126, 77, 0.733);
+    background-color: rgba(224, 184, 243, 0.733);
 }
 
 .categories-followed svg {
@@ -80,10 +129,61 @@
     float: right;
 }
 
+.title {
+    text-align: left;
+    background-color: #eee7fc;
+
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.title h1 {
+    padding: 0.5% 0 0 2%;
+    font-size: 35px;
+
+    /* font-size: 5vh; */
+}
+
+.all-opinions {
+    /* background-color: #eae2f9;
+    border-radius: 10px; */
+    padding: 0 2%;
+}
+
+.category-name {
+    margin-bottom: 2%;
+    clear: both;
+    /* padding: 1% 0; */
+}
+
+.category-name p {
+    display: inline-block;
+}
+
+.category-name:first-child{
+    margin-top: 2%;
+}
+
 .category-name svg {
     cursor: pointer;
-    float: right;
+    position: absolute;
+    bottom: 10%;
+    margin-left: 10px;
 }
+
+.category-name h2 {
+    text-align: center;
+    float: left;
+    position: relative;
+    margin-bottom: 0;
+    padding-left: 1%;
+}
+
+/* .category-name:not(:first-child) {
+    border-top: 1px solid rgb(211, 209, 209);
+} */
 
 .black-h4 {
     color: black;
@@ -101,6 +201,8 @@
 .img_wrap {
     display: inline-block;
     position: relative;
+    margin: 2% 0 0 34%;
+
 }
 
 .close {
@@ -110,4 +212,417 @@
     right: 0;
     font-size: 20px;
     cursor: pointer;
+    color: white;
+    font-weight: bold;
+}
+
+
+.all-content {
+    display: grid;
+    /* grid-template-columns: repeat(5, 1fr); */
+    /* grid-template-columns: 15% 85%; */
+    /* grid-template-columns: 16% 21% 21% 21% 21%; */
+
+    grid-template-columns: 15% 21.25% 21.25% 21.25% 21.25%;
+
+    grid-template-rows: repeat(5, 1fr);
+    /* grid-template-rows: 20% auto; */
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    background-color: rgb(229, 220, 248);
+    height: 100%;
+    /* padding: 0 1% 0 0; */
+}
+
+.navbar {
+    grid-area: 1/1/6/2;
+    border-bottom-width: 0;
+    border-right-width: 2px;
+    border-right-style: solid;
+    /* border-right-color: rgba(34,36,38,.15); */
+    border-right-color: rgb(144 147 150 / 15%);
+    background-color: rgb(238 231 253);
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+
+
+.main-content {
+    grid-area: 1/2/6/6;
+    /* margin-left: 1%; */
+    /* height: 100% */
+}
+
+.card h3 {
+    /* display: inline-block; */
+    /* height: 100px;  */
+    /* height: 100%;  */
+    /* margin: 0px;  */
+    /* padding: 25px 0px; */
+}
+
+.card a {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card .header {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eae2f9;
+}
+
+.card {
+    text-align: center;
+}
+
+.scrolling {
+    overflow: auto;
+    height: 140px;
+    width: 100%;
+}
+
+/* .category-name {
+    margin-bottom: 2%;
+} */
+
+.scrolling .card {
+    flex: 0 0 auto;
+}
+
+
+.chat-box ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    /* width: 500px;
+    height: 500px; */
+    overflow: auto;
+    height: 84vh;
+}
+
+.chat-box li {
+    padding: 10%;
+    border-radius: 30px;
+    margin-bottom: 2px;
+}
+
+.chat-box .my-message, .chat-box .their-message {
+    clear: both;
+    display: inline-block;
+}
+
+.time {
+    font-size: 2vh;
+}
+
+.my-message {
+    float: right;
+    /* background-color: skyblue; */
+}
+
+.my-message li {
+    background-color: skyblue;
+}
+
+.their-message {
+    float: left;
+}
+
+.their-message li {
+    background-color: lightgray;
+}
+
+.their-message li + .my-message li {
+    border-bottom-right-radius: 5px;
+}
+
+.my-message li + .my-message li {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.messages-container {
+    display: flex;
+    /* margin: 0px; */
+}
+
+
+
+
+.convo-list {
+    flex: 0 0 30%;
+}
+
+.convo-list h3 {
+    margin: 0% 0% 2% 0;
+    padding: 2% 0 0 2%;
+}
+
+.convo-list ul {
+    list-style: none;
+    
+    padding-left: 0px;
+    overflow: auto;
+    height: 95vh;
+    margin: 0px;
+}
+
+.convo-list li {
+    padding: 3% 0 3% 2%;
+    font-size: 18px;
+    border-top: 1px solid black;
+}
+
+.convo-list li:hover {
+    background-color: rgb(238 231 253);
+}
+
+.messages {
+    flex: 0 50%;
+    height: 100vh;
+    border: 1px solid grey;
+    border-radius: 7px;
+    padding: 0 3%;
+    position: relative;
+}
+
+.messages form {
+    /* position: absolute;
+    bottom: 0;
+    display: flex; */
+    bottom: 0;
+    height: 6%;
+    width: 74%;
+    display: flex;
+    margin-bottom: 3%;
+}
+
+.message-form .field {
+    margin: 0
+}
+
+.messages textarea {
+    width: 100%;
+    flex: 0 0 100%;
+}
+
+.messages button {
+    flex: 0 50%;
+}
+
+
+.messages h1 {
+    text-align: center;
+    border-bottom: 1px solid grey;
+}
+
+.sticky-opinion {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+    /* align-items: center; */
+    text-align: center;
+}
+
+/* .sticky-opinion button {
+    margin-bottom: 5px;
+} */
+
+.opinions-placeholder {
+    padding: 0 2% 4%;
+    /* height: 100vh; */
+}
+
+.super-main-content {
+    height: 100%;
+}
+
+body ::-webkit-scrollbar {
+    height: 5px !important; 
+}
+
+.user-pic-info img {
+    display: block;
+    margin: 1% auto 0;
+}
+
+.user-pic-info h2 {
+    /* display: block; */
+    /* text-align: center; */
+    /* margin: 0; */
+}
+
+/* .user-pic-info {
+    width: 100%
+} */
+
+.user-pic-info button {
+    display: inline-block;
+}
+
+.user-follow-info {
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 3%;
+
+}
+
+.user-follow-info p {
+    /* cursor: pointer; */
+    font-size: 26px;
+    margin-bottom: 1%;
+    margin: 0% 48%;
+}
+
+.user-follow-info svg {
+    cursor: pointer;
+}
+
+.my-opinions .cards {
+    padding: 0 2% 2%;
+    width: 100%;
+    min-height: 60%;
+    /* min-height: 100vh; */
+
+    /* max-height: */
+}
+
+.my-opinions {
+    height: 93%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.modal-header {
+    text-align: center;
+    padding: 0 1%;
+}
+
+.followed-opinions .cards {
+    padding: 2% 2%;
+    width: 100%;
+}
+
+.followed-opinions h3 {
+    text-align: center;
+    padding-top: 10%;
+}
+
+.user-opinion {
+    min-height: 93%;
+    padding: 2% 2% 0;
+}
+
+.opinion-ratings {
+    margin: 0 15% 2%;
+}
+
+.user-info h4 {
+    display: inline-block;
+    margin: 0 0 0 1%;
+}
+
+.category-tags p {
+    display: inline-block;
+    margin: 0 2% 0 0;
+    font-weight: bold;
+}
+
+.opinion-stuff {
+    border: 1px solid #c7c1d6;
+    margin: 2% 10%;
+    min-height: 61%;
+    border-radius: 5px;
+    background-color: rgb(238 231 253);
+    /* position: relative; */
+}
+
+.user-opinion-buttons {
+    /* text-align: right; */
+    float: right;
+}
+
+.category-tags {
+    padding-left: 2%;
+    padding-right: 24%;
+}
+
+.opinion-content h2 {
+    padding: 0 20%;
+    text-align: center;
+    font-size: 35px;
+}
+
+.opinion-content .text-content {
+    padding: 0px 12%;
+    text-align: center;
+}
+
+.voting-buttons {
+    /* position: absolute;
+    bottom: 0; */
+    margin-top: 5%;
+    width: 100%;
+    text-align: center;
+}
+
+.user-info {
+    padding-left: 5%;
+}
+
+.edit-opinion-form {
+    margin: 4% 0 0 0;
+}
+
+.edit-opinion-form .input {
+    width: 100%;
+    padding: 0 27%;
+}
+
+.edit-opinion-form .field {
+    padding: 0 20%;
+}
+
+.beginning-auth {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(229, 220, 248);
+}
+
+.auth-login-c {
+    text-align: center;
+    margin: 5% 0;
+}
+
+.auth-login-form .input {
+    width: 16%;
+    margin: .6% 0;
+}
+
+.auth-signin-c {
+    text-align: center;
+    margin: 5% 0;
+}
+
+.auth-signin-form .input {
+    width: 16%;
+    margin: .6% 0.5%;
+}
+
+.user-image-label {
+    font-size: 30px;
+}
+
+.messages-container h4 {
+    padding: 2% 0 0 2%;
+    font-size: 25px;
 }

@@ -5,9 +5,10 @@ import { NavLink } from 'react-router-dom'
 import MyOpinions from './MyOpinions'
 import profile from '../default-profile.png'
 import { Button, Icon, Modal } from 'semantic-ui-react'
-import { AiFillDelete } from "react-icons/ai";
+import { AiFillDelete, AiFillMail } from "react-icons/ai";
 import { IoAddCircle } from "react-icons/io5";
 import { followCategory, unfollowCategory } from '../Redux/action'
+import StartChatButton from '../Messages/StartChatButton'
 
 
 class Profile extends Component {
@@ -87,35 +88,48 @@ class Profile extends Component {
     }
     
     render() {
-        // console.log(this.props)
+        console.log(this.props)
         return (
             <div className="my-opinions">
-            {this.props.userObj ? 
-            
-            
-            <img src={this.props.userObj.avatar ? this.props.userObj.avatar.url : profile} alt="avatar" className="avatar" />
-            
-            : 
-            <img src={this.props.currentUser.avatar ? this.props.currentUser.avatar.url : profile} alt="avatar" className="avatar" />
-            }
-            {/* <img src={this.props.currentUser.avatar ? this.props.currentUser.avatar.url : "https://freesvg.org/img/abstract-user-flat-4.png"} alt="avatar" className="avatar" /> */}
+                {/* <div className="title">
+                    <h1>{this.props.userObj ? "Opinions:" : "My Opinions:"}</h1>
+                </div> */}
+                
+                <div className="user-pic-info">
+                    {this.props.userObj ? 
+                    
+                    
+                    <img src={this.props.userObj.avatar ? this.props.userObj.avatar.url : profile} alt="avatar" className="avatar" />
+                    
+                    : 
+                    <img src={this.props.currentUser.avatar ? this.props.currentUser.avatar.url : profile} alt="avatar" className="avatar" />
+                    }
 
-            <h2>{this.props.userObj ? 
-            this.props.userObj.username
-            
-            : this.props.currentUser.username}</h2>
-            <h1>{this.props.userObj ? "Opinions:" : "My Opinions:"}</h1>
+                    {/* <img src={this.props.currentUser.avatar ? this.props.currentUser.avatar.url : "https://freesvg.org/img/abstract-user-flat-4.png"} alt="avatar" className="avatar" /> */}
+                    <div className="user-follow-info">
+                    {this.props.userObj ? 
+                    <>
+                        <h2>{this.props.userObj.username}</h2>
+                        <StartChatButton user={this.props.userObj}/>
+                    </>
+                    :           
+                    <h2>{this.props.currentUser.username}</h2>
+                    }
 
-            <Button onClick={()=> this.setState(prevState => ({open: true}))}>
-                {this.props.userObj ? this.props.userObj.categories.length : this.props.currentUser.categories.length} Following
-            </Button>
+                    {/* <h1>{this.props.userObj ? "Opinions:" : "My Opinions:"}</h1> */}
+
+                    <Button onClick={()=> this.setState(prevState => ({open: true}))}>
+                        {this.props.userObj ? this.props.userObj.categories.length : this.props.currentUser.categories.length} Following
+                    </Button>
+                    </div>
+                </div>
 
             <Modal
                 size="mini"
                 open={this.state.open}
                 onClose={()=> this.setState(prevState => ({open: false}))}
             >
-                <Modal.Header>Followed Categories: </Modal.Header>
+                <Modal.Header className="modal-header">Following Categories: </Modal.Header>
                 <Modal.Content>
                     {this.renderFollowedCategories()}
                 </Modal.Content>

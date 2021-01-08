@@ -208,7 +208,15 @@ export const deleteRating = (rating)=>{
     }
 }
 
+function saveTokenAsCookie() {
+  // debugger
+  document.cookie = 'X-Authorization=' + localStorage.getItem('token') + '; path=/';
+}
 export const loginAction = (userInfo) =>{
+  // function saveTokenAsCookie() {
+  //   // debugger
+  //   document.cookie = 'X-Authorization=' + localStorage.getItem('token') + '; path=/';
+  // }
   // debugger
   return (dispatch) => {
     fetch("http://localhost:3000/api/v1/login",{
@@ -229,13 +237,18 @@ export const loginAction = (userInfo) =>{
           alert("Username and/or password is incorrect")
         } else {
           localStorage.setItem("token", data.jwt)
+          saveTokenAsCookie()
           dispatch({type: "LOGIN", payload: data.user})
+          dispatch({type: "FETCH_CONVERSATIONS", payload: data.user.conversations})
+          
         }
   })
+  .catch(console.log)
   }
 }
 
 export const signupAction = (userInfo) =>{
+
   return (dispatch) =>{
     const formData = new FormData();
     formData.append('first_name', userInfo.firstName);
@@ -267,7 +280,9 @@ export const signupAction = (userInfo) =>{
       // debugger
       if (data.user){
         localStorage.setItem('token', data.jwt)
+        saveTokenAsCookie()
         dispatch({type: "SIGNUP", payload: data.user})
+        dispatch({type: "FETCH_CONVERSATIONS", payload: data.user.conversations})
       }
     })
   }
@@ -290,7 +305,9 @@ export const userLoggedIn = () =>{
     .then(data => {
       // debugger
         if(data.user){
+          saveTokenAsCookie()
           dispatch({type: "USER_LOGGED_IN", payload: data.user})
+          dispatch({type: "FETCH_CONVERSATIONS", payload: data.user.conversations})
         }
     })
   }

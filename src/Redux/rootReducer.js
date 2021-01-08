@@ -4,7 +4,8 @@ import { combineReducers } from "redux";
 const defaultState = {
     currentUser: null,
     opinions: [],
-    categories: []
+    categories: [],
+    conversations: []
 }
 
 
@@ -99,12 +100,54 @@ const categoriesReducer = (state = defaultState.categories, action) =>{
     }
 }
 
+const conversationsReducer = (state = defaultState.conversations, action) =>{
+    switch (action.type){
+        case "FETCH_CONVERSATIONS":
+            // debugger
+            return action.payload
+        case "RECEIVED_CONVERSATION":
+            // debugger
+            let copyConvos = [...state]
+            let existing = copyConvos.find(convo => convo.id === action.payload.id)
+            if (existing){
+                let foundConvoIndex = copyConvos.indexOf(existing)
+                copyConvos[foundConvoIndex] = action.payload
+                return copyConvos
+            } else {
+                // debugger
+                return [...state, action.payload]
+            }
+        case "NEW_MESSAGE":
+            // debugger
+            let copiedConvos = [...state]
+            let indexOfConvo = copiedConvos.findIndex(convo => convo.id === action.payload.id)
+            copiedConvos[indexOfConvo] = action.payload
+            // debugger
+            return copiedConvos
+        case "ADD_CONVO":
+            // debugger
+            let copyC = [...state]
+            let existingC = copyC.find(convo => convo.id === action.payload.id)
+            if (existingC){
+                let foundConvoI = copyC.indexOf(existingC)
+                copyC[foundConvoI] = action.payload
+                return copyC
+            } else {
+                // debugger
+                return [...state, action.payload]
+            }
+        default:
+            return state
+    }
+
+}
 
 
 const rootReducer = combineReducers({
     currentUser: currentUserReducer,
     opinions: opinionsReducer,
-    categories: categoriesReducer
+    categories: categoriesReducer,
+    conversations: conversationsReducer
 })
 
 export default rootReducer

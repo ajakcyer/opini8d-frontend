@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { signupAction } from '../Redux/action'
+import { Button, Form, Input, Icon } from 'semantic-ui-react'
+import { BsPersonBoundingBox } from "react-icons/bs";
 
 class Signup extends Component {
 
@@ -34,24 +36,29 @@ class Signup extends Component {
         this.props.signup(this.state)
         // this.props.history.push('/explore/opinions')
     }
-
+// smile outline
     render() {
         // console.log(this.props)
         return (
-            <div>
-                <h1>Sign up Component</h1>
-            <form onSubmit={this.onSubmitHandler}>
-                <input onChange={this.imageChangeHandler} type="file" name="avatar" accept="image/*" />
+            <div className="auth-signin-c">
+                <h1>Sign Up</h1>
+            <Form className="auth-signin-form" onSubmit={this.onSubmitHandler}>
+                <label htmlFor="user-sign-image"
+                className="user-image-label"
+                style={this.state.avatar ? {color: "black"} : {color: "white"}}
+                ><BsPersonBoundingBox/></label>
+                <input id="user-sign-image" onChange={this.imageChangeHandler} type="file" name="avatar" accept="image/*" style={{display: "none"}} />
                 <br></br>
-                <input onChange={this.onChangeHandler} type="text" name="firstName" placeholder="First Name" value={this.state.firstName} />
-                <input onChange={this.onChangeHandler} type="text" name="lastName" placeholder="Last Name" value={this.state.lastName} />
-                <input onChange={this.onChangeHandler} type="email" name="email" placeholder="Email" value={this.state.email} />
+                <Input onChange={this.onChangeHandler} type="text" name="firstName" placeholder="First Name" value={this.state.firstName} />
+                <Input onChange={this.onChangeHandler} type="text" name="lastName" placeholder="Last Name" value={this.state.lastName} />
                 <br></br>
-                <input onChange={this.onChangeHandler} type="text" name="username" placeholder="Username" value={this.state.username} />
-                <input onChange={this.onChangeHandler} type="text" name="password" placeholder="Password" value={this.state.password} />
+                <Input onChange={this.onChangeHandler} type="email" name="email" placeholder="Email" value={this.state.email} />
                 <br></br>
-                <button>Sign Up</button>
-            </form>
+                <Input onChange={this.onChangeHandler} type="text" name="username" placeholder="Username" value={this.state.username} />
+                <Input onChange={this.onChangeHandler} type="password" name="password" placeholder="Password" value={this.state.password} />
+                <br></br>
+                <Button color="violet">Sign Up</Button>
+            </Form>
             <br></br>
             <NavLink to="/auth/login">
                 Already have an account?
